@@ -1,0 +1,283 @@
+---
+/**
+ * Navigation Component
+ * This component is integrated into the Header component
+ * Can be used standalone if needed for other layouts
+ */
+
+export interface Props {
+  currentLang: string;
+  currentPath: string;
+}
+
+const { currentLang, currentPath } = Astro.props;
+
+const getPageActive = () => {
+  const segments = currentPath.split('/').filter(Boolean);
+  return segments.length > 0 ? segments[0] : '';
+};
+
+const pageActive = getPageActive();
+
+// Navigation menu structure
+const navigation = {
+  aboutUs: {
+    id: 'about-us',
+    labelKey: 'aboutUs',
+    items: [
+      { href: '/about-us/ceo-message', labelKey: 'ceoMessage' },
+      { href: '/about-us/vision', labelKey: 'vision' },
+      { href: '/about-us/history', labelKey: 'history' },
+      { href: '/about-us/ci', labelKey: 'ci' },
+      { href: '/about-us/location', labelKey: 'location' }
+    ]
+  },
+  business: {
+    id: 'business',
+    labelKey: 'business',
+    items: [
+      { href: '/business/online-booking-engine', labelKey: 'ota' },
+      { href: '/business/hotel-web', labelKey: 'bookingEngine' },
+      { href: '/business/pms', labelKey: 'pms' },
+      { href: '/business/cms', labelKey: 'cms' },
+      { href: '/business/company-profile', labelKey: 'hotelManagement' }
+    ]
+  },
+  careers: {
+    id: 'careers',
+    labelKey: 'careers',
+    items: [
+      { href: '/careers/desired-traits', labelKey: 'desiredTraits' },
+      { href: '/careers/job-opportunities', labelKey: 'jobOpportunities' }
+    ]
+  }
+};
+
+// Translations
+const translations: Record<string, Record<string, string>> = {
+  ja: {
+    aboutUs: '会社紹介',
+    business: '事業内容',
+    careers: '採用情報',
+    ceoMessage: 'CEO挨拶',
+    vision: 'ビジョン',
+    history: '沿革',
+    ci: 'CI',
+    location: '所在地',
+    ota: 'OTA',
+    bookingEngine: '予約エンジン',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: 'ホテル経営',
+    desiredTraits: '求める人材',
+    jobOpportunities: '採用情報'
+  },
+  en: {
+    aboutUs: 'About Us',
+    business: 'Business',
+    careers: 'Careers',
+    ceoMessage: 'CEO Message',
+    vision: 'Vision',
+    history: 'History',
+    ci: 'CI',
+    location: 'Location',
+    ota: 'OTA',
+    bookingEngine: 'Booking Engine',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: 'Hotel Management',
+    desiredTraits: 'Desired Traits',
+    jobOpportunities: 'Job Opportunities'
+  },
+  vi: {
+    aboutUs: 'Về chúng tôi',
+    business: 'Kinh doanh',
+    careers: 'Nghề nghiệp',
+    ceoMessage: 'Thông điệp CEO',
+    vision: 'Tầm nhìn',
+    history: 'Lịch sử',
+    ci: 'CI',
+    location: 'Vị trí',
+    ota: 'OTA',
+    bookingEngine: 'Công cụ đặt phòng',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: 'Quản lý khách sạn',
+    desiredTraits: 'Phẩm chất mong muốn',
+    jobOpportunities: 'Cơ hội việc làm'
+  },
+  ko: {
+    aboutUs: '회사소개',
+    business: '사업소개',
+    careers: '채용정보',
+    ceoMessage: 'CEO 인사말',
+    vision: '비전',
+    history: '연혁',
+    ci: 'CI',
+    location: '오시는 길',
+    ota: 'OTA',
+    bookingEngine: '예약엔진',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: '호텔경영',
+    desiredTraits: '인재상',
+    jobOpportunities: '채용공고'
+  }
+};
+
+const t = translations[currentLang] || translations.en;
+---
+
+<nav class="desktop-navigation">
+  <ul class="nav-menu">
+    {Object.entries(navigation).map(([key, menu]) => (
+      <li class={`nav-item dropdown ${pageActive === menu.id ? 'active' : ''}`}>
+        <a href="#" class="nav-link dropdown-toggle no-underline">
+          {t[menu.labelKey]}
+        </a>
+        <span class="header-line"></span>
+        <ul class="dropdown-menu">
+          {menu.items.map((item) => (
+            <li>
+              <a href={item.href} class="dropdown-link no-underline">
+                {t[item.labelKey]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .desktop-navigation {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-item {
+    position: relative;
+    margin: 0;
+    padding: 2.55rem 1.8rem;
+  }
+
+  .nav-link {
+    padding: 0.2rem 0;
+    text-transform: uppercase;
+    color: #555;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdown-toggle::after {
+    content: "";
+    margin-left: 0.5rem;
+    border-top: 0.4rem solid;
+    border-right: 0.3rem solid transparent;
+    border-left: 0.3rem solid transparent;
+    border-top-color: #666;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus {
+    color: black;
+  }
+
+  .nav-item.active .nav-link {
+    font-weight: bold;
+  }
+
+  .header-line {
+    display: none;
+    max-width: 100%;
+  }
+
+  .nav-item.active .header-line {
+    display: flex;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    list-style: none;
+    padding: 2rem 0;
+    margin: 0;
+    color: #555;
+    font-size: 1.4rem;
+    width: 25.4rem;
+    transform: translateX(50%);
+    margin-right: 50%;
+    box-shadow: 0 -1px 9px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.94);
+    border-radius: 7px;
+    border: none;
+    margin-top: -0.5px;
+    top: 100%;
+    left: 50%;
+    z-index: 1000;
+  }
+
+  .dropdown-menu::before {
+    position: absolute;
+    display: block;
+    content: "";
+    border-color: transparent;
+    border-style: solid;
+    top: -0.8rem;
+    left: calc(50% - 0.8rem);
+    border-color: transparent transparent rgba(255, 255, 255, 0.94) rgba(255, 255, 255, 0.94);
+    border-width: 0.8rem;
+    box-shadow: -3px 3px 6px 0 rgba(0, 0, 0, 0.1);
+    transform: rotate(135deg);
+  }
+
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-link {
+    padding: 0.8rem 2.8rem;
+    color: #555;
+    font-size: 1.4rem;
+    display: block;
+    position: relative;
+  }
+
+  .dropdown-link::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 2.3rem;
+    background: var(--brand-color-gradient);
+    top: 0.8rem;
+    transition: 0.15s width 0.1s cubic-bezier(0.39, 0.575, 0.565, 1);
+    box-shadow: var(--primary-box-shadow);
+  }
+
+  .dropdown-link:hover {
+    color: black;
+  }
+
+  .dropdown-link:hover::after {
+    width: 0.3rem;
+  }
+
+  @media only screen and (max-width: 991.98px) {
+    .desktop-navigation {
+      display: none;
+    }
+  }
+</style>

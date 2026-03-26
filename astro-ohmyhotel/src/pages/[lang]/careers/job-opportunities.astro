@@ -1,0 +1,96 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import JobList from '../../../components/careers/JobList.astro';
+import type { Language } from '../../../utils/i18n';
+import { languages } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+
+const pageTitle: Record<Language, string> = {
+  en: 'Job Opportunities',
+  ja: '採用情報',
+  ko: '채용 정보',
+  vi: 'Cơ hội việc làm'
+};
+
+const bannerContent: Record<Language, { title: string; subtitle: string }> = {
+  en: {
+    title: 'Job Opportunities',
+    subtitle: 'Explore exciting career opportunities with us'
+  },
+  ja: {
+    title: '採用情報',
+    subtitle: '私たちと一緒にエキサイティングなキャリアの機会を探索しましょう'
+  },
+  ko: {
+    title: '채용 정보',
+    subtitle: '우리와 함께 흥미로운 경력 기회를 탐색하세요'
+  },
+  vi: {
+    title: 'Cơ hội việc làm',
+    subtitle: 'Khám phá các cơ hội nghề nghiệp thú vị cùng chúng tôi'
+  }
+};
+---
+
+<PageLayout title={pageTitle[lang]} lang={lang}>
+  <div class="job-opportunities-page">
+    <section class="page-banner">
+      <div class="banner-content">
+        <h1>{bannerContent[lang].title}</h1>
+        <p>{bannerContent[lang].subtitle}</p>
+      </div>
+    </section>
+
+    <JobList lang={lang} />
+  </div>
+</PageLayout>
+
+<style>
+  .job-opportunities-page {
+    min-height: 100vh;
+  }
+
+  .page-banner {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-banner h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .page-banner p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .page-banner {
+      padding: 4rem 1.5rem;
+    }
+
+    .page-banner h1 {
+      font-size: 2rem;
+    }
+
+    .page-banner p {
+      font-size: 1rem;
+    }
+  }
+</style>

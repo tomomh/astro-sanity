@@ -1,0 +1,340 @@
+---
+/**
+ * Mobile Menu Component
+ * This component is integrated into the Header component
+ * Provides a slide-in menu for mobile devices
+ */
+
+export interface Props {
+  currentLang: string;
+  currentPath: string;
+}
+
+const { currentLang, currentPath } = Astro.props;
+
+const getPageActive = () => {
+  const segments = currentPath.split('/').filter(Boolean);
+  return segments.length > 0 ? segments[0] : '';
+};
+
+const pageActive = getPageActive();
+
+// Navigation menu structure
+const navigation = {
+  aboutUs: {
+    id: 'about-us',
+    labelKey: 'aboutUs',
+    items: [
+      { href: '/about-us/ceo-message', labelKey: 'ceoMessage' },
+      { href: '/about-us/vision', labelKey: 'vision' },
+      { href: '/about-us/history', labelKey: 'history' },
+      { href: '/about-us/ci', labelKey: 'ci' },
+      { href: '/about-us/location', labelKey: 'location' }
+    ]
+  },
+  business: {
+    id: 'business',
+    labelKey: 'business',
+    items: [
+      { href: '/business/online-booking-engine', labelKey: 'ota' },
+      { href: '/business/hotel-web', labelKey: 'bookingEngine' },
+      { href: '/business/pms', labelKey: 'pms' },
+      { href: '/business/cms', labelKey: 'cms' },
+      { href: '/business/company-profile', labelKey: 'hotelManagement' }
+    ]
+  },
+  careers: {
+    id: 'careers',
+    labelKey: 'careers',
+    items: [
+      { href: '/careers/desired-traits', labelKey: 'desiredTraits' },
+      { href: '/careers/job-opportunities', labelKey: 'jobOpportunities' }
+    ]
+  }
+};
+
+// Translations
+const translations: Record<string, Record<string, string>> = {
+  ja: {
+    aboutUs: '会社紹介',
+    business: '事業内容',
+    careers: '採用情報',
+    ceoMessage: 'CEO挨拶',
+    vision: 'ビジョン',
+    history: '沿革',
+    ci: 'CI',
+    location: '所在地',
+    ota: 'OTA',
+    bookingEngine: '予約エンジン',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: 'ホテル経営',
+    desiredTraits: '求める人材',
+    jobOpportunities: '採用情報'
+  },
+  en: {
+    aboutUs: 'About Us',
+    business: 'Business',
+    careers: 'Careers',
+    ceoMessage: 'CEO Message',
+    vision: 'Vision',
+    history: 'History',
+    ci: 'CI',
+    location: 'Location',
+    ota: 'OTA',
+    bookingEngine: 'Booking Engine',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: 'Hotel Management',
+    desiredTraits: 'Desired Traits',
+    jobOpportunities: 'Job Opportunities'
+  },
+  vi: {
+    aboutUs: 'Về chúng tôi',
+    business: 'Kinh doanh',
+    careers: 'Nghề nghiệp',
+    ceoMessage: 'Thông điệp CEO',
+    vision: 'Tầm nhìn',
+    history: 'Lịch sử',
+    ci: 'CI',
+    location: 'Vị trí',
+    ota: 'OTA',
+    bookingEngine: 'Công cụ đặt phòng',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: 'Quản lý khách sạn',
+    desiredTraits: 'Phẩm chất mong muốn',
+    jobOpportunities: 'Cơ hội việc làm'
+  },
+  ko: {
+    aboutUs: '회사소개',
+    business: '사업소개',
+    careers: '채용정보',
+    ceoMessage: 'CEO 인사말',
+    vision: '비전',
+    history: '연혁',
+    ci: 'CI',
+    location: '오시는 길',
+    ota: 'OTA',
+    bookingEngine: '예약엔진',
+    pms: 'PMS',
+    cms: 'CMS',
+    hotelManagement: '호텔경영',
+    desiredTraits: '인재상',
+    jobOpportunities: '채용공고'
+  }
+};
+
+const t = translations[currentLang] || translations.en;
+---
+
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Close menu">
+        <img src="/images/icons/close.svg" alt="Close" height="20" />
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <ul class="mobile-nav-list">
+        {Object.entries(navigation).map(([key, menu]) => (
+          <li class={`mobile-nav-item ${pageActive === menu.id ? 'active' : ''}`}>
+            <button class="mobile-nav-toggle" data-menu={menu.id}>
+              {t[menu.labelKey]}
+              <span class="chevron"></span>
+            </button>
+            <ul class="mobile-submenu">
+              {menu.items.map((item) => (
+                <li>
+                  <a href={item.href} class="mobile-submenu-link">
+                    {t[item.labelKey]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    overflow-y: auto;
+  }
+
+  .mobile-menu-overlay.active {
+    display: block;
+  }
+
+  .mobile-menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.6rem 3rem;
+  }
+
+  .close-mobile-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .mobile-menu-nav {
+    flex: 1;
+    padding-top: 3rem;
+    overflow-y: auto;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-nav-item {
+    border-bottom: 1px solid transparent;
+    background: linear-gradient(270deg, #ffffff 0%, #e3e3e3 51.39%, #ffffff 100%) bottom / 100% 1px no-repeat;
+    padding-bottom: 2.55rem;
+  }
+
+  .mobile-nav-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 2.55rem 2rem;
+    font-size: 2.2rem;
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .mobile-nav-item.active .mobile-nav-toggle {
+    font-weight: 500;
+  }
+
+  .chevron {
+    position: absolute;
+    right: 2rem;
+    width: 1.2rem;
+    height: 2.2rem;
+    background-image: url("/images/icons/chevron.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: rotate(90deg);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .mobile-nav-item.expanded .chevron {
+    transform: rotate(-90deg);
+  }
+
+  .mobile-submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s linear, opacity 0.3s linear;
+  }
+
+  .mobile-nav-item.expanded .mobile-submenu {
+    max-height: 100vh;
+    opacity: 1;
+  }
+
+  .mobile-submenu li {
+    text-align: center;
+  }
+
+  .mobile-submenu-link {
+    display: block;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    color: #555;
+    text-decoration: none;
+  }
+
+  .mobile-submenu-link:hover {
+    color: black;
+  }
+
+  @media only screen and (min-width: 992px) {
+    .mobile-menu-overlay {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle functionality
+  function initMobileMenu() {
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const closeMobileMenu = document.getElementById('closeMobileMenu');
+    const mobileNavToggles = document.querySelectorAll('.mobile-nav-toggle');
+
+    // Close mobile menu
+    closeMobileMenu?.addEventListener('click', () => {
+      mobileMenuOverlay?.classList.remove('active');
+      document.body.classList.remove('disable-scroll');
+    });
+
+    // Toggle submenus
+    mobileNavToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const navItem = toggle.closest('.mobile-nav-item');
+        const isExpanded = navItem?.classList.contains('expanded');
+
+        // Close all other submenus
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+          if (item !== navItem) {
+            item.classList.remove('expanded');
+          }
+        });
+
+        // Toggle current submenu
+        if (isExpanded) {
+          navItem?.classList.remove('expanded');
+        } else {
+          navItem?.classList.add('expanded');
+        }
+      });
+    });
+
+    // Close menu when clicking submenu link
+    const submenuLinks = document.querySelectorAll('.mobile-submenu-link');
+    submenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuOverlay?.classList.remove('active');
+        document.body.classList.remove('disable-scroll');
+      });
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+  } else {
+    initMobileMenu();
+  }
+</script>

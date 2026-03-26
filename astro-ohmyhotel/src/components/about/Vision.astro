@@ -1,0 +1,226 @@
+---
+import { fetchAboutUsPage } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+import { PortableText } from 'astro-portabletext';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const aboutPage = await fetchAboutUsPage();
+const vision = aboutPage?.vision;
+
+// Get localized values with fallbacks
+const title = getLocalizedValue(vision?.title, lang) || 'Vision';
+const content = getLocalizedValue(vision?.content, lang);
+
+// Get image from Sanity or fallback
+const imageUrl = vision?.image
+  ? urlFor(vision.image).width(400).auto('format').url()
+  : '/images/about/vision.svg';
+
+// Fallback vision items
+const fallbackItems = [
+  {
+    title: "Society",
+    description: "We are committed to social responsibilities to the community."
+  },
+  {
+    title: "Partner",
+    description: "We understand the need for coexistence with our partners and strive to maximize mutual interests."
+  },
+  {
+    title: "Investor",
+    description: "We guarantee transparence. We will present honest and open visions and fully disclose our operations, while meeting the expectations of our investors by staying true to our path and maximizing their investments."
+  },
+  {
+    title: "Customer",
+    description: "Every member of the staff places top priority on customers satisfaction, and strives to provide services worthy of our customers' love and trust."
+  },
+  {
+    title: "Employee",
+    description: "We provide employee benefits and hold company events to make sure our staff members are comfortable and happy at the office."
+  }
+];
+
+const visionItems = fallbackItems;
+---
+
+<section class="vision-section">
+  <div class="container">
+    <div class="section-header">
+      <h3>{title}</h3>
+      <span class="header-line"></span>
+    </div>
+    <div class="section-content">
+      <div class="vision-image">
+        <img src={imageUrl} alt="Vision" />
+        <h3>Your Friend and Confidant</h3>
+      </div>
+      <div class="vision-items">
+        {visionItems.map((item) => (
+          <div class="vision-item">
+            <h6>{item.title}</h6>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vision-section {
+    padding: 5rem 0 6rem;
+    background-color: #ffffff;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .header-line {
+    display: block;
+    width: 4rem;
+    height: 0.3rem;
+    background: var(--brand-color-gradient);
+    margin: 0 auto;
+  }
+
+  .section-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+  }
+
+  .vision-image {
+    position: relative;
+    text-align: center;
+  }
+
+  .vision-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .vision-image h3 {
+    position: absolute;
+    width: 30rem;
+    left: 50%;
+    top: 50%;
+    margin-left: -15rem;
+    margin-top: 0.5rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    text-align: center;
+  }
+
+  .vision-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vision-item {
+    display: flex;
+    padding: 2rem 1.5rem;
+    line-height: 2.3rem;
+    border-bottom: 1px solid transparent;
+    background: linear-gradient(270deg, #FFFFFF 0%, #E3E3E3 51.39%, #FFFFFF 100%) bottom no-repeat;
+    background-size: 100% 1px;
+  }
+
+  .vision-item:last-child {
+    background: none;
+  }
+
+  .vision-item h6 {
+    min-width: 10.6rem;
+    max-width: 10.6rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--primary-header-color);
+    margin: 0;
+  }
+
+  .vision-item p {
+    flex-grow: 1;
+    font-size: 1.4rem;
+    color: var(--primary-text-color);
+    line-height: 2.3rem;
+    margin: 0;
+    padding-left: 2rem;
+  }
+
+  @media (max-width: 991px) and (min-width: 768px) {
+    .vision-image h3 {
+      font-size: 2.8rem;
+      width: 21rem;
+      margin-left: -10.5rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .vision-section {
+      padding: 4rem 0;
+    }
+
+    .section-header h3 {
+      font-size: 2rem;
+    }
+
+    .section-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .vision-image {
+      margin: 0;
+      padding: 0.5rem 1.2rem;
+    }
+
+    .vision-image h3 {
+      width: 13rem;
+      margin-left: -6.5rem;
+      margin-top: 0;
+      font-size: 1.8rem;
+    }
+
+    .vision-item {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .vision-item h6 {
+      min-width: 100%;
+      max-width: 100%;
+      padding-top: 4rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .vision-item p {
+      padding-left: 0;
+      padding-top: 0;
+      padding-bottom: 4rem;
+    }
+  }
+</style>

@@ -1,0 +1,156 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import type { Language } from '../../utils/i18n';
+import { languages } from '../../utils/i18n';
+import { sanityClient } from '../../sanity/client';
+import { PRIVACY_PAGE_QUERY, getLocalizedValue } from '../../sanity/queries';
+
+export async function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+
+// Fetch privacy page content from Sanity
+const privacyData = await sanityClient.fetch(PRIVACY_PAGE_QUERY);
+
+interface PrivacySection {
+  _key: string;
+  title?: Array<{ _key: string; value: string }>;
+  content: Array<{ _key: string; value: string }>;
+  isHtml?: boolean;
+}
+
+// Get localized content
+const pageTitle = privacyData?.pageTitle ? getLocalizedValue(privacyData.pageTitle, lang) : 'Privacy Policy';
+const bannerTitle = privacyData?.bannerTitle ? getLocalizedValue(privacyData.bannerTitle, lang) : 'Privacy Policy';
+const contactInfo = privacyData?.contactInfo ? getLocalizedValue(privacyData.contactInfo, lang) : '';
+const sections: Array<{ title?: string; content: string; isHtml?: boolean }> = (privacyData?.sections || []).map((section: PrivacySection) => ({
+  title: section.title ? getLocalizedValue(section.title, lang) : undefined,
+  content: getLocalizedValue(section.content, lang),
+  isHtml: section.isHtml || false
+}));
+---
+
+<PageLayout title={pageTitle} lang={lang}>
+  <div class="privacy-page">
+    <section class="privacy-banner">
+      <div class="banner-content">
+        <h1 set:html={bannerTitle}></h1>
+      </div>
+    </section>
+
+    <section class="privacy-content">
+      <div class="container">
+        {sections.map((section) => (
+          <div class="privacy-section">
+            {section.title && <h3 class="section-title">{section.title}</h3>}
+            {section.isHtml ? (
+              <div set:html={section.content}></div>
+            ) : (
+              <p>{section.content}</p>
+            )}
+          </div>
+        ))}
+
+        <div class="contact-info" set:html={contactInfo}></div>
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .privacy-page {
+    min-height: 100vh;
+  }
+
+  .privacy-banner {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .privacy-banner h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .privacy-content {
+    padding: 4rem 0;
+    background: #fff;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .privacy-section {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    padding-left: 1rem;
+    border-left: 3px solid #007bff;
+  }
+
+  .privacy-section p,
+  .privacy-section div {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.8;
+  }
+
+  .privacy-section :global(ul) {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+  }
+
+  .privacy-section :global(li) {
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+
+  .contact-info {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #444;
+    line-height: 2;
+  }
+
+  .contact-info :global(strong) {
+    color: #1a1a1a;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .privacy-banner {
+      padding: 4rem 1.5rem;
+    }
+
+    .privacy-banner h1 {
+      font-size: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+    }
+  }
+</style>

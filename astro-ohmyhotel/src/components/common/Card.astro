@@ -1,0 +1,195 @@
+---
+import Button from './Button.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  variant?: 'default' | 'horizontal' | 'minimal';
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt = '',
+  ctaText,
+  ctaHref,
+  variant = 'default',
+  class: className = ''
+} = Astro.props;
+---
+
+<div class={`card card-${variant} ${className}`}>
+  {image && (
+    <div class="card-image">
+      <img src={image} alt={imageAlt} />
+    </div>
+  )}
+  <div class="card-body">
+    {title && <h3 class="card-title">{title}</h3>}
+    {description && <p class="card-description">{description}</p>}
+    <div class="card-content">
+      <slot />
+    </div>
+    {ctaText && ctaHref && (
+      <div class="card-cta">
+        <Button href={ctaHref} variant="primary" size="medium">
+          {ctaText}
+        </Button>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .card {
+    background-color: white;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    box-shadow: var(--primary-box-shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.8rem 2rem 0 rgba(0, 0, 0, 0.15);
+  }
+
+  /* Default Card */
+  .card-default {
+    flex-direction: column;
+  }
+
+  .card-default .card-image {
+    width: 100%;
+    height: 24rem;
+    overflow: hidden;
+  }
+
+  .card-default .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .card-default:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  /* Horizontal Card */
+  .card-horizontal {
+    flex-direction: row;
+  }
+
+  .card-horizontal .card-image {
+    width: 40%;
+    min-height: 30rem;
+    overflow: hidden;
+  }
+
+  .card-horizontal .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-horizontal .card-body {
+    width: 60%;
+  }
+
+  /* Minimal Card */
+  .card-minimal {
+    box-shadow: none;
+    border: var(--primary-border);
+  }
+
+  .card-minimal:hover {
+    transform: none;
+    border-color: #ddd;
+  }
+
+  /* Card Body */
+  .card-body {
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--primary-header-color);
+    line-height: 1.3;
+  }
+
+  .card-description {
+    font-size: 1.5rem;
+    color: var(--primary-text-color);
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+  }
+
+  .card-content {
+    flex: 1;
+    margin-bottom: 1.6rem;
+  }
+
+  .card-cta {
+    margin-top: auto;
+    padding-top: 1.6rem;
+  }
+
+  /* Responsive */
+  @media only screen and (max-width: 767px) {
+    .card-horizontal {
+      flex-direction: column;
+    }
+
+    .card-horizontal .card-image {
+      width: 100%;
+      height: 24rem;
+      min-height: auto;
+    }
+
+    .card-horizontal .card-body {
+      width: 100%;
+    }
+
+    .card-default .card-image {
+      height: 20rem;
+    }
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .card-title {
+      font-size: 2rem;
+    }
+
+    .card-description {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media only screen and (max-width: 991.98px) and (min-width: 768px) {
+    .card-horizontal .card-image {
+      min-height: 25rem;
+    }
+
+    .card-title {
+      font-size: 2.2rem;
+    }
+  }
+</style>

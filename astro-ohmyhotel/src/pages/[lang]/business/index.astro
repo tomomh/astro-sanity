@@ -1,0 +1,170 @@
+---
+import MainLayout from '../../../layouts/main.astro';
+import ProductCard from '../../../components/business/ProductCard.astro';
+import { languages, type Language } from '../../../utils/i18n';
+import { fetchProductsList } from '../../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../../utils/sanity';
+
+export async function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+
+// Fetch products from Sanity
+const sanityProducts = await fetchProductsList();
+
+// Map Sanity products to display format
+const productsFromSanity = sanityProducts?.map((product: any) => ({
+  title: getLocalizedValue(product.title, lang) || product.title,
+  description: getLocalizedValue(product.shortDescription, lang) || product.shortDescription,
+  image: product.logo ? urlFor(product.logo).width(400).auto('format').url() : '/images/business/default.jpg',
+  slug: product.slug?.current || product.slug
+})) || [];
+
+// Fallback products
+const fallbackProducts = [
+  {
+    title: "OTA (Online Travel Agency)",
+    description: "Comprehensive B2C platform Ohmyhotel.com and Ohmytrip.com in multiple languages",
+    image: "/images/business/ota.jpg",
+    slug: "ota"
+  },
+  {
+    title: "PMS (Property Management System)",
+    description: "Convenient reservation check and intuitive accommodation management",
+    image: "/images/business/pms.jpg",
+    slug: "pms"
+  },
+  {
+    title: "CMS (Channel Management System)",
+    description: "Efficient rate/inventory management with simple interface",
+    image: "/images/business/cms.jpg",
+    slug: "cms"
+  },
+  {
+    title: "Booking Engine",
+    description: "Powerful booking engine for direct bookings on your website",
+    image: "/images/business/booking-engine.jpg",
+    slug: "booking-engine"
+  },
+  {
+    title: "Hotel Website Design",
+    description: "Modern, responsive website design for hotels",
+    image: "/images/business/website.jpg",
+    slug: "hotel-web"
+  },
+  {
+    title: "Company Profile",
+    description: "OHMY SaaS - One-Stop Solution for hospitality systems",
+    image: "/images/business/company-profile.jpg",
+    slug: "company-profile"
+  }
+];
+
+// Use Sanity data or fallback
+const products = productsFromSanity.length > 0 ? productsFromSanity : fallbackProducts;
+---
+
+<MainLayout content={{ title: 'Our Business - OHMYHOTEL & CO' }}>
+  <div class="business-page">
+    <section class="hero">
+      <h1>Our Business</h1>
+      <p>Comprehensive Hotel Technology Solutions</p>
+    </section>
+
+    <div class="container">
+      <div class="intro-section">
+        <h2>All-in-one, Seamless Solution</h2>
+        <p>From purchasing to selling, we provide a complete one-stop solution for the hospitality industry.</p>
+      </div>
+
+      <div class="products-grid">
+        {products.map((product) => (
+          <ProductCard
+            title={product.title}
+            description={product.description}
+            image={product.image}
+            link={`/${lang}/business/${product.slug}`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .business-page {
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .intro-section {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .intro-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .intro-section p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .intro-section h2 {
+      font-size: 1.8rem;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</MainLayout>

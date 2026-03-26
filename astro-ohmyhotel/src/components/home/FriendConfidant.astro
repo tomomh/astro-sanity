@@ -1,0 +1,225 @@
+---
+import { fetchHomePage } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const homePage = await fetchHomePage();
+
+// Get localized values with fallbacks
+const title = getLocalizedValue(homePage?.friendTitle, lang);
+const description = getLocalizedValue(homePage?.friendDescription, lang);
+
+// Fallback translations - matching original website content exactly
+const fallbackTranslations: Record<string, any> = {
+  en: {
+    header: "A valued and trusted company, ohmyhotel&co",
+    quote: "", // Original site does not show this subtitle
+    slogans: [
+      { icon: "/images/home/society.svg", title: "SOCIETY", content: "We are committed to building a strong, unified community. We fully embrace corporate social responsibility, putting environment and people before all else." },
+      { icon: "/images/home/technology.svg", title: "TECHNOLOGY", content: "We respond to the rapid changes of the digital ecosystem by combining IT and travel. All of our associates are dedicated to providing valued and reliable service, with customer satisfaction as our top priority." },
+      { icon: "/images/home/happy.svg", title: "HAPPINESS", content: "We operate a variety of welfare schemes and corporate events focused on the wellbeing and happiness of our associates, with the aim of creating a happy workplace." }
+    ]
+  },
+  ja: {
+    header: "信頼され愛される会社、ohmyhotel&co",
+    quote: "あなたの友人であり相談相手",
+    slogans: [
+      { icon: "/images/home/society.svg", title: "社会", content: "私たちはコミュニティを夢見て、共に生きる社会を創造します。環境と人々を最も大切にし、企業の社会的責任を果たします。" },
+      { icon: "/images/home/technology.svg", title: "技術", content: "ITに旅行を加え、デジタルエコシステムの変化に迅速に対応します。全ての役員と従業員は、顧客満足を最優先に、愛され信頼されるサービスの提供に努めます。" },
+      { icon: "/images/home/happy.svg", title: "幸福", content: "職場を幸せで快適にするため、従業員の利便性と幸福を重視した様々な福利厚生制度とイベントを開催しています。" }
+    ]
+  },
+  ko: {
+    header: "가치 있고 신뢰받는 회사, ohmyhotel&co",
+    quote: "당신의 친구이자 조언자",
+    slogans: [
+      { icon: "/images/home/society.svg", title: "사회", content: "우리는 커뮤니티를 꿈꾸며 함께 사는 사회를 만듭니다. 환경과 사람을 가장 중요하게 여기며 기업의 사회적 책임을 다합니다." },
+      { icon: "/images/home/technology.svg", title: "기술", content: "IT에 여행을 더하고 디지털 생태계의 변화에 빠르게 접근합니다. 모든 임직원은 고객 만족을 최우선으로 사랑받고 신뢰받는 서비스를 제공하기 위해 노력합니다." },
+      { icon: "/images/home/happy.svg", title: "행복", content: "직장을 행복하고 즐겁게 만들기 위해 직원의 편의와 행복을 강조하는 다양한 복지 제도와 이벤트를 개최합니다." }
+    ]
+  },
+  vi: {
+    header: "",
+    quote: "Một công ty có giá trị và đáng tin cậy",
+    slogans: [
+      { icon: "/images/home/society.svg", title: "XÃ HỘI", content: "Chúng tôi mơ ước về một cộng đồng và tạo ra một xã hội sống cùng nhau. Chúng tôi coi trọng môi trường và con người nhất và thực hiện trách nhiệm xã hội của doanh nghiệp." },
+      { icon: "/images/home/technology.svg", title: "CÔNG NGHỆ", content: "Chúng tôi thêm du lịch vào CNTT và nhanh chóng tiếp cận những thay đổi trong hệ sinh thái kỹ thuật số. Tất cả các giám đốc và nhân viên đều nỗ lực cung cấp các dịch vụ được yêu thích và tin tưởng với ưu tiên cao nhất là sự hài lòng của khách hàng." },
+      { icon: "/images/home/happy.svg", title: "HẠNH PHÚC", content: "Để làm cho nơi làm việc hạnh phúc và dễ chịu, các hệ thống phúc lợi và sự kiện khác nhau được tổ chức với sự nhấn mạnh vào sự tiện lợi và hạnh phúc của nhân viên." }
+    ]
+  }
+};
+
+const t = fallbackTranslations[lang] || fallbackTranslations.en;
+
+// Use Sanity data or fallback
+const displayHeader = t.header;
+const displayQuote = title || t.quote;
+
+// Build slogans array from Sanity data or use fallback
+const sanitySlogans = homePage?.friendSlogans;
+const slogans = sanitySlogans && sanitySlogans.length > 0
+  ? sanitySlogans.map((slogan: any, index: number) => ({
+      icon: slogan.icon ? urlFor(slogan.icon).url() : t.slogans[index]?.icon || "/images/home/society.svg",
+      title: getLocalizedValue(slogan.title, lang) || t.slogans[index]?.title || "",
+      content: getLocalizedValue(slogan.content, lang) || t.slogans[index]?.content || ""
+    }))
+  : t.slogans;
+---
+
+<section class="your-friend-confidant-section">
+  <div class="section-header align-center">
+    {displayHeader && <h3 class="section-title">{displayHeader}</h3>}
+    {displayQuote && <h4 class="quote"><span class="quote-mark open">"</span>{displayQuote}<span class="quote-mark close">"</span></h4>}
+    <span class="header-line"></span>
+  </div>
+  <div class="container">
+    <div class="section-content">
+      <div class="slogans-grid">
+        {slogans.map((slogan) => (
+          <div class="slogan-card">
+            <div class="item-icon">
+              <img src={slogan.icon} alt={slogan.title} />
+            </div>
+            <h6 class="p-title">{slogan.title}</h6>
+            <p>{slogan.content}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .your-friend-confidant-section {
+    padding: 0 0 8rem;
+    background-color: #ffffff;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--primary-text-color);
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+  }
+
+  .quote {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+    position: relative;
+    display: inline-block;
+  }
+
+  .quote-mark {
+    font-family: Georgia, serif;
+    font-size: 4rem;
+    font-weight: 400;
+    color: #f5a623;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .quote-mark.open {
+    margin-right: 0.5rem;
+  }
+
+  .quote-mark.close {
+    margin-left: 0.5rem;
+  }
+
+  .header-line {
+    display: block;
+    width: 4rem;
+    height: 0.3rem;
+    background: var(--brand-color-gradient);
+    margin: 0 auto;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .slogans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .slogan-card {
+    background: transparent;
+    border: none;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .item-icon {
+    margin-bottom: 1.5rem;
+  }
+
+  .item-icon img {
+    width: 7.4rem;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .p-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .slogan-card p {
+    font-size: 1.4rem;
+    color: var(--primary-text-color);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .your-friend-confidant-section {
+      padding: 0 0 5rem;
+    }
+
+    .quote {
+      font-size: 2rem;
+    }
+
+    .slogans-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .slogan-card {
+      padding-bottom: 3rem;
+    }
+
+    .slogan-card:last-child {
+      padding-bottom: 0;
+    }
+  }
+</style>

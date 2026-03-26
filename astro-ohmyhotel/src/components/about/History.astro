@@ -1,0 +1,253 @@
+---
+import { fetchAboutUsPage } from '../../utils/queries';
+import { getLocalizedValue } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const aboutPage = await fetchAboutUsPage();
+
+// Get history items from Sanity or use fallback
+const sanityHistory = aboutPage?.history || [];
+
+// Map Sanity history to display format
+const historyFromSanity = sanityHistory.map((item: any) => ({
+  year: item.year || '',
+  month: '',
+  flag: 'international',
+  event: getLocalizedValue(item.title, lang) || getLocalizedValue(item.description, lang) || '',
+  lastOfYear: false
+}));
+
+// Fallback history data structure
+const fallbackHistoryData = [
+  { year: "2025", month: "11", flag: "singapore", event: "Relocation of Headquarters to Singapore" },
+  { year: "", month: "10", flag: "singapore", event: "Establishment of Singapore Entity" },
+  { year: "", month: "05", flag: "international", event: "Trip.com Group – 2025 Excellent Partner" },
+  { year: "", month: "", flag: "ko", event: "Selected for Korea Tourism Organization's Global Challenge Program" },
+  { year: "", month: "", flag: "ko", event: "Launch of Hana Card's Travel Bucket service", lastOfYear: true },
+
+  { year: "2024", month: "09", flag: "ko", event: "Awarded the 2024 'Tourism Day' Prime Minister's Award" },
+  { year: "", month: "05", flag: "international", event: "Awarded Trip.com 2024 Performance Excellence Partner" },
+  { year: "", month: "01", flag: "ko", event: "Launched Ohmytrip.com", lastOfYear: true },
+
+  { year: "2023", month: "09", flag: "international", event: "Awarded Trip.com 2023 Performance Excellence Partner" },
+  { year: "", month: "06", flag: "international", event: "Launched Ohmyhotel.com", lastOfYear: true },
+
+  { year: "2021", month: "12", flag: "ko", event: "Relocated OhMyHotel&Co. headquarters from Vietnam to Seoul", lastOfYear: true },
+
+  { year: "2018", month: "07", flag: "international", event: "Established Ohmyhotel & Co (Japan, Vietnam)" },
+  { year: "", month: "06", flag: "ko", event: "Formed strategic business partnership with ROONETS PMS", lastOfYear: true },
+
+  { year: "2017", month: "11", flag: "vi", event: "Established NDC Hospitality in HCMC, Vietnam" },
+  { year: "", month: "06", flag: "ja", event: "Established Orenge Partners Holdings in Osaka", lastOfYear: true },
+
+  { year: "2015", month: "11", flag: "ko", event: "Established Ohmytrip and launched brand", lastOfYear: true },
+
+  { year: "2013", month: "03", flag: "taiwan", event: "Awarded prestigious Taiwan Tourism Award by Taiwan Tourism Bureau", lastOfYear: true },
+
+  { year: "2012", month: "05", flag: "ko", event: "Established Ezget (IT Corporate)" },
+  { year: "", month: "02", flag: "ko", event: "Appointed Policy Advisor for Secretary to President of Tourism", lastOfYear: true },
+
+  { year: "2011", month: "04", flag: "ko", event: "Acquired Bico and arranged basis for global business expansion", lastOfYear: true },
+
+  { year: "2010", month: "", flag: "international", event: "Founded Bico Trip branches (Hong Kong, Shanghai, Singapore, Thailand, Taiwan, Philippines)", lastOfYear: true },
+
+  { year: "2009", month: "12", flag: "ja", event: "Awarded Japan Tourism Agency Commissioner's Commendation", lastOfYear: true },
+
+  { year: "2006", month: "05", flag: "ko", event: "Established Bico Trip (Korean Corporate)", lastOfYear: true },
+
+  { year: "1997", month: "03", flag: "ja", event: "Established Bico (Japanese Corporate)", lastOfYear: true }
+];
+
+// Use Sanity data if available, otherwise fallback
+const historyData = historyFromSanity.length > 0 ? historyFromSanity : fallbackHistoryData;
+---
+
+<section class="history-section">
+  <div class="container">
+    <div class="section-header">
+      <h3>History</h3>
+      <span class="header-line"></span>
+    </div>
+    <div class="section-content">
+      <div class="timeline">
+        {historyData.map((item: any) => (
+          <div class:list={["timeline-item", { "last-of-year": item.lastOfYear }]}>
+            <div class="year">{item.year}</div>
+            <div class="month">{item.month}</div>
+            <div class="flag">
+              {item.flag && (
+                <span class="lang-flag">
+                  <img src={`/images/flags/${item.flag}.${item.flag === 'international' ? 'png' : 'svg'}`} alt="" />
+                </span>
+              )}
+            </div>
+            <div class="event">{item.event}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .history-section {
+    padding: 5rem 0 6rem;
+    background-color: #fff;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .header-line {
+    display: block;
+    width: 4rem;
+    height: 0.3rem;
+    background: var(--brand-color-gradient);
+    margin: 0 auto;
+  }
+
+  .section-content {
+    max-width: 65rem;
+    margin: auto;
+    padding-top: 1rem;
+  }
+
+  .timeline {
+    position: relative;
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    line-height: 2.3rem;
+  }
+
+  .timeline-item.last-of-year {
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .timeline-item.last-of-year::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    margin-top: 1rem;
+    background: linear-gradient(270deg, #FFFFFF 0%, #E3E3E3 51.39%, #FFFFFF 100%);
+  }
+
+  .year {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    min-width: 5.6rem;
+    max-width: 5.6rem;
+    padding: 1rem;
+  }
+
+  .month {
+    font-size: 1.6rem;
+    color: var(--primary-text-color);
+    min-width: 4rem;
+    max-width: 4rem;
+    padding: 1rem;
+  }
+
+  .flag {
+    min-width: 4.5rem;
+    max-width: 4.5rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lang-flag img {
+    width: 24px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .event {
+    flex: 1;
+    font-size: 1.4rem;
+    color: var(--primary-text-color);
+    line-height: 2.3rem;
+    padding: 1rem;
+  }
+
+  @media (max-width: 767px) {
+    .history-section {
+      padding: 4rem 0;
+    }
+
+    .section-header h3 {
+      font-size: 2rem;
+    }
+
+    .section-content {
+      padding-top: 2.5rem;
+    }
+
+    .timeline-item {
+      flex-wrap: wrap;
+    }
+
+    .year {
+      min-width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      padding: 0.5rem;
+    }
+
+    .year:not(:empty)::after {
+      content: "";
+      height: 1px;
+      width: 100%;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(270deg, #FFFFFF 0%, #E3E3E3 51.39%, #FFFFFF 100%);
+      display: block;
+    }
+
+    .month,
+    .flag,
+    .event {
+      padding-left: 2rem !important;
+      padding-right: 2rem !important;
+    }
+
+    .timeline-item.last-of-year {
+      margin-bottom: 4.5rem;
+    }
+
+    .timeline-item.last-of-year::after {
+      display: none;
+    }
+  }
+</style>

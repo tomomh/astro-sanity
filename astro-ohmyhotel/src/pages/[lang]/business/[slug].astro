@@ -1,0 +1,238 @@
+---
+import MainLayout from '../../../layouts/main.astro';
+import ProductFeature from '../../../components/business/ProductFeature.astro';
+import ProductScreenshots from '../../../components/business/ProductScreenshots.astro';
+import PartnerLogos from '../../../components/business/PartnerLogos.astro';
+import ContactForm from '../../../components/business/ContactForm.astro';
+import { languages, type Language } from '../../../utils/i18n';
+import { fetchProduct, fetchProductsList } from '../../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../../utils/sanity';
+
+export async function getStaticPaths() {
+  // Fetch product slugs from Sanity
+  const sanityProducts = await fetchProductsList();
+  const sanitySlugList = sanityProducts?.map((p: any) => p.slug?.current || p.slug).filter(Boolean) || [];
+
+  // Fallback slugs
+  const fallbackSlugs = ['ota', 'pms', 'cms', 'booking-engine', 'hotel-web', 'company-profile'];
+
+  // Use Sanity slugs if available, otherwise fallback
+  const slugList = sanitySlugList.length > 0 ? sanitySlugList : fallbackSlugs;
+
+  const paths = [];
+  for (const lang of languages) {
+    for (const slug of slugList) {
+      paths.push({
+        params: { lang, slug },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: Language; slug: string };
+
+// Fetch product from Sanity
+const sanityProduct = await fetchProduct(slug);
+
+// Map Sanity product to display format
+const productFromSanity = sanityProduct ? {
+  title: getLocalizedValue(sanityProduct.title, lang) || sanityProduct.title,
+  description: getLocalizedValue(sanityProduct.shortDescription, lang) || sanityProduct.shortDescription,
+  features: sanityProduct.features?.map((f: any) => ({
+    title: getLocalizedValue(f.title, lang) || f.title,
+    content: getLocalizedValue(f.description, lang) || f.description,
+    image: f.icon ? urlFor(f.icon).width(600).auto('format').url() : null,
+    imagePosition: f.imagePosition || 'right'
+  })) || [],
+  screenshots: sanityProduct.screenshots?.map((s: any) => urlFor(s).width(800).auto('format').url()) || [],
+  partners: [] // Add if needed
+} : null;
+
+// Fallback product data
+const fallbackProductData: Record<string, any> = {
+  'ota': {
+    title: 'OTA (Online Travel Agency)',
+    description: 'Comprehensive B2C platform with Ohmyhotel.com and Ohmytrip.com',
+    features: [
+      {
+        title: 'Multi-language Support',
+        content: '<p>Available in 5 languages: Korean, English, Japanese, Vietnamese, and Chinese</p><ul><li>Ohmyhotel.com for accommodation</li><li>Ohmytrip.com for comprehensive travel services</li></ul>',
+        image: '/images/business/ota-multilang.jpg'
+      },
+      {
+        title: 'Lower Costs, Higher Revenue',
+        content: '<p>Reduce commission fees and increase direct bookings</p><ul><li>Competitive commission rates</li><li>Real-time inventory management</li><li>Automated booking confirmation</li></ul>',
+        image: '/images/business/ota-revenue.jpg',
+        imagePosition: 'left'
+      }
+    ],
+    partners: [
+      { name: 'Trip.com', logo: '/images/partners/tripcom.png' },
+      { name: 'Agoda', logo: '/images/partners/agoda.png' },
+      { name: 'Booking.com', logo: '/images/partners/booking.png' },
+      { name: 'Expedia', logo: '/images/partners/expedia.png' }
+    ]
+  },
+  'pms': {
+    title: 'PMS (Property Management System)',
+    description: 'Intuitive and efficient property management solution',
+    features: [
+      {
+        title: 'Convenient Reservation Check',
+        content: '<p>Streamline your front desk operations</p><ul><li>Real-time reservation dashboard</li><li>Guest profile management</li><li>Automated check-in/check-out</li></ul>',
+        image: '/images/business/pms-reservation.jpg'
+      },
+      {
+        title: 'Just-in-Time Management',
+        content: '<p>Manage your property efficiently with real-time updates</p><ul><li>Room status tracking</li><li>Housekeeping management</li><li>Maintenance scheduling</li></ul>',
+        image: '/images/business/pms-management.jpg',
+        imagePosition: 'left'
+      }
+    ],
+    screenshots: [
+      '/images/business/pms-screen-1.jpg',
+      '/images/business/pms-screen-2.jpg',
+      '/images/business/pms-screen-3.jpg'
+    ]
+  },
+  'cms': {
+    title: 'CMS (Channel Management System)',
+    description: 'Efficient rate and inventory management',
+    features: [
+      {
+        title: 'The Simplest Solution',
+        content: '<p>Manage all your channels from one dashboard</p><ul><li>Single interface for all OTAs</li><li>Bulk update capabilities</li><li>Real-time synchronization</li></ul>',
+        image: '/images/business/cms-dashboard.jpg'
+      },
+      {
+        title: 'Smart Rate Management',
+        content: '<p>Optimize pricing across all channels</p><ul><li>Dynamic pricing tools</li><li>Rate parity control</li><li>Seasonal rate planning</li></ul>',
+        image: '/images/business/cms-rates.jpg',
+        imagePosition: 'left'
+      }
+    ]
+  },
+  'booking-engine': {
+    title: 'Booking Engine',
+    description: 'Powerful direct booking solution',
+    features: [
+      {
+        title: 'Increase Direct Bookings',
+        content: '<p>Commission-free bookings directly from your website</p><ul><li>Mobile-responsive design</li><li>Multiple payment options</li><li>Multi-language support</li></ul>',
+        image: '/images/business/be-bookings.jpg'
+      }
+    ]
+  },
+  'hotel-web': {
+    title: 'Hotel Website Design',
+    description: 'Modern, responsive website design',
+    features: [
+      {
+        title: 'Beautiful & Functional',
+        content: '<p>Professional website design that converts</p><ul><li>Custom design tailored to your brand</li><li>Mobile-first approach</li><li>SEO optimized</li><li>Integrated booking engine</li></ul>',
+        image: '/images/business/web-design.jpg'
+      }
+    ]
+  },
+  'company-profile': {
+    title: 'OHMY SaaS',
+    description: 'One-Stop Solution for Hospitality Systems',
+    features: [
+      {
+        title: 'Complete Integration',
+        content: '<p>From purchasing to selling, all in one system</p><ul><li>Integrated PMS, CMS, and OTA</li><li>Unified reporting dashboard</li><li>Seamless data flow</li></ul>',
+        image: '/images/business/saas-integration.jpg'
+      }
+    ]
+  }
+};
+
+// Use Sanity data or fallback
+const fallbackProduct = fallbackProductData[slug] || fallbackProductData['ota'];
+const product = productFromSanity && productFromSanity.features.length > 0
+  ? productFromSanity
+  : fallbackProduct;
+---
+
+<MainLayout content={{ title: `${product.title} - OHMYHOTEL & CO` }}>
+  <div class="product-page">
+    <section class="hero">
+      <h1>{product.title}</h1>
+      <p>{product.description}</p>
+    </section>
+
+    <div class="container">
+      {product.features.map((feature: any) => (
+        <ProductFeature
+          title={feature.title}
+          content={feature.content}
+          image={feature.image}
+          imagePosition={feature.imagePosition}
+        />
+      ))}
+
+      {product.screenshots && (
+        <ProductScreenshots
+          images={product.screenshots}
+          title="Product Screenshots"
+        />
+      )}
+
+      {product.partners && (
+        <PartnerLogos
+          title="Our Partners"
+          partners={product.partners}
+        />
+      )}
+
+      <ContactForm
+        title="Interested in this solution?"
+        description="Contact us for more information and pricing"
+        lang={lang}
+      />
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .product-page {
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</MainLayout>

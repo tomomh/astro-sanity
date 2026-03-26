@@ -1,0 +1,417 @@
+---
+import { fetchSiteSettings } from '../../utils/queries';
+import { getLocalizedValue } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  currentLang: string;
+}
+
+const { currentLang } = Astro.props;
+const lang = currentLang as Language;
+
+// Fetch site settings from Sanity
+const siteSettings = await fetchSiteSettings();
+
+// Fallback translations (used if Sanity data is empty)
+const fallbackTranslations: Record<string, Record<string, string>> = {
+  ja: {
+    aboutUs: '会社紹介',
+    business: '事業内容',
+    careers: '採用情報',
+    location: '所在地',
+    contactUs: 'お問い合わせ',
+    privacy: 'プライバシーポリシー',
+    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
+    tel: '+82-2-762-0552',
+    fax: '+82-2-733-0551'
+  },
+  en: {
+    aboutUs: 'About Us',
+    business: 'Business',
+    careers: 'Careers',
+    location: 'Location',
+    contactUs: 'Contact Us',
+    privacy: 'Privacy Policy',
+    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
+    tel: '+82-2-762-0552',
+    fax: '+82-2-733-0551'
+  },
+  vi: {
+    aboutUs: 'Về chúng tôi',
+    business: 'Kinh doanh',
+    careers: 'Nghề nghiệp',
+    location: 'Vị trí',
+    contactUs: 'Liên hệ',
+    privacy: 'Chính sách bảo mật',
+    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
+    tel: '+82-2-762-0552',
+    fax: '+82-2-733-0551'
+  },
+  ko: {
+    aboutUs: '회사소개',
+    business: '사업소개',
+    careers: '채용정보',
+    location: '오시는 길',
+    contactUs: '문의하기',
+    privacy: '개인정보처리방침',
+    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
+    tel: '+82-2-762-0552',
+    fax: '+82-2-733-0551'
+  }
+};
+
+const fallback = fallbackTranslations[currentLang] || fallbackTranslations.en;
+
+// Use Sanity data with fallbacks
+const t = {
+  aboutUs: getLocalizedValue(siteSettings?.footerLinks?.aboutUs, lang) || fallback.aboutUs,
+  business: getLocalizedValue(siteSettings?.footerLinks?.business, lang) || fallback.business,
+  careers: getLocalizedValue(siteSettings?.footerLinks?.careers, lang) || fallback.careers,
+  location: getLocalizedValue(siteSettings?.footerLinks?.location, lang) || fallback.location,
+  contactUs: getLocalizedValue(siteSettings?.footerLinks?.contactUs, lang) || fallback.contactUs,
+  privacy: getLocalizedValue(siteSettings?.footerLinks?.privacy, lang) || fallback.privacy,
+  address: getLocalizedValue(siteSettings?.address, lang) || fallback.address,
+  tel: siteSettings?.contactPhone || fallback.tel,
+  fax: siteSettings?.contactFax || fallback.fax
+};
+
+// Social links from Sanity or fallback
+const socialLinks = siteSettings?.socialLinks || [
+  { platform: 'instagram', url: 'https://www.instagram.com/ohmytrip_by_ohmyhotel/', icon: '/images/footer/instagram.svg' },
+  { platform: 'naver', url: 'https://blog.naver.com/ohmyhotelnco', icon: '/images/footer/naver-blog.svg' },
+  { platform: 'linkedin', url: 'https://kr.linkedin.com/company/ohmyhotel-co', icon: '/images/footer/linkedIn.svg' },
+  { platform: 'partner', url: 'https://ohmypartners.notion.site/4f3bbe4586b1443897aa925e82f89190', icon: '/images/footer/omt-partner.svg' },
+  { platform: 'kakao', url: 'http://pf.kakao.com/_Pxduwxj', icon: '/images/footer/kakao.svg' }
+];
+
+const showFax = currentLang !== 'vi'; // Hide fax for Vietnamese version
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="logo">
+      <img src="/images/footer/logo-gray.svg" alt="Ohmyhotel & CO" />
+    </div>
+    <div class="info align-left">
+      <div class="footer-links">
+        <div>
+          <div>
+            <a href="/about-us/ceo-message" class="no-underline">{t.aboutUs}</a>
+          </div>
+          <div>
+            <a href="/business/online-booking-engine" class="no-underline">{t.business}</a>
+          </div>
+          <div>
+            <a href="/careers/desired-traits" class="no-underline">{t.careers}</a>
+          </div>
+        </div>
+        <div>
+          <div>
+            <a href="mailto:CS@ohmyhotel.com" class="no-underline">{t.contactUs}</a>
+          </div>
+          <div>
+            <a href="/about-us/location" class="no-underline">{t.location}</a>
+          </div>
+          <div>
+            <a href="/privacy-policy" class="no-underline">{t.privacy}</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="icon-container">
+          <img src="/images/footer/location.svg" alt="Location" />
+        </span>
+        {t.address}
+      </div>
+      <div class="content-left">
+        <div>
+          <span class="icon-container">
+            <img src="/images/footer/phone.svg" alt="Phone" />
+          </span>
+          <span>{t.tel}</span>
+        </div>
+        {showFax && (
+          <div class="footer-fax">
+            <span class="icon-container">
+              <img src="/images/footer/fax.svg" alt="Fax" />
+            </span>
+            <span>{t.fax}</span>
+          </div>
+        )}
+        <div>
+          <a
+            href="https://www.facebook.com/ohmyhotelncovietnam"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="content-center no-underline"
+          >
+            <span class="icon-container">
+              <img src="/images/icons/facebook.svg" alt="Facebook" />
+            </span>
+            <span>Ohmyhotelnco</span>
+          </a>
+        </div>
+      </div>
+      <p>Copyright &copy; Ohmyhotel & Co. Ltd. All Rights Reserved.</p>
+      <div class="content-left social">
+        {socialLinks.map((social: any) => (
+          <div>
+            <a href={social.url} target="_blank" rel="noopener noreferrer" class="no-underline">
+              <span>
+                <img src={social.icon || `/images/footer/${social.platform}.svg`} alt={social.platform} height="35" />
+              </span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: #fafcff;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 1rem 0;
+    z-index: 2;
+    position: relative;
+  }
+
+  .footer::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 73px;
+    background-color: #fafcff;
+    border-top: var(--primary-border);
+    right: 0;
+    top: -3.5rem;
+    transform: skewY(184deg);
+    z-index: 1;
+  }
+
+  .footer::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 73px;
+    background-color: #fafcff;
+    border-top: var(--primary-border);
+    left: 0;
+    top: -3.5rem;
+    transform: skewY(176deg);
+  }
+
+  .footer .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo {
+    padding: 1.5rem 0;
+    margin-right: 4rem;
+    z-index: 2;
+  }
+
+  .info {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+  .footer-links {
+    display: flex;
+  }
+
+  .footer-links > div {
+    display: flex;
+    font-size: 1.4rem;
+  }
+
+  .footer-links > div > div {
+    padding-right: 2rem;
+    margin-right: 2rem;
+    position: relative;
+  }
+
+  .footer-links > div > div a {
+    padding: 0.3rem 0;
+  }
+
+  .footer-links > div > div::before {
+    content: "";
+    height: 1rem;
+    width: 0.1rem;
+    background-color: #ccc;
+    position: absolute;
+    right: 0;
+    top: 0.6rem;
+  }
+
+  .footer-links > div:last-child > div:last-child {
+    margin: 0;
+    border: 0;
+    padding: 0;
+  }
+
+  .footer-links > div:last-child > div:last-child::before {
+    display: none;
+  }
+
+  .info > div {
+    display: flex;
+    padding-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .info > div:nth-child(n + 2) {
+    align-items: center;
+  }
+
+  .info > div.content-left {
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  .info > div.content-left > div {
+    display: flex;
+    align-items: center;
+    margin-right: 4rem;
+  }
+
+  .info > div.content-left::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(270deg, rgba(248, 248, 248, 0) 0%, #eeeeee 100%);
+  }
+
+  .info > div.content-left a:hover::before,
+  .info > div.content-left a:focus::before {
+    display: none;
+  }
+
+  .info > div.content-left.social div {
+    margin-right: 0.5rem;
+  }
+
+  .icon-container {
+    height: 3.5rem;
+    width: 3.5rem;
+    box-shadow: var(--primary-box-shadow-inset);
+    background-color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.6rem;
+  }
+
+  .info p {
+    text-align: left;
+    font-size: 1.2rem;
+    color: #666;
+    margin: 1.5rem 0 1rem;
+  }
+
+  /* Mobile Styles */
+  @media only screen and (max-width: 767px) {
+    .footer {
+      padding: 0;
+    }
+
+    .footer .container {
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .footer .container .logo {
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer .container .info {
+      padding-top: 4rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      border-bottom: var(--primary-border);
+      padding: 0 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links > div {
+      flex-direction: column;
+    }
+
+    .footer-links > div > div {
+      margin: 0;
+      padding: 0;
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-links > div > div::before {
+      display: none;
+    }
+
+    .footer-links > div > div a {
+      font-size: 1.6rem;
+    }
+
+    .footer-links > div:first-child {
+      padding-right: 13rem;
+    }
+
+    .info > div {
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+    }
+
+    .info > div.content-left {
+      justify-content: space-between !important;
+      border-bottom: var(--primary-border);
+    }
+
+    .info > div.content-left::after {
+      display: none;
+    }
+
+    .info > div.content-left > div {
+      padding-bottom: 2rem;
+      margin-right: 2rem;
+    }
+
+    .info p {
+      text-align: center;
+      margin-top: 2rem;
+    }
+  }
+
+  /* Tablet Styles */
+  @media only screen and (max-width: 991.98px) and (min-width: 768px) {
+    .footer {
+      padding: 0;
+    }
+
+    .footer .container {
+      flex-direction: column;
+    }
+
+    .footer .container .logo {
+      padding-top: 0;
+      margin: 0;
+    }
+
+    .footer .container .info {
+      align-items: center;
+    }
+  }
+</style>

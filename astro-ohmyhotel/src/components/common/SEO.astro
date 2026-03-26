@@ -1,0 +1,86 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  ogType?: 'website' | 'article' | 'product';
+  lang?: string;
+  alternateLanguages?: Array<{ lang: string; url: string }>;
+  keywords?: string[];
+  author?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt = title,
+  canonical,
+  noindex = false,
+  nofollow = false,
+  ogType = 'website',
+  lang = 'ja',
+  alternateLanguages = [],
+  keywords = [],
+  author = 'Ohmyhotel & Co'
+} = Astro.props;
+
+const siteUrl = Astro.site || 'https://ohmyhotel.com';
+const currentUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = image ? (image.startsWith('http') ? image : new URL(image, siteUrl).href) : new URL('/images/og-default.jpg', siteUrl).href;
+
+// Ensure title is not too long for meta tags
+const metaTitle = title.length > 60 ? title.substring(0, 57) + '...' : title;
+const metaDescription = description.length > 160 ? description.substring(0, 157) + '...' : description;
+
+// Robots meta
+const robotsContent = [
+  noindex ? 'noindex' : 'index',
+  nofollow ? 'nofollow' : 'follow'
+].join(', ');
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={metaTitle} />
+<meta name="description" content={metaDescription} />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+{author && <meta name="author" content={author} />}
+<meta name="robots" content={robotsContent} />
+
+<!-- Canonical URL -->
+{canonical && <link rel="canonical" href={canonical} />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={metaTitle} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:site_name" content="Ohmyhotel & Co" />
+<meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : lang === 'ko' ? 'ko_KR' : lang === 'vi' ? 'vi_VN' : 'en_US'} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={currentUrl} />
+<meta name="twitter:title" content={metaTitle} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+<!-- Language Alternates -->
+{alternateLanguages.map(({ lang: altLang, url }) => (
+  <link rel="alternate" hreflang={altLang} href={url} />
+))}
+{alternateLanguages.length > 0 && (
+  <link rel="alternate" hreflang="x-default" href={alternateLanguages.find(a => a.lang === 'en')?.url || alternateLanguages[0].url} />
+)}
+
+<!-- Additional SEO -->
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#EE8768" />

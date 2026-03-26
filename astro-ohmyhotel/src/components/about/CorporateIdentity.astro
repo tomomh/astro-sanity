@@ -1,0 +1,472 @@
+---
+import { fetchAboutUsPage } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const aboutPage = await fetchAboutUsPage();
+const corporateIdentity = aboutPage?.corporateIdentity;
+
+// Get localized values from Sanity
+const introText = getLocalizedValue(corporateIdentity?.intro, lang);
+const colorSystemDesc = getLocalizedValue(corporateIdentity?.colorSystem?.description, lang);
+const signatureDesc = getLocalizedValue(corporateIdentity?.signatureDescription, lang);
+
+// Get colors and signatures from Sanity
+const sanityColors = corporateIdentity?.colorSystem?.colors || [];
+const sanitySignatures = corporateIdentity?.signatures || [];
+
+// Fallback content
+const fallbackIntro = {
+  title: 'Loved and Reliable Company,<br />Ohmyhotel & Co',
+  description: `CI of Ohmyhotel & Co is the design which expresses creative ideas and active thinking method in a visual language.<br />
+    CI also symbolizes the symbol mark of orange with a pleasant scent.<br />
+    CI is the symbol of customer-centered management communicating with partners anytime and anywhere.`
+};
+
+const fallbackColorDesc = `Ohmyhotel & Co colors are a key factor in establishing corporate identity.<br />
+  For effective use, the designated colors should be used in accordance to the characteristics of the medium.<br />
+  Upon significant differences in brightness, chroma or other aspects, the color should be as close to pantone color as possible.`;
+
+const fallbackSignatureDesc = `Signature is the most reasonable and organized combination of the basic symbols and logos – in other words, it is a formal representation of the company.<br />
+  This is the most straightforward method of representing the company's image. Thus, it is finetuned to accordance to the balance of each element.<br />
+  Therefore, it should only be used in its specified perimeters.`;
+
+// Use Sanity data or fallback
+const displayIntro = introText || fallbackIntro.description;
+const displayColorDesc = colorSystemDesc || fallbackColorDesc;
+const displaySignatureDesc = signatureDesc || fallbackSignatureDesc;
+---
+
+<div class="CI-page">
+  <!-- CI Intro Section -->
+  <section class="ci-intro-section">
+    <div class="section-header container">
+      <h3>CI</h3>
+      <span class="header-line"></span>
+    </div>
+    <div class="section-content">
+      <div class="container">
+        <h6 class="p-title">Loved and Reliable Company,<br />Ohmyhotel & Co</h6>
+        <p set:html={displayIntro} />
+      </div>
+      <div class="full-width-image">
+        <img class="left" src="/images/about/ci-intro-logo-new.svg" alt="CI Logo" />
+        <img class="right" src="/images/about/ci-intro-logo-new-1.svg" alt="CI Logo" />
+      </div>
+      <div class="content-center">
+        <a href="/images/about/ci_ohmyhotelco_ai_new.zip" download="ci_ohmyhotelco_ai" class="btn btn-primary">
+          <img src="/images/about/download.svg" alt="" width="18" />
+          <span>AI Download</span>
+        </a>
+        <a href="/images/about/ci_ohmyhotelco_new.zip" download="ci_ohmyhotelco" class="btn btn-primary">
+          <img src="/images/about/download.svg" alt="" width="18" />
+          <span>JPG Download</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Color System Section -->
+  <section class="color-system-section">
+    <div class="section-header container">
+      <h3>Color System</h3>
+      <span class="header-line"></span>
+    </div>
+    <div class="section-content">
+      <div class="container">
+        <p set:html={displayColorDesc} />
+        <div class="title-comp">
+          <div>Ohmyhotel & Co</div>
+          <div>Corporate Identity Basic System</div>
+        </div>
+        <div class="content-center row">
+          <div class="color-item">
+            <div class="color-cycle orange-gradient"></div>
+            <div class="orange-gradient">
+              <p>Reference</p>
+              <p>Gradient View</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-cycle green-gradient"></div>
+            <div class="green-gradient">
+              <p>Reference</p>
+              <p>Gradient View</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-cycle orange"></div>
+            <div>
+              <p>CMYK: 00/77/100/00</p>
+              <p>RGB: 255/96/0</p>
+              <p>#ff6000</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-cycle black"></div>
+            <div>
+              <p>CMYK: 69/62/61/54</p>
+              <p>RGB: 56/56/56</p>
+              <p>#383838</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-cycle white"></div>
+            <div>
+              <p>CMYK: 0/1/2/0</p>
+              <p>RGB: 252/252/248</p>
+              <p>#fffcf8</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-cycle green"></div>
+            <div>
+              <p>CMYK: 98/12/100/02</p>
+              <p>RGB: 00/149/58</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Signature Section -->
+  <section class="corporate-signature-section">
+    <div class="section-header container">
+      <h3>Corporate Signature</h3>
+      <span class="header-line"></span>
+    </div>
+    <div class="section-content">
+      <div class="container">
+        <p set:html={displaySignatureDesc} />
+      </div>
+      <div class="container signature-grid">
+        <div class="signature-row">
+          <div class="color-item-signature">
+            <div class="white"><img src="/images/about/ci-1-01.png" alt="Logo" /></div>
+            <div class="white"><img src="/images/about/ci-1-02.png" alt="Logo" /></div>
+          </div>
+          <div class="color-item-signature">
+            <div><img src="/images/about/ci-1-01.png" alt="Logo" /></div>
+            <div><img src="/images/about/ci-1-02.png" alt="Logo" /></div>
+          </div>
+          <div class="color-item-signature">
+            <div class="orange"><img src="/images/about/ci-2-01.png" alt="Logo" /></div>
+            <div class="orange"><img src="/images/about/ci-2-02.png" alt="Logo" /></div>
+          </div>
+          <div class="color-item-signature">
+            <div><img src="/images/about/ci-3-01.png" alt="Logo" /></div>
+            <div><img src="/images/about/ci-3-02.png" alt="Logo" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .CI-page {
+    background-color: #fff;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-top: 5rem;
+  }
+
+  .section-header h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .header-line {
+    display: block;
+    width: 4rem;
+    height: 0.3rem;
+    background: var(--brand-color-gradient);
+    margin: 0 auto;
+  }
+
+  .section-content {
+    text-align: center;
+  }
+
+  .section-content p {
+    font-size: 1.4rem;
+    color: var(--primary-text-color);
+    line-height: 2.3rem;
+    margin-bottom: 2rem;
+  }
+
+  /* CI Intro Section */
+  .ci-intro-section .p-title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--primary-header-color);
+    margin-bottom: 2rem;
+  }
+
+  .ci-intro-section .section-content .container {
+    margin-top: 1rem;
+  }
+
+  .ci-intro-section .section-content p {
+    margin-top: 4rem;
+  }
+
+  .ci-intro-section .full-width-image {
+    background: url('/images/about/ci-intro-bg.svg') top center repeat;
+    background-size: 606px auto;
+    height: 25.7rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 3.5rem 0 4rem;
+  }
+
+  .ci-intro-section .full-width-image img.left {
+    height: 25.7rem;
+  }
+
+  .ci-intro-section .full-width-image img.right {
+    height: 7rem;
+  }
+
+  .content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    margin: 0 1.3rem;
+    background: var(--brand-color-gradient);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  .btn img {
+    filter: brightness(0) invert(1);
+  }
+
+  /* Color System Section */
+  .color-system-section {
+    padding-bottom: 4rem;
+  }
+
+  .color-system-section .row {
+    max-width: 72rem;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .title-comp {
+    text-align: left;
+    padding: 1.5rem 0.9rem 2rem;
+    color: #ABACAE;
+    position: relative;
+    max-width: 72rem;
+    margin: 2rem auto;
+  }
+
+  .title-comp::after {
+    content: "";
+    width: 13%;
+    height: 2px;
+    background: #ABACAE;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .title-comp::before {
+    content: "";
+    width: 13%;
+    height: 2px;
+    background: #ABACAE;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+  }
+
+  .color-item {
+    padding: 1.5rem 0.9rem 2rem;
+    width: 18rem;
+    text-align: center;
+  }
+
+  .color-item .orange-gradient {
+    color: #EE7E28;
+  }
+
+  .color-item .green-gradient {
+    color: #07834C;
+  }
+
+  .color-item p {
+    margin: 0;
+    font-size: 1.3rem;
+    line-height: 1.8;
+  }
+
+  .color-cycle {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.15);
+    border: 1rem solid white;
+    margin: 0 auto 1.6rem;
+  }
+
+  .color-cycle.orange-gradient {
+    background: linear-gradient(90deg, #BD1819 0%, #F1C400 100%);
+  }
+
+  .color-cycle.green-gradient {
+    background: linear-gradient(90deg, #07834C 0%, #1DA136 100%);
+  }
+
+  .color-cycle.orange {
+    background-color: #ff6000;
+  }
+
+  .color-cycle.black {
+    background-color: #383838;
+  }
+
+  .color-cycle.white {
+    background-color: #fffcf8;
+  }
+
+  .color-cycle.green {
+    background-color: rgb(0, 149, 58);
+  }
+
+  /* Corporate Signature Section */
+  .corporate-signature-section {
+    padding-bottom: 6rem;
+  }
+
+  .corporate-signature-section .section-content .container {
+    margin-bottom: 5rem;
+  }
+
+  .signature-grid {
+    margin-bottom: 2rem;
+  }
+
+  .signature-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .color-item-signature {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .color-item-signature > div {
+    background-color: #fffcf8;
+    border: 1px solid #C2C2C0;
+    padding: 2rem;
+  }
+
+  .color-item-signature > div.white {
+    background-color: #FFFFFF;
+  }
+
+  .color-item-signature > div.orange {
+    background-color: #ff6000;
+  }
+
+  .color-item-signature img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .section-header {
+      padding-top: 4rem;
+    }
+
+    .section-header h3 {
+      font-size: 2rem;
+    }
+
+    .ci-intro-section .full-width-image {
+      height: 14.8rem;
+      background-size: 90% 75%, auto;
+      flex-direction: column;
+    }
+
+    .ci-intro-section .full-width-image img.left {
+      height: 14.8rem;
+    }
+
+    .ci-intro-section .full-width-image img.right {
+      height: 4rem;
+    }
+
+    .btn {
+      flex-direction: column;
+      margin: 0.5rem;
+    }
+
+    .btn img {
+      margin-bottom: 0.5rem;
+    }
+
+    .color-system-section .row {
+      max-width: 36rem;
+    }
+
+    .color-item {
+      width: 50%;
+    }
+
+    .signature-row {
+      flex-direction: column;
+    }
+
+    .color-item-signature {
+      flex-direction: row;
+    }
+  }
+</style>

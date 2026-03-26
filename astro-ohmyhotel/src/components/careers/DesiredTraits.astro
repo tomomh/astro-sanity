@@ -1,0 +1,243 @@
+---
+import { fetchCareersPage } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const careersPage = await fetchCareersPage();
+const desiredTraits = careersPage?.desiredTraits;
+
+// Get localized values from Sanity
+const sanityHeader = getLocalizedValue(desiredTraits?.title, lang);
+const sanityTraits = desiredTraits?.traits?.map((trait: any) => ({
+  title: getLocalizedValue(trait.title, lang),
+  description: getLocalizedValue(trait.description, lang),
+  icon: trait.icon ? urlFor(trait.icon).width(80).auto('format').url() : null
+})) || [];
+
+// Fallback content
+const fallbackContent: Record<Language, {
+  header: string;
+  traits: Array<{
+    title: string;
+    description: string;
+    icon: string;
+  }>;
+}> = {
+  en: {
+    header: 'Who we look for',
+    traits: [
+      {
+        title: 'Partner - A Shared Growth Ally',
+        description: 'We regard our partners not merely as suppliers, but as collaborators who grow with us. Through mutual trust and shared benefit, we pursue sustainable cooperation.',
+        icon: '/images/career/icon-partner.svg'
+      },
+      {
+        title: 'Customer - Customer First',
+        description: 'All employees place customer satisfaction as the highest priority, delivering services that earn love and trust and create meaningful customer delight.',
+        icon: '/images/career/icon-customer.svg'
+      },
+      {
+        title: 'Employee - Practical, Team-Driven Mindset',
+        description: 'We value individuals who identify and address challenges on their own, and we cherish a culture where collaboration enables both the individual and the company to grow stronger together.',
+        icon: '/images/career/icon-employee.svg'
+      }
+    ]
+  },
+  ja: {
+    header: '私たちが求める人材',
+    traits: [
+      {
+        title: 'パートナー - 共に成長する仲間',
+        description: 'パートナーを単なる供給者ではなく、共に成長する協力者として捉えています。相互信頼と共有利益を通じて、持続可能な協力関係を追求します。',
+        icon: '/images/career/icon-partner.svg'
+      },
+      {
+        title: '顧客 - 顧客第一',
+        description: '全社員が顧客満足を最優先とし、愛され信頼されるサービスを提供し、意味のある顧客の喜びを創造します。',
+        icon: '/images/career/icon-customer.svg'
+      },
+      {
+        title: '社員 - 実践的でチーム重視の姿勢',
+        description: '自ら課題を発見し解決する人材を重視し、協力によって個人と会社が共に強くなる文化を大切にしています。',
+        icon: '/images/career/icon-employee.svg'
+      }
+    ]
+  },
+  ko: {
+    header: '우리가 찾는 인재',
+    traits: [
+      {
+        title: '파트너 - 함께 성장하는 동반자',
+        description: '우리는 파트너를 단순한 공급자가 아닌 함께 성장하는 협력자로 여깁니다. 상호 신뢰와 공유 이익을 통해 지속 가능한 협력을 추구합니다.',
+        icon: '/images/career/icon-partner.svg'
+      },
+      {
+        title: '고객 - 고객 우선',
+        description: '모든 직원이 고객 만족을 최우선으로 하며, 사랑받고 신뢰받는 서비스를 제공하여 의미 있는 고객 감동을 창출합니다.',
+        icon: '/images/career/icon-customer.svg'
+      },
+      {
+        title: '직원 - 실용적이고 팀 중심적인 마인드',
+        description: '스스로 과제를 발견하고 해결하는 인재를 중시하며, 협력을 통해 개인과 회사가 함께 성장하는 문화를 소중히 여깁니다.',
+        icon: '/images/career/icon-employee.svg'
+      }
+    ]
+  },
+  vi: {
+    header: 'Chúng tôi tìm kiếm ai',
+    traits: [
+      {
+        title: 'Đối tác - Đồng hành cùng phát triển',
+        description: 'Chúng tôi coi đối tác không chỉ là nhà cung cấp mà là những cộng tác viên cùng phát triển. Thông qua sự tin tưởng lẫn nhau và lợi ích chung, chúng tôi theo đuổi hợp tác bền vững.',
+        icon: '/images/career/icon-partner.svg'
+      },
+      {
+        title: 'Khách hàng - Khách hàng là trên hết',
+        description: 'Tất cả nhân viên đặt sự hài lòng của khách hàng lên hàng đầu, cung cấp dịch vụ được yêu thương và tin tưởng, tạo ra niềm vui có ý nghĩa cho khách hàng.',
+        icon: '/images/career/icon-customer.svg'
+      },
+      {
+        title: 'Nhân viên - Tư duy thực tế và hướng đội nhóm',
+        description: 'Chúng tôi trân trọng những cá nhân tự tìm ra và giải quyết thách thức, và chúng tôi gìn giữ văn hóa nơi sự hợp tác giúp cả cá nhân và công ty cùng phát triển mạnh mẽ hơn.',
+        icon: '/images/career/icon-employee.svg'
+      }
+    ]
+  }
+};
+
+const fallback = fallbackContent[lang] || fallbackContent.en;
+
+// Use Sanity data or fallback
+const currentContent = {
+  header: sanityHeader || fallback.header,
+  traits: sanityTraits.length > 0 ? sanityTraits.map((trait: any, index: number) => ({
+    title: trait.title || fallback.traits[index]?.title,
+    description: trait.description || fallback.traits[index]?.description,
+    icon: trait.icon || fallback.traits[index]?.icon
+  })) : fallback.traits
+};
+---
+
+<section class="desired-traits-section">
+  <div class="section-header">
+    <h3>{currentContent.header}</h3>
+    <span class="header-line"></span>
+  </div>
+
+  <div class="container">
+    <div class="traits-grid">
+      {currentContent.traits.map((trait) => (
+        <div class="trait-card">
+          <div class="trait-icon">
+            <img src={trait.icon} alt="" />
+          </div>
+          <h4 class="trait-title">{trait.title}</h4>
+          <p class="trait-description">{trait.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .desired-traits-section {
+    padding: 4rem 0;
+    background: #f8f9fa;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .header-line {
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #007bff;
+    margin: 0 auto;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .traits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .trait-card {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .trait-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .trait-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .trait-icon img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .trait-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .trait-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 992px) {
+    .traits-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .traits-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-header h3 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

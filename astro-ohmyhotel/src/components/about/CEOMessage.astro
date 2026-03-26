@@ -1,0 +1,229 @@
+---
+import { fetchAboutUsPage } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+import { PortableText } from 'astro-portabletext';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const aboutPage = await fetchAboutUsPage();
+const ceoMessage = aboutPage?.ceoMessage;
+
+// Get localized values with fallbacks
+const header = getLocalizedValue(ceoMessage?.title, lang) || 'CEO Message';
+const content = getLocalizedValue(ceoMessage?.content, lang);
+const ceoTitle = getLocalizedValue(ceoMessage?.ceoTitle, lang) || 'CEO';
+const ceoName = ceoMessage?.ceoName || 'Jackie Lee';
+
+// Get images from Sanity or fallback to static
+const ceoImageUrl = ceoMessage?.ceoImage
+  ? urlFor(ceoMessage.ceoImage).width(400).quality(90).auto('format').url()
+  : '/images/about/img-ceo-2026.png';
+
+const signatureUrl = ceoMessage?.ceoSignature
+  ? urlFor(ceoMessage.ceoSignature).width(200).auto('format').url()
+  : '/images/about/sign.svg';
+
+// Fallback translations for content if not in Sanity
+const fallbackTranslations: Record<string, { thankYou: string, content: string }> = {
+  en: {
+    thankYou: "Thank you for visiting Ohmyhotel & Co",
+    content: `<p>After the start of tourism business in 1997 through Bico, we have been trying our best to provide a long-cherished pleasant travel. We accomplished continuous growth by focusing on flight and hotel booking and we developed the online booking system to provide an integrated domestic and overseas travel service.</p>
+      <p>Now, Ohmyhotel & Co is steping forward from system development and we are focusing on accomplishing a significant result in hotel solution field such as "System, marketing, and optional service" necessary for customer satisfaction.</p>
+      <p>Based on our global networks and sales know-how, we will take a leap toward "Software publishing company" for overseas marketing, finding new partner companies, and providing technology infrastructure.</p>
+      <p>Our Ohmyhotel & Co promises to become a loved and reliable company based on our approaching services.</p>`
+  },
+  ja: {
+    thankYou: "Ohmyhotel & Coへのご訪問ありがとうございます",
+    content: `<p>1997年にBicoを通じて観光事業を開始して以来、私たちは長年の夢である快適な旅行を提供するために最善を尽くしてきました。</p>`
+  },
+  ko: {
+    thankYou: "Ohmyhotel & Co를 방문해 주셔서 감사합니다",
+    content: `<p>1997년 Bico를 통해 관광 사업을 시작한 이후, 저희는 오랫동안 꿈꿔온 즐거운 여행을 제공하기 위해 최선을 다해왔습니다.</p>`
+  },
+  vi: {
+    thankYou: "Cảm ơn bạn đã ghé thăm Ohmyhotel & Co",
+    content: `<p>Sau khi bắt đầu kinh doanh du lịch vào năm 1997 thông qua Bico, chúng tôi đã cố gắng hết sức để mang đến những chuyến du lịch thú vị.</p>`
+  }
+};
+
+const t = fallbackTranslations[lang] || fallbackTranslations.en;
+---
+
+<section class="ceo-section">
+  <div class="container">
+    <div class="section-header">
+      <h3>{header}</h3>
+      <span class="header-line"></span>
+    </div>
+    <div class="section-content align-left">
+      <div class="ceo-message-content">
+        <h4 class="quote">{t.thankYou}</h4>
+        {content ? (
+          <div class="message-text">
+            <PortableText value={content} />
+          </div>
+        ) : (
+          <div class="message-text" set:html={t.content}></div>
+        )}
+        <div class="ceo-signature">
+          <span>{ceoTitle} {ceoName}</span>
+          <img src={signatureUrl} alt="CEO Signature" />
+        </div>
+      </div>
+      <div class="ceo-img">
+        <picture>
+          <source media="(max-width: 767.98px)" srcset={ceoImageUrl} />
+          <img src={ceoImageUrl} alt={`${ceoTitle} ${ceoName}`} />
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ceo-section {
+    padding: 5rem 0 6rem;
+    background-color: #fff;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    padding-bottom: 2.6rem;
+  }
+
+  .section-header h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .header-line {
+    display: block;
+    width: 4rem;
+    height: 0.3rem;
+    background: var(--brand-color-gradient);
+    margin: 0 auto;
+  }
+
+  .section-content {
+    max-width: 81.1rem;
+    margin: auto;
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .align-left {
+    color: #444;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0.56px;
+  }
+
+  .quote {
+    color: #333;
+    text-align: center;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 34px;
+    margin: 4rem 0 3.2rem;
+  }
+
+  .message-text {
+    font-size: 1.4rem;
+    color: var(--primary-text-color);
+    line-height: 1.8;
+  }
+
+  .message-text :global(p) {
+    margin-bottom: 2rem;
+  }
+
+  .ceo-message-content > div:last-child {
+    margin-top: 6.6rem;
+  }
+
+  .ceo-signature {
+    text-align: right;
+  }
+
+  .ceo-signature span {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--primary-header-color);
+    margin-bottom: 1rem;
+  }
+
+  .ceo-signature img {
+    max-width: 200px;
+    height: auto;
+    margin-left: auto;
+  }
+
+  .ceo-img {
+    min-width: 21.2rem;
+    max-width: 21.2rem;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .ceo-img picture {
+    display: block;
+  }
+
+  .ceo-img img {
+    min-width: 35rem;
+    mix-blend-mode: multiply;
+  }
+
+  @media (max-width: 767px) {
+    .ceo-section {
+      padding: 4rem 0;
+    }
+
+    .section-header h3 {
+      font-size: 2rem;
+    }
+
+    .section-content {
+      flex-direction: column-reverse;
+      padding-top: 2.5rem;
+    }
+
+    .quote {
+      text-align: center;
+      font-size: 2.4rem;
+    }
+
+    .ceo-img {
+      text-align: center;
+    }
+
+    .ceo-img img {
+      max-width: 25.2rem !important;
+      min-width: auto;
+    }
+
+    .ceo-signature {
+      text-align: center;
+    }
+
+    .ceo-signature img {
+      margin: 0 auto;
+    }
+  }
+</style>

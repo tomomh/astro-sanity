@@ -1,0 +1,139 @@
+---
+export interface Props {
+  lang: string;
+  activeItem: string;
+}
+
+const { lang, activeItem } = Astro.props;
+
+const items = [
+  { path: "ceo-message", name: "CEO Message" },
+  { path: "vision", name: "Vision" },
+  { path: "history", name: "History" },
+  { path: "ci", name: "CI" },
+  { path: "location", name: "Location" }
+];
+---
+
+<div class="sub-menu" id="subMenu">
+  <nav>
+    <ul>
+      {items.map((item) => (
+        <li class={activeItem === item.path ? 'active' : ''}>
+          <a href={`/${lang}/about-us/${item.path}`}>{item.name}</a>
+          <span class="header-line sort-line"></span>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .sub-menu {
+    border-bottom: 1px solid white;
+    position: sticky;
+    top: 7.8rem;
+    z-index: 4;
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0 1.4rem;
+    background-color: #F7FBFF;
+    line-height: 1;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+    list-style: none;
+  }
+
+  ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  li {
+    padding: 0 3rem;
+    white-space: nowrap;
+  }
+
+  .header-line {
+    display: none;
+    width: 4rem;
+    height: 0.3rem;
+    background: var(--brand-color-gradient);
+    margin: 0.8rem auto 0;
+  }
+
+  a {
+    color: #555;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    font-size: 1.4rem;
+    display: block;
+  }
+
+  a:hover,
+  a:focus {
+    color: black;
+  }
+
+  li.active {
+    font-weight: bold;
+  }
+
+  li.active .header-line {
+    display: flex;
+  }
+
+  li.active a {
+    color: var(--primary-header-color);
+  }
+
+  @media (max-width: 767px) {
+    .sub-menu {
+      top: 6rem;
+      position: relative;
+    }
+
+    ul {
+      justify-content: flex-start;
+    }
+
+    li {
+      padding: 0 1.5rem;
+    }
+
+    li:first-child {
+      padding-left: 2rem;
+    }
+
+    li:last-child {
+      padding-right: 2rem;
+    }
+
+    .sub-menu::before,
+    .sub-menu::after {
+      content: "";
+      width: 2rem;
+      min-width: 2rem;
+      position: absolute;
+      padding: 0;
+      display: block;
+      top: 0;
+      bottom: 0.1rem;
+      z-index: 100;
+    }
+
+    .sub-menu::before {
+      background: linear-gradient(to right, rgba(247, 251, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+      left: 0;
+    }
+
+    .sub-menu::after {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(247, 251, 255, 1) 100%);
+      right: 0;
+    }
+  }
+</style>

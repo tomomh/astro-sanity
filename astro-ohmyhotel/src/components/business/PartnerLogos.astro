@@ -1,0 +1,84 @@
+---
+export interface Props {
+  title?: string;
+  partners: { name: string; logo: string }[];
+}
+
+const { title = "Our Partners", partners } = Astro.props;
+---
+
+<div class="partner-logos">
+  <h3>{title}</h3>
+  <div class="logos-grid">
+    {partners.map((partner) => (
+      <div class="partner-item">
+        <img src={partner.logo} alt={partner.name} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .partner-logos {
+    margin: 4rem 0;
+    text-align: center;
+  }
+
+  .partner-logos h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 3rem;
+  }
+
+  .logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .partner-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    width: 100%;
+    height: 100px;
+    transition: all 0.3s ease;
+  }
+
+  .partner-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .partner-item img {
+    max-width: 100%;
+    max-height: 60px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .partner-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .logos-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .partner-item {
+      height: 80px;
+    }
+  }
+</style>

@@ -1,0 +1,160 @@
+---
+export interface Props {
+  images: string[];
+  title?: string;
+}
+
+const { images, title } = Astro.props;
+---
+
+<div class="product-screenshots">
+  {title && <h3>{title}</h3>}
+  <div class="screenshots-container">
+    <div class="screenshots-scroll">
+      {images.map((image) => (
+        <div class="screenshot-item">
+          <img src={image} alt="Product screenshot" />
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="scroll-indicators">
+    {images.map((_, index) => (
+      <button class="indicator" data-index={index}></button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .product-screenshots {
+    margin: 4rem 0;
+  }
+
+  .product-screenshots h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .screenshots-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .screenshots-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screenshots-scroll {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .screenshot-item {
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+  }
+
+  .screenshot-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .scroll-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 0;
+  }
+
+  .indicator:hover,
+  .indicator.active {
+    background-color: #007bff;
+  }
+
+  @media (min-width: 768px) {
+    .screenshot-item {
+      flex: 0 0 60%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .screenshot-item {
+      flex: 0 0 45%;
+    }
+  }
+</style>
+
+<script>
+  // Handle scroll indicators
+  const containers = document.querySelectorAll('.screenshots-container');
+
+  containers.forEach((container) => {
+    const parent = container.parentElement;
+    if (!parent) return;
+
+    const indicators = parent.querySelectorAll('.indicator');
+    const scroll = container.querySelector('.screenshots-scroll');
+
+    if (!scroll) return;
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        const items = scroll.querySelectorAll('.screenshot-item');
+        if (items[index]) {
+          items[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    });
+
+    // Update active indicator on scroll
+    container.addEventListener('scroll', () => {
+      const items = scroll.querySelectorAll('.screenshot-item');
+      const containerRect = container.getBoundingClientRect();
+      const containerCenter = containerRect.left + containerRect.width / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      items.forEach((item, index) => {
+        const itemRect = item.getBoundingClientRect();
+        const itemCenter = itemRect.left + itemRect.width / 2;
+        const distance = Math.abs(containerCenter - itemCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      indicators.forEach((ind, index) => {
+        ind.classList.toggle('active', index === closestIndex);
+      });
+    });
+
+    // Initialize first indicator as active
+    if (indicators[0]) {
+      indicators[0].classList.add('active');
+    }
+  });
+</script>

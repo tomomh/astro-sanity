@@ -1,0 +1,153 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  backgroundImage?: string;
+  backgroundColor?: string;
+  height?: string;
+  overlay?: boolean;
+  overlayOpacity?: number;
+  textAlign?: 'left' | 'center' | 'right';
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  backgroundImage,
+  backgroundColor = 'var(--background-color-lightblue)',
+  height = '40rem',
+  overlay = false,
+  overlayOpacity = 0.5,
+  textAlign = 'center',
+  class: className = ''
+} = Astro.props;
+
+const bannerStyle = {
+  backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
+  backgroundColor: backgroundColor,
+  height: height,
+};
+---
+
+<div class={`banner ${className}`} style={bannerStyle}>
+  {overlay && (
+    <div class="banner-overlay" style={`opacity: ${overlayOpacity}`}></div>
+  )}
+  <div class={`banner-content text-${textAlign}`}>
+    {title && <h1 class="banner-title">{title}</h1>}
+    {subtitle && <p class="banner-subtitle">{subtitle}</p>}
+    <slot />
+  </div>
+</div>
+
+<style>
+  .banner {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1140px;
+    padding: 2rem;
+    color: white;
+  }
+
+  .banner-content.text-left {
+    text-align: left;
+    align-self: flex-start;
+    margin-left: 0;
+  }
+
+  .banner-content.text-center {
+    text-align: center;
+  }
+
+  .banner-content.text-right {
+    text-align: right;
+    align-self: flex-end;
+    margin-right: 0;
+  }
+
+  .banner-title {
+    font-size: 4.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .banner-subtitle {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  /* No overlay banner (for light backgrounds) */
+  .banner:not(:has(.banner-overlay)) .banner-content {
+    color: var(--primary-text-color);
+  }
+
+  .banner:not(:has(.banner-overlay)) .banner-title {
+    color: var(--primary-header-color);
+    text-shadow: none;
+  }
+
+  .banner:not(:has(.banner-overlay)) .banner-subtitle {
+    color: var(--primary-text-color);
+    text-shadow: none;
+  }
+
+  /* Responsive */
+  @media only screen and (max-width: 767px) {
+    .banner {
+      height: auto !important;
+      min-height: 30rem;
+    }
+
+    .banner-title {
+      font-size: 3.2rem;
+    }
+
+    .banner-subtitle {
+      font-size: 1.6rem;
+    }
+
+    .banner-content {
+      padding: 3rem 2rem;
+    }
+  }
+
+  @media only screen and (max-width: 991.98px) and (min-width: 768px) {
+    .banner-title {
+      font-size: 4rem;
+    }
+
+    .banner-subtitle {
+      font-size: 1.8rem;
+    }
+  }
+</style>

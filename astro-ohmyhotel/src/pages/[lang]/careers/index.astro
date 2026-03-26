@@ -1,0 +1,113 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import DesiredTraits from '../../../components/careers/DesiredTraits.astro';
+import JobList from '../../../components/careers/JobList.astro';
+import type { Language } from '../../../utils/i18n';
+import { languages } from '../../../utils/i18n';
+import { fetchCareersPage } from '../../../utils/queries';
+import { getLocalizedValue } from '../../../utils/sanity';
+
+export async function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang }
+  }));
+}
+
+const { lang } = Astro.params as { lang: Language };
+
+// Fetch careers page data from Sanity
+const careersPage = await fetchCareersPage();
+
+// Get localized values from Sanity
+const sanityBannerTitle = getLocalizedValue(careersPage?.banner?.title, lang);
+const sanityBannerSubtitle = getLocalizedValue(careersPage?.banner?.subtitle, lang);
+
+// Fallback content
+const fallbackPageTitle: Record<Language, string> = {
+  en: 'Careers',
+  ja: '採用情報',
+  ko: '채용',
+  vi: 'Tuyển dụng'
+};
+
+const fallbackBannerContent: Record<Language, { title: string; subtitle: string }> = {
+  en: {
+    title: 'Join Our Team',
+    subtitle: 'Be part of a company that values innovation and growth'
+  },
+  ja: {
+    title: '私たちのチームに参加',
+    subtitle: 'イノベーションと成長を重視する会社の一員になりましょう'
+  },
+  ko: {
+    title: '우리 팀에 합류하세요',
+    subtitle: '혁신과 성장을 중시하는 회사의 일원이 되세요'
+  },
+  vi: {
+    title: 'Gia nhập đội ngũ của chúng tôi',
+    subtitle: 'Trở thành một phần của công ty coi trọng đổi mới và phát triển'
+  }
+};
+
+// Use Sanity data or fallback
+const pageTitle = fallbackPageTitle[lang];
+const bannerTitle = sanityBannerTitle || fallbackBannerContent[lang].title;
+const bannerSubtitle = sanityBannerSubtitle || fallbackBannerContent[lang].subtitle;
+---
+
+<PageLayout title={pageTitle} lang={lang}>
+  <div class="careers-page">
+    <section class="career-banner">
+      <div class="banner-content">
+        <h1>{bannerTitle}</h1>
+        <p>{bannerSubtitle}</p>
+      </div>
+    </section>
+
+    <DesiredTraits lang={lang} />
+    <JobList lang={lang} />
+  </div>
+</PageLayout>
+
+<style>
+  .careers-page {
+    min-height: 100vh;
+  }
+
+  .career-banner {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .career-banner h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .career-banner p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .career-banner {
+      padding: 4rem 1.5rem;
+    }
+
+    .career-banner h1 {
+      font-size: 2rem;
+    }
+
+    .career-banner p {
+      font-size: 1rem;
+    }
+  }
+</style>

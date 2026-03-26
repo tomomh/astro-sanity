@@ -1,0 +1,166 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'small' | 'medium' | 'large';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  id?: string;
+  disabled?: boolean;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'medium',
+  href,
+  type = 'button',
+  class: className = '',
+  id,
+  disabled = false,
+  target,
+  rel
+} = Astro.props;
+
+const baseClasses = 'btn';
+const variantClass = `btn-${variant}`;
+const sizeClass = `btn-${size}`;
+const classes = `${baseClasses} ${variantClass} ${sizeClass} ${className}`.trim();
+
+const Element = href ? 'a' : 'button';
+---
+
+{Element === 'a' ? (
+  <a
+    href={href}
+    class={classes}
+    id={id}
+    target={target}
+    rel={rel}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    type={type}
+    class={classes}
+    id={id}
+    disabled={disabled}
+  >
+    <slot />
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    border-radius: 0.4rem;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(238, 135, 104, 0.25);
+  }
+
+  .btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  /* Primary Button */
+  .btn-primary {
+    color: white;
+    background: var(--brand-color-gradient);
+    border: none;
+    box-shadow: 0 0.2rem 0.5rem rgba(238, 135, 104, 0.3);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 0.4rem 1rem rgba(238, 135, 104, 0.4);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 0.2rem 0.5rem rgba(238, 135, 104, 0.3);
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    color: var(--primary-text-color);
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: var(--primary-box-shadow);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+    transform: translateY(-1px);
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-secondary:active:not(:disabled) {
+    background-color: #e9ecef;
+    transform: translateY(0);
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    color: #EE8768;
+    background-color: transparent;
+    border: 2px solid #EE8768;
+  }
+
+  .btn-outline:hover:not(:disabled) {
+    color: white;
+    background: var(--brand-color-gradient);
+    border-color: transparent;
+    transform: translateY(-1px);
+  }
+
+  .btn-outline:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  /* Sizes */
+  .btn-small {
+    padding: 0.6rem 1.4rem;
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
+  }
+
+  .btn-medium {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    border-radius: 0.4rem;
+  }
+
+  .btn-large {
+    padding: 1.4rem 3rem;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+  }
+
+  /* Remove underline effect for button links */
+  a.btn::before {
+    display: none !important;
+  }
+</style>

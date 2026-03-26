@@ -1,0 +1,2036 @@
+{
+  "about/about-banner.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-beb2660c47ea8af734681a5ee26620cc76800fae-1500x1000-jpg"
+    },
+    "originalPath": "/images/about/about-banner.jpg",
+    "uploadedAt": "2026-03-26T10:44:48.707Z"
+  },
+  "about/ci-1-01.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2e505d611ab0c48138d6ffb1f079d4e856593df2-500x500-png"
+    },
+    "originalPath": "/images/about/ci-1-01.png",
+    "uploadedAt": "2026-03-26T10:44:51.009Z"
+  },
+  "about/ci-1-02.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-683f668dcdc32d1d41b74cdd9cfc7df215c15078-500x98-png"
+    },
+    "originalPath": "/images/about/ci-1-02.png",
+    "uploadedAt": "2026-03-26T10:44:52.797Z"
+  },
+  "about/ci-1.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-24f769350de3bb2ea24d1d6adc54228729055fa0-3000x240-svg"
+    },
+    "originalPath": "/images/about/ci-1.svg",
+    "uploadedAt": "2026-03-26T10:44:55.542Z"
+  },
+  "about/ci-2-01.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-dc0ab84cae40b321cd8e460bb2e89ee147073aa0-500x500-png"
+    },
+    "originalPath": "/images/about/ci-2-01.png",
+    "uploadedAt": "2026-03-26T10:44:57.293Z"
+  },
+  "about/ci-2-02.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-645c2ae303ef0e8e242bba63880ec0fd6d4fbabb-500x98-png"
+    },
+    "originalPath": "/images/about/ci-2-02.png",
+    "uploadedAt": "2026-03-26T10:44:59.029Z"
+  },
+  "about/ci-2.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-aa83902d7e7adc66a40e0a352ec9cc0bc1db2a85-3002x471-svg"
+    },
+    "originalPath": "/images/about/ci-2.svg",
+    "uploadedAt": "2026-03-26T10:45:03.726Z"
+  },
+  "about/ci-3-01.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1591f86594908bde1296ab86282ea991a0aab62c-500x500-png"
+    },
+    "originalPath": "/images/about/ci-3-01.png",
+    "uploadedAt": "2026-03-26T10:45:05.810Z"
+  },
+  "about/ci-3-02.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-8a2cfe275578a933fa0edca3d5150784824a4231-500x98-png"
+    },
+    "originalPath": "/images/about/ci-3-02.png",
+    "uploadedAt": "2026-03-26T10:45:08.287Z"
+  },
+  "about/ci-blue-bg.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-32ce65c998ffc699cb8e8f01b886ec7c8a4d79cb-70x48-svg"
+    },
+    "originalPath": "/images/about/ci-blue-bg.svg",
+    "uploadedAt": "2026-03-26T10:45:10.473Z"
+  },
+  "about/ci-blue-logo.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-0dfaa710f85c5fdbac73e5808e76736036c85627-473x115-svg"
+    },
+    "originalPath": "/images/about/ci-blue-logo.svg",
+    "uploadedAt": "2026-03-26T10:45:12.456Z"
+  },
+  "about/ci-gray-bg.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-f71a13f88cdc869d2b8a50699bda74481116f81e-71x48-svg"
+    },
+    "originalPath": "/images/about/ci-gray-bg.svg",
+    "uploadedAt": "2026-03-26T10:45:14.287Z"
+  },
+  "about/ci-gray-logo.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-6421ddca5f5647a6845b82538dcf26945c86752d-473x115-svg"
+    },
+    "originalPath": "/images/about/ci-gray-logo.svg",
+    "uploadedAt": "2026-03-26T10:45:16.608Z"
+  },
+  "about/ci-intro-bg.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-772c1e9f19255e9cac9430232de395a285c21989-70x48-svg"
+    },
+    "originalPath": "/images/about/ci-intro-bg.svg",
+    "uploadedAt": "2026-03-26T10:45:18.850Z"
+  },
+  "about/ci-intro-logo-new-1.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-06bc8deebbd554e9f143b76d1c511a2fef2b679c-158x31-svg"
+    },
+    "originalPath": "/images/about/ci-intro-logo-new-1.svg",
+    "uploadedAt": "2026-03-26T10:45:21.113Z"
+  },
+  "about/ci-intro-logo-new.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-818a62b1a6608fe756a9dee079646fc6cc4e6969-163x163-svg"
+    },
+    "originalPath": "/images/about/ci-intro-logo-new.svg",
+    "uploadedAt": "2026-03-26T10:45:23.271Z"
+  },
+  "about/ci-intro-logo.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e5e21e5b22bd4deaa63c2e4b89fd537d7ad9c266-627x172-svg"
+    },
+    "originalPath": "/images/about/ci-intro-logo.svg",
+    "uploadedAt": "2026-03-26T10:45:25.677Z"
+  },
+  "about/ci-orange-bg.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-41db6b06f43724d88ccd9c8299451561df5c12e1-70x48-svg"
+    },
+    "originalPath": "/images/about/ci-orange-bg.svg",
+    "uploadedAt": "2026-03-26T10:45:27.601Z"
+  },
+  "about/ci-orange-logo.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-4be3dda7d578a9b67791d7c570539e51183f89a8-473x115-svg"
+    },
+    "originalPath": "/images/about/ci-orange-logo.svg",
+    "uploadedAt": "2026-03-26T10:45:29.681Z"
+  },
+  "about/download.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-33203e9f3e97ca288c596ae27f71ddaec058936c-19x17-svg"
+    },
+    "originalPath": "/images/about/download.svg",
+    "uploadedAt": "2026-03-26T10:45:31.780Z"
+  },
+  "about/img-ceo-2026.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b48732a3786e7e790d855cd4950786f2deef8f2e-2132x3200-png"
+    },
+    "originalPath": "/images/about/img-ceo-2026.png",
+    "uploadedAt": "2026-03-26T10:45:39.025Z"
+  },
+  "about/img-ceo-2026.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1ab580dc8df3e4dc2c4d909f779ed587092339a4-533x800-svg"
+    },
+    "originalPath": "/images/about/img-ceo-2026.svg",
+    "uploadedAt": "2026-03-26T10:45:41.911Z"
+  },
+  "about/img_ceo.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b0b5961164e8e8456a80bba89a0689485cc9d0b5-404x1442-jpg"
+    },
+    "originalPath": "/images/about/img_ceo.jpg",
+    "uploadedAt": "2026-03-26T10:45:44.402Z"
+  },
+  "about/img_ceo.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-dbcdd62847840df49c3f692f2a8bc186e13cf826-592x1501-png"
+    },
+    "originalPath": "/images/about/img_ceo.png",
+    "uploadedAt": "2026-03-26T10:45:47.353Z"
+  },
+  "about/img_ceo_old.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-680ecd02d3a16861d3cacbf10f9e51e5135eff81-404x1442-png"
+    },
+    "originalPath": "/images/about/img_ceo_old.png",
+    "uploadedAt": "2026-03-26T10:45:49.169Z"
+  },
+  "about/m-img_ceo.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1cce3c3d8dba43333fdecd111710d28dd0672103-465x537-png"
+    },
+    "originalPath": "/images/about/m-img_ceo.png",
+    "uploadedAt": "2026-03-26T10:45:51.828Z"
+  },
+  "about/m-img_ceo_old.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-65cdc93ba066994f198a24467d0ac29f6fd7771b-544x628-png"
+    },
+    "originalPath": "/images/about/m-img_ceo_old.png",
+    "uploadedAt": "2026-03-26T10:45:54.344Z"
+  },
+  "about/sign.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-46ef1cc4f4642a07b5d44f000fba91d4b1f4e052-82x60-svg"
+    },
+    "originalPath": "/images/about/sign.svg",
+    "uploadedAt": "2026-03-26T10:45:56.594Z"
+  },
+  "about/vision.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3887f0d3b01bd5986adf20231f32b8c89850cfbe-510x481-svg"
+    },
+    "originalPath": "/images/about/vision.svg",
+    "uploadedAt": "2026-03-26T10:45:59.625Z"
+  },
+  "business/BE/booking.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d0e90bc6210247423e8c49e58d87c0b830872213-1138x688-jpg"
+    },
+    "originalPath": "/images/business/BE/booking.jpg",
+    "uploadedAt": "2026-03-26T10:46:02.582Z"
+  },
+  "business/BE/booking.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3e029fa7ed59d1738f494355d80d55fcd9849ae1-569x344-svg"
+    },
+    "originalPath": "/images/business/BE/booking.svg",
+    "uploadedAt": "2026-03-26T10:46:05.998Z"
+  },
+  "business/BE/design.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e3a52366a98695367dd09ac093f416714fef1c52-1138x688-jpg"
+    },
+    "originalPath": "/images/business/BE/design.jpg",
+    "uploadedAt": "2026-03-26T10:46:08.088Z"
+  },
+  "business/BE/design.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-76649f858692083085997a805abc629e5fb65d58-569x344-svg"
+    },
+    "originalPath": "/images/business/BE/design.svg",
+    "uploadedAt": "2026-03-26T10:46:12.034Z"
+  },
+  "business/BE/efficient.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-346cf9ddbb97b2611d14f4314ead9bf0abef1224-76x76-svg"
+    },
+    "originalPath": "/images/business/BE/efficient.svg",
+    "uploadedAt": "2026-03-26T10:46:14.359Z"
+  },
+  "business/BE/hotel-booking-engine-1.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5970aae93e9e3ba9de7c17e74b1c6a6b845270ed-1484x956-jpg"
+    },
+    "originalPath": "/images/business/BE/hotel-booking-engine-1.jpg",
+    "uploadedAt": "2026-03-26T10:46:17.639Z"
+  },
+  "business/BE/hotel-booking-engine-1.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-f8832c5cd77ad98a8e2cc09363ed172be939f0d9-742x478-svg"
+    },
+    "originalPath": "/images/business/BE/hotel-booking-engine-1.svg",
+    "uploadedAt": "2026-03-26T10:46:21.939Z"
+  },
+  "business/BE/hotel-booking-engine-2.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5e0acc8e649bdf4439f609abc09c23df99fd1a43-520x286-svg"
+    },
+    "originalPath": "/images/business/BE/hotel-booking-engine-2.svg",
+    "uploadedAt": "2026-03-26T10:46:24.036Z"
+  },
+  "business/BE/hotel-registration.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d93e237d6ba9f4ae37d80326e152ebf00320d307-76x76-svg"
+    },
+    "originalPath": "/images/business/BE/hotel-registration.svg",
+    "uploadedAt": "2026-03-26T10:46:25.993Z"
+  },
+  "business/BE/online-payment.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-43514fcabfa3955ed5e2f3e1ab37279055835c3c-76x76-svg"
+    },
+    "originalPath": "/images/business/BE/online-payment.svg",
+    "uploadedAt": "2026-03-26T10:46:27.526Z"
+  },
+  "business/BE/reservation.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-822442b7b3c2d2de0fdc3843f8a81cc12c69d6aa-76x76-svg"
+    },
+    "originalPath": "/images/business/BE/reservation.svg",
+    "uploadedAt": "2026-03-26T10:46:29.512Z"
+  },
+  "business/BE/template.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2e7785cd1f8f1afabe4d4e8794ccd970fde33d9b-1138x688-jpg"
+    },
+    "originalPath": "/images/business/BE/template.jpg",
+    "uploadedAt": "2026-03-26T10:46:32.299Z"
+  },
+  "business/BE/template.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1a1633896f0383a2613c9520a2bc43e9b7d75115-569x344-svg"
+    },
+    "originalPath": "/images/business/BE/template.svg",
+    "uploadedAt": "2026-03-26T10:46:36.187Z"
+  },
+  "business/business-banner.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e31b760439b9a2b60fec0bccc0c7b1c53052694c-2000x1126-jpg"
+    },
+    "originalPath": "/images/business/business-banner.jpg",
+    "uploadedAt": "2026-03-26T10:46:39.972Z"
+  },
+  "business/CMS/channel-manager-system-jp.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-6455be0fec824bff84174004c75404e5940b2e39-1129x526-svg"
+    },
+    "originalPath": "/images/business/CMS/channel-manager-system-jp.svg",
+    "uploadedAt": "2026-03-26T10:46:44.071Z"
+  },
+  "business/CMS/channel-manager-system.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-17d7c66b02ab63379245412d6307b63fd2c18d3f-1129x526-svg"
+    },
+    "originalPath": "/images/business/CMS/channel-manager-system.svg",
+    "uploadedAt": "2026-03-26T10:46:48.250Z"
+  },
+  "business/CMS/cms.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e0e00a5b7227a490984404078d0ebdd861cb7773-569x344-svg"
+    },
+    "originalPath": "/images/business/CMS/cms.svg",
+    "uploadedAt": "2026-03-26T10:46:50.738Z"
+  },
+  "business/CMS/m-channel-manager-system-jp.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3dfa3c5b3e55cb229626f462450afa3b63bfbac5-393x740-svg"
+    },
+    "originalPath": "/images/business/CMS/m-channel-manager-system-jp.svg",
+    "uploadedAt": "2026-03-26T10:46:54.240Z"
+  },
+  "business/CMS/m-channel-manager-system.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-f69269e86f1780e47035be4456dedc04a8fd5b58-393x740-svg"
+    },
+    "originalPath": "/images/business/CMS/m-channel-manager-system.svg",
+    "uploadedAt": "2026-03-26T10:46:57.800Z"
+  },
+  "business/CMS/world-map.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-a8a6baf8f39e2ba305f1d8b72536dd6a7fa76624-2226x1302-png"
+    },
+    "originalPath": "/images/business/CMS/world-map.png",
+    "uploadedAt": "2026-03-26T10:47:01.199Z"
+  },
+  "business/CMS/world-map.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b83a5832adf1c8f21d835d495b71ba61393c82bb-1113x651-svg"
+    },
+    "originalPath": "/images/business/CMS/world-map.svg",
+    "uploadedAt": "2026-03-26T10:47:10.117Z"
+  },
+  "business/HM/hotel-management.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c93e23014d980aa3061fc0152c8da6715989fd8f-602x235-svg"
+    },
+    "originalPath": "/images/business/HM/hotel-management.svg",
+    "uploadedAt": "2026-03-26T10:47:12.468Z"
+  },
+  "business/OMTBIZ/omt-biz-ja.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e7ad3f35e1440671382f3a0d4465bb71bd7b0ebb-3254x1661-svg"
+    },
+    "originalPath": "/images/business/OMTBIZ/omt-biz-ja.svg",
+    "uploadedAt": "2026-03-26T10:47:17.700Z"
+  },
+  "business/OMTBIZ/omt-biz-ko.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d7655c617ebf7667d768f50276f76f21c9aa06ef-3254x1660-svg"
+    },
+    "originalPath": "/images/business/OMTBIZ/omt-biz-ko.svg",
+    "uploadedAt": "2026-03-26T10:47:23.537Z"
+  },
+  "business/OMTBIZ/omt-biz-vi.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-83b0cc0c9c7b2ffc4e77083de0503f29dad3e772-3254x1661-svg"
+    },
+    "originalPath": "/images/business/OMTBIZ/omt-biz-vi.svg",
+    "uploadedAt": "2026-03-26T10:47:28.803Z"
+  },
+  "business/OMTBIZ/omt-biz.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5945821de5276bad38a21c12b484e1356f7fccb1-3258x1661-svg"
+    },
+    "originalPath": "/images/business/OMTBIZ/omt-biz.svg",
+    "uploadedAt": "2026-03-26T10:47:33.145Z"
+  },
+  "business/OTA/cheap-top.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d7c2c78b31851642c85b24e24302b9a770ea1871-364x55-svg"
+    },
+    "originalPath": "/images/business/OTA/cheap-top.svg",
+    "uploadedAt": "2026-03-26T10:47:35.399Z"
+  },
+  "business/OTA/cheap.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-76295e9304941c85b9fd8d753913280cf506f85d-728x830-jpg"
+    },
+    "originalPath": "/images/business/OTA/cheap.jpg",
+    "uploadedAt": "2026-03-26T10:47:38.228Z"
+  },
+  "business/OTA/cheap.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-79d70d7a758d43143cba83851dcb353e105e7de4-364x415-svg"
+    },
+    "originalPath": "/images/business/OTA/cheap.svg",
+    "uploadedAt": "2026-03-26T10:47:43.860Z"
+  },
+  "business/OTA/done-top.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9975be451078a40e7fd5a964435d30806a0b74cc-364x55-svg"
+    },
+    "originalPath": "/images/business/OTA/done-top.svg",
+    "uploadedAt": "2026-03-26T10:47:46.177Z"
+  },
+  "business/OTA/done.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3495b2835afc1b326446996bae5a96d9ae63c693-728x798-jpg"
+    },
+    "originalPath": "/images/business/OTA/done.jpg",
+    "uploadedAt": "2026-03-26T10:47:48.161Z"
+  },
+  "business/OTA/done.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-952df470e6915d2d6c09330654d611a00455b97e-364x399-svg"
+    },
+    "originalPath": "/images/business/OTA/done.svg",
+    "uploadedAt": "2026-03-26T10:47:53.192Z"
+  },
+  "business/OTA/easy-top.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2b66f8d04cf2549ac4c55723b3891272318e4215-364x55-svg"
+    },
+    "originalPath": "/images/business/OTA/easy-top.svg",
+    "uploadedAt": "2026-03-26T10:47:55.014Z"
+  },
+  "business/OTA/easy.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1e880924c3739b5d16d47cfa882f27782c90def3-728x798-jpg"
+    },
+    "originalPath": "/images/business/OTA/easy.jpg",
+    "uploadedAt": "2026-03-26T10:47:57.258Z"
+  },
+  "business/OTA/easy.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-60ec0d253be52b84951061f9f1923fe93f01572e-364x399-svg"
+    },
+    "originalPath": "/images/business/OTA/easy.svg",
+    "uploadedAt": "2026-03-26T10:48:03.882Z"
+  },
+  "business/OTA/hbe-logo.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d0192ee24bef4ca24d430c22a970ef2d8f5c3525-66x88-svg"
+    },
+    "originalPath": "/images/business/OTA/hbe-logo.svg",
+    "uploadedAt": "2026-03-26T10:48:05.970Z"
+  },
+  "business/OTA/loop.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1941049972fcd9969d7ce2dc777e35620fc8c5bc-364x56-svg"
+    },
+    "originalPath": "/images/business/OTA/loop.svg",
+    "uploadedAt": "2026-03-26T10:48:07.893Z"
+  },
+  "business/OTA/m-cheap.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c4dd074b457a0b56c7d6ac1dca419401ec1175c8-828x812-jpg"
+    },
+    "originalPath": "/images/business/OTA/m-cheap.jpg",
+    "uploadedAt": "2026-03-26T10:48:10.748Z"
+  },
+  "business/OTA/m-done.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-16cb3d4d3ef2a2cbe7143373a8e9dba0cf2d4226-828x810-jpg"
+    },
+    "originalPath": "/images/business/OTA/m-done.jpg",
+    "uploadedAt": "2026-03-26T10:48:12.445Z"
+  },
+  "business/OTA/m-easy.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d024b1bed1c1eb61d5ca576c856325efdd60d71f-828x812-jpg"
+    },
+    "originalPath": "/images/business/OTA/m-easy.jpg",
+    "uploadedAt": "2026-03-26T10:48:15.033Z"
+  },
+  "business/OTA/m-new-cheap.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c3d607c389736a882929cbafd27afaad95717007-281x555-svg"
+    },
+    "originalPath": "/images/business/OTA/m-new-cheap.svg",
+    "uploadedAt": "2026-03-26T10:48:22.556Z"
+  },
+  "business/OTA/m-new-done.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-4154c78a1f1143cb32fd5a32b70e5ba78c06e0b7-272x542-svg"
+    },
+    "originalPath": "/images/business/OTA/m-new-done.svg",
+    "uploadedAt": "2026-03-26T10:48:28.204Z"
+  },
+  "business/OTA/m-new-easy.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d41866b962db88ed5c94e196481f7caf175c6052-272x555-svg"
+    },
+    "originalPath": "/images/business/OTA/m-new-easy.svg",
+    "uploadedAt": "2026-03-26T10:48:34.861Z"
+  },
+  "business/OTA/management-system-1.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2d3b967e5bbf951d4b2b32e7619507804331762b-1138x688-jpg"
+    },
+    "originalPath": "/images/business/OTA/management-system-1.jpg",
+    "uploadedAt": "2026-03-26T10:48:37.000Z"
+  },
+  "business/OTA/management-system-1.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-89b8f98a958e51da75d888366191c656d6e733d2-569x344-svg"
+    },
+    "originalPath": "/images/business/OTA/management-system-1.svg",
+    "uploadedAt": "2026-03-26T10:48:41.240Z"
+  },
+  "business/OTA/management-system.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e889a3942159092c279ab2e8f8838b946c343e56-1138x688-jpg"
+    },
+    "originalPath": "/images/business/OTA/management-system.jpg",
+    "uploadedAt": "2026-03-26T10:48:43.761Z"
+  },
+  "business/OTA/management-system.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c30b3a1f218bbe08eae892bde76f98668fbd766d-569x344-svg"
+    },
+    "originalPath": "/images/business/OTA/management-system.svg",
+    "uploadedAt": "2026-03-26T10:48:48.146Z"
+  },
+  "business/OTA/partner/hotel/image10.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-42263bc36b67d322fa0cbc9f1ed6acd4d4d74dcd-111x50-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image10.jpg",
+    "uploadedAt": "2026-03-26T10:48:50.213Z"
+  },
+  "business/OTA/partner/hotel/image11.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-06742f04e74a90a37746b67d33510256646be82a-113x16-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image11.jpg",
+    "uploadedAt": "2026-03-26T10:48:52.150Z"
+  },
+  "business/OTA/partner/hotel/image12.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-10e1754bf80508fe9033d28871966590a01ea133-71x71-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image12.jpg",
+    "uploadedAt": "2026-03-26T10:48:53.597Z"
+  },
+  "business/OTA/partner/hotel/image13.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-4932d6272c13be2dced54bda0cb3ab5e5027e7c5-128x47-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image13.jpg",
+    "uploadedAt": "2026-03-26T10:48:55.549Z"
+  },
+  "business/OTA/partner/hotel/image14.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5b4c83af360f888be059f308e93fe8304f3ec811-79x63-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image14.jpg",
+    "uploadedAt": "2026-03-26T10:48:57.721Z"
+  },
+  "business/OTA/partner/hotel/image15.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1fee3c6bb2d1181369014429a3d3f356fc829dab-140x71-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image15.jpg",
+    "uploadedAt": "2026-03-26T10:48:59.688Z"
+  },
+  "business/OTA/partner/hotel/image16.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-20633a81d614107ac72c4bd00c34d5a24cb014d9-91x64-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image16.jpg",
+    "uploadedAt": "2026-03-26T10:49:01.572Z"
+  },
+  "business/OTA/partner/hotel/image17.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3d1acf3b692f0a0b99f550be2f79e055db7a6b44-139x51-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image17.jpg",
+    "uploadedAt": "2026-03-26T10:49:03.078Z"
+  },
+  "business/OTA/partner/hotel/image18.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-4517d653a6b9ecc1db1e674d01cd7c80635957dd-150x49-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image18.jpg",
+    "uploadedAt": "2026-03-26T10:49:05.936Z"
+  },
+  "business/OTA/partner/hotel/image19.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-676c88156f8ee6160529144d15d2c95df1c7fe39-142x34-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image19.jpg",
+    "uploadedAt": "2026-03-26T10:49:07.846Z"
+  },
+  "business/OTA/partner/hotel/image20.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-397b3a84cebd0e8627ea48e34b987855d20acf74-125x39-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image20.jpg",
+    "uploadedAt": "2026-03-26T10:49:09.374Z"
+  },
+  "business/OTA/partner/hotel/image21.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b816fce65d7bbb9cf21b24daeeab3ef54fa9845b-89x61-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image21.jpg",
+    "uploadedAt": "2026-03-26T10:49:11.596Z"
+  },
+  "business/OTA/partner/hotel/image22.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9105e5bb95f2436f86e26afd3e9adb3a03c38cdd-82x50-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image22.jpg",
+    "uploadedAt": "2026-03-26T10:49:13.191Z"
+  },
+  "business/OTA/partner/hotel/image23.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9b605604064b7d4e4f44c96cd176fb0210aa6dfa-96x97-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image23.jpg",
+    "uploadedAt": "2026-03-26T10:49:15.303Z"
+  },
+  "business/OTA/partner/hotel/image24.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-86cba495e1201b658b356aba8dbe318e370675d7-127x71-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image24.jpg",
+    "uploadedAt": "2026-03-26T10:49:17.856Z"
+  },
+  "business/OTA/partner/hotel/image25.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1672bb6405f4cc99e7eec0deb01f103a528878d2-78x66-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image25.jpg",
+    "uploadedAt": "2026-03-26T10:49:19.566Z"
+  },
+  "business/OTA/partner/hotel/image26.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-912480a85c65fd30f035732734d901bffa172375-87x78-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image26.jpg",
+    "uploadedAt": "2026-03-26T10:49:21.731Z"
+  },
+  "business/OTA/partner/hotel/image27.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-0c2b02a41791d64dbc8c513d41c62f134361bb82-131x73-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image27.jpg",
+    "uploadedAt": "2026-03-26T10:49:23.551Z"
+  },
+  "business/OTA/partner/hotel/image28.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-42bf3aaac1b65f8f1e8961579a727cb944e565d5-153x16-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image28.jpg",
+    "uploadedAt": "2026-03-26T10:49:25.074Z"
+  },
+  "business/OTA/partner/hotel/image29.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-0306da1f3fe62d418256f990cf80ccfbd5c2a6d2-145x44-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image29.jpg",
+    "uploadedAt": "2026-03-26T10:49:26.607Z"
+  },
+  "business/OTA/partner/hotel/image30.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-6e20d76c043978c87ca49e5c9d125615eb358b70-140x20-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image30.jpg",
+    "uploadedAt": "2026-03-26T10:49:28.074Z"
+  },
+  "business/OTA/partner/hotel/image4.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-be32cd0c91a5a1ded21fca4e9b0317958dbd8933-114x31-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image4.jpg",
+    "uploadedAt": "2026-03-26T10:49:29.662Z"
+  },
+  "business/OTA/partner/hotel/image5.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-ec2898841bab330c85ea9e673fca37440a17fe84-55x56-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image5.jpg",
+    "uploadedAt": "2026-03-26T10:49:31.430Z"
+  },
+  "business/OTA/partner/hotel/image6.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-35e0d6b599c277d93c6710803fa5834e87ffe254-149x37-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image6.jpg",
+    "uploadedAt": "2026-03-26T10:49:33.463Z"
+  },
+  "business/OTA/partner/hotel/image7.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-fbee977919e0448124565063d34b1fde9b0754f5-111x23-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image7.jpg",
+    "uploadedAt": "2026-03-26T10:49:35.032Z"
+  },
+  "business/OTA/partner/hotel/image8.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-84341aba96931ca239aab226180ab684d1d717c0-105x70-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image8.jpg",
+    "uploadedAt": "2026-03-26T10:49:36.817Z"
+  },
+  "business/OTA/partner/hotel/image9.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1208bc25c6c2ca9aceaca7cf8b1175dfd415eaa2-107x49-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/hotel/image9.jpg",
+    "uploadedAt": "2026-03-26T10:49:38.292Z"
+  },
+  "business/OTA/partner/service/image32.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e80a763d714fd16166edfe86507472480887e9db-169x54-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image32.jpg",
+    "uploadedAt": "2026-03-26T10:49:39.900Z"
+  },
+  "business/OTA/partner/service/image33.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-709b035e2fc94df3c9febcb5c43859b9019a817f-176x41-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image33.jpg",
+    "uploadedAt": "2026-03-26T10:49:41.519Z"
+  },
+  "business/OTA/partner/service/image34.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-98df7e07ea970063fefa9c13baff9ac5c5246a76-149x50-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image34.jpg",
+    "uploadedAt": "2026-03-26T10:49:43.375Z"
+  },
+  "business/OTA/partner/service/image35.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-18738e4acf953fbffab32b76bb6da249bef1f8a7-192x39-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image35.jpg",
+    "uploadedAt": "2026-03-26T10:49:45.098Z"
+  },
+  "business/OTA/partner/service/image36.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-813e626e780746d043bebd0775a71bccdc63bc9f-158x55-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image36.jpg",
+    "uploadedAt": "2026-03-26T10:49:46.703Z"
+  },
+  "business/OTA/partner/service/image37.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b597d27bb34cacde7aef1a8a320c9f876fcf2a0d-165x38-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image37.jpg",
+    "uploadedAt": "2026-03-26T10:49:48.370Z"
+  },
+  "business/OTA/partner/service/image38.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c63aec1c329019cedfd312082f863e0c72b1b5d9-168x83-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image38.jpg",
+    "uploadedAt": "2026-03-26T10:49:49.773Z"
+  },
+  "business/OTA/partner/service/image39.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-42d5373df65ee3060aa39a89a7b2b3d48ce976b0-157x46-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image39.jpg",
+    "uploadedAt": "2026-03-26T10:49:51.323Z"
+  },
+  "business/OTA/partner/service/image40.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-a06c33f1cf50d813ffdb135a6e1d50de2347922b-167x69-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image40.jpg",
+    "uploadedAt": "2026-03-26T10:49:52.985Z"
+  },
+  "business/OTA/partner/service/image41.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-69ec3a6135048f54d41f85b0e23118cc2fef49d0-193x46-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image41.jpg",
+    "uploadedAt": "2026-03-26T10:49:54.769Z"
+  },
+  "business/OTA/partner/service/image42.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c9bf4ccebed8e61d990190c639b7ce67d2e4f3f0-185x56-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image42.jpg",
+    "uploadedAt": "2026-03-26T10:49:56.768Z"
+  },
+  "business/OTA/partner/service/image43.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-65fcc20c04fefb5532d45e9a85b34f1d57d991de-176x53-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image43.jpg",
+    "uploadedAt": "2026-03-26T10:49:58.137Z"
+  },
+  "business/OTA/partner/service/image44.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-6c4c3974fe779dd2bf0c29fa01ee2b1019fd5083-177x51-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image44.jpg",
+    "uploadedAt": "2026-03-26T10:50:00.107Z"
+  },
+  "business/OTA/partner/service/image45.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3ed28be959ebe38e153c7d7d7d08d6fdabc77a94-186x61-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image45.jpg",
+    "uploadedAt": "2026-03-26T10:50:01.768Z"
+  },
+  "business/OTA/partner/service/image46.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-0bfb84db25bb73e0bc5a3bba351fe23dd2922524-161x39-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image46.jpg",
+    "uploadedAt": "2026-03-26T10:50:03.476Z"
+  },
+  "business/OTA/partner/service/image47.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1d2826cc637016f1ac0ca050fdbc89508cd0edd4-137x66-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image47.jpg",
+    "uploadedAt": "2026-03-26T10:50:05.118Z"
+  },
+  "business/OTA/partner/service/image48.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-506bbb15edc1edd8394ed822e442a0085d5aa81d-154x87-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image48.jpg",
+    "uploadedAt": "2026-03-26T10:50:06.714Z"
+  },
+  "business/OTA/partner/service/image49.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-909a353db6d00b3da5df863c752b8ab43edfa530-172x53-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image49.jpg",
+    "uploadedAt": "2026-03-26T10:50:09.493Z"
+  },
+  "business/OTA/partner/service/image50.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b467c162bcc6496a433bdddae9032984a6308da7-121x57-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image50.jpg",
+    "uploadedAt": "2026-03-26T10:50:11.238Z"
+  },
+  "business/OTA/partner/service/image51.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e863584261cf294fb8bb2a68ccc4bcd18ae34b9b-211x39-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image51.jpg",
+    "uploadedAt": "2026-03-26T10:50:12.799Z"
+  },
+  "business/OTA/partner/service/image52.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e58b499f24334077f6f25fb13b2a79fbe84c8a93-156x24-jpg"
+    },
+    "originalPath": "/images/business/OTA/partner/service/image52.jpg",
+    "uploadedAt": "2026-03-26T10:50:14.300Z"
+  },
+  "business/PARTNER/partner_1.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c5c2faf85cde56f8d4a94fca774bc29c159c68ab-1722x1581-svg"
+    },
+    "originalPath": "/images/business/PARTNER/partner_1.svg",
+    "uploadedAt": "2026-03-26T10:50:17.814Z"
+  },
+  "business/PARTNER/partner_1_ja.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-ce225d045447be3aa21ff8b24802ff6d6ebfe70f-1722x1581-svg"
+    },
+    "originalPath": "/images/business/PARTNER/partner_1_ja.svg",
+    "uploadedAt": "2026-03-26T10:50:23.035Z"
+  },
+  "business/PARTNER/partner_1_ko.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-59962d360b64fb03d29163cf7f0a3ae96de384ae-1722x1581-svg"
+    },
+    "originalPath": "/images/business/PARTNER/partner_1_ko.svg",
+    "uploadedAt": "2026-03-26T10:50:25.855Z"
+  },
+  "business/PARTNER/partner_2.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-bec1a8a2867ba504d6dafd59becce305d694e801-1724x1583-svg"
+    },
+    "originalPath": "/images/business/PARTNER/partner_2.svg",
+    "uploadedAt": "2026-03-26T10:50:29.242Z"
+  },
+  "business/PARTNER/partner_2_ja.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-8b2884f3d7c94be27279ce5fac24c206a4b2e1b1-1724x1583-svg"
+    },
+    "originalPath": "/images/business/PARTNER/partner_2_ja.svg",
+    "uploadedAt": "2026-03-26T10:50:33.119Z"
+  },
+  "business/PARTNER/partner_2_ko.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9bec78436138ab0ffa2c1360a33942a20fdb2dee-1724x1583-svg"
+    },
+    "originalPath": "/images/business/PARTNER/partner_2_ko.svg",
+    "uploadedAt": "2026-03-26T10:50:37.203Z"
+  },
+  "business/PMS/accommodation-management.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-dd4ebeb7c2f1c6e9fef285ec537936115500b9d1-249x208-svg"
+    },
+    "originalPath": "/images/business/PMS/accommodation-management.svg",
+    "uploadedAt": "2026-03-26T10:50:38.968Z"
+  },
+  "business/PMS/accommodation.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-474d37c39f833296322a088b9a9c257a6c9fefda-1138x688-jpg"
+    },
+    "originalPath": "/images/business/PMS/accommodation.jpg",
+    "uploadedAt": "2026-03-26T10:50:41.529Z"
+  },
+  "business/PMS/accommodation.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-489435f2575d396ce079cea337b98850935a6f16-569x344-svg"
+    },
+    "originalPath": "/images/business/PMS/accommodation.svg",
+    "uploadedAt": "2026-03-26T10:50:46.161Z"
+  },
+  "business/PMS/analysis-report.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5e4def84de8353b3968061b7df5f3e33e851e8bc-264x194-svg"
+    },
+    "originalPath": "/images/business/PMS/analysis-report.svg",
+    "uploadedAt": "2026-03-26T10:50:48.108Z"
+  },
+  "business/PMS/compatibility.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5ed338924c275b6e364978ad4ed2be815ea78b7b-60x60-svg"
+    },
+    "originalPath": "/images/business/PMS/compatibility.svg",
+    "uploadedAt": "2026-03-26T10:50:50.088Z"
+  },
+  "business/PMS/cost-reduction.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-f051908c21acdac066db52f1047d18568128aed8-60x60-svg"
+    },
+    "originalPath": "/images/business/PMS/cost-reduction.svg",
+    "uploadedAt": "2026-03-26T10:50:52.061Z"
+  },
+  "business/PMS/efficiency.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b2340ba4f58f398814644358692dab513620dd32-60x60-svg"
+    },
+    "originalPath": "/images/business/PMS/efficiency.svg",
+    "uploadedAt": "2026-03-26T10:50:54.026Z"
+  },
+  "business/PMS/faster-check-in.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c8f4434d919f275f5efa37c83a5cc8ea7616df22-226x199-svg"
+    },
+    "originalPath": "/images/business/PMS/faster-check-in.svg",
+    "uploadedAt": "2026-03-26T10:50:55.805Z"
+  },
+  "business/PMS/full-package-hotelier.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2434ec3a5f7c3a07009ae8896ffaa286a5ec8b82-1138x688-jpg"
+    },
+    "originalPath": "/images/business/PMS/full-package-hotelier.jpg",
+    "uploadedAt": "2026-03-26T10:50:58.221Z"
+  },
+  "business/PMS/full-package-hotelier.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-7ec9a8cd37c1a118ff7281b6f51c0935a05d5019-569x344-svg"
+    },
+    "originalPath": "/images/business/PMS/full-package-hotelier.svg",
+    "uploadedAt": "2026-03-26T10:51:02.627Z"
+  },
+  "business/PMS/property-management-system.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e4f4dd6e411ef41e434f531907838411adbeb3d9-1484x902-jpg"
+    },
+    "originalPath": "/images/business/PMS/property-management-system.jpg",
+    "uploadedAt": "2026-03-26T10:51:04.493Z"
+  },
+  "business/PMS/property-management-system.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5ff3b2bcaf73136a8fce59b5594aa34e25fdf25f-742x451-svg"
+    },
+    "originalPath": "/images/business/PMS/property-management-system.svg",
+    "uploadedAt": "2026-03-26T10:51:10.799Z"
+  },
+  "business/SYSSaleChannel/omh-saas-ja.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-01be5f3a66a4f8d95c457c3f48125ed21afe46ad-3739x1487-svg"
+    },
+    "originalPath": "/images/business/SYSSaleChannel/omh-saas-ja.svg",
+    "uploadedAt": "2026-03-26T10:51:15.294Z"
+  },
+  "business/SYSSaleChannel/omh-saas-vi.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-760999ded22729e4eb9f434dfbd71b335daa3010-3739x1487-svg"
+    },
+    "originalPath": "/images/business/SYSSaleChannel/omh-saas-vi.svg",
+    "uploadedAt": "2026-03-26T10:51:20.524Z"
+  },
+  "business/SYSSaleChannel/omh-saas.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-ad19f8d394f9d209fadba69f231a588b542c04e6-3739x1487-svg"
+    },
+    "originalPath": "/images/business/SYSSaleChannel/omh-saas.svg",
+    "uploadedAt": "2026-03-26T10:51:24.916Z"
+  },
+  "business/SYSSaleChannel/sys-sales-channel-ja.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-8f47d12e3c67c9d26159df1c8fde5e9f6d7ae8be-3960x1917-svg"
+    },
+    "originalPath": "/images/business/SYSSaleChannel/sys-sales-channel-ja.svg",
+    "uploadedAt": "2026-03-26T10:51:28.559Z"
+  },
+  "business/SYSSaleChannel/sys-sales-channel-vi.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-6415f535496dfddb624818769bcd2112cb8952cc-3960x1526-svg"
+    },
+    "originalPath": "/images/business/SYSSaleChannel/sys-sales-channel-vi.svg",
+    "uploadedAt": "2026-03-26T10:51:31.917Z"
+  },
+  "business/SYSSaleChannel/sys-sales-channel.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9302b047bfdc5b51a510e30ab663a3822cf26e95-3960x1505-svg"
+    },
+    "originalPath": "/images/business/SYSSaleChannel/sys-sales-channel.svg",
+    "uploadedAt": "2026-03-26T10:51:36.218Z"
+  },
+  "business/WOC/WOC_1.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-7005596d3069c5fbb1e10da06fa2308007e44961-2011x1971-svg"
+    },
+    "originalPath": "/images/business/WOC/WOC_1.svg",
+    "uploadedAt": "2026-03-26T10:51:40.217Z"
+  },
+  "business/WOC/WOC_2.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c950423dc95810c6d884916cfb196ce8d4f1312f-1632x1961-svg"
+    },
+    "originalPath": "/images/business/WOC/WOC_2.svg",
+    "uploadedAt": "2026-03-26T10:51:46.296Z"
+  },
+  "business/WOC/WOC_3.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3c92f561f878f60c8d0243218bf686625653b150-1602x2258-svg"
+    },
+    "originalPath": "/images/business/WOC/WOC_3.svg",
+    "uploadedAt": "2026-03-26T10:51:53.724Z"
+  },
+  "career/adaptability.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d22002983e68010981104915f8338174d4e3d127-75x75-svg"
+    },
+    "originalPath": "/images/career/adaptability.svg",
+    "uploadedAt": "2026-03-26T10:51:56.179Z"
+  },
+  "career/banner.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-dc014e62696aba75f8763c5ab2cf8385926f2adc-2592x1728-jpg"
+    },
+    "originalPath": "/images/career/banner.jpg",
+    "uploadedAt": "2026-03-26T10:52:00.877Z"
+  },
+  "career/confidence.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-26815c2defb01c3ba9801c42796c53d289aaaa7b-75x75-svg"
+    },
+    "originalPath": "/images/career/confidence.svg",
+    "uploadedAt": "2026-03-26T10:52:03.016Z"
+  },
+  "career/health.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-21c8e1c29d798256fceef5357d3f131abbedadc4-75x75-svg"
+    },
+    "originalPath": "/images/career/health.svg",
+    "uploadedAt": "2026-03-26T10:52:04.987Z"
+  },
+  "career/icon-customer.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3e353ec088fdedb9af89bbf750181f6c1c1b1031-80x80-svg"
+    },
+    "originalPath": "/images/career/icon-customer.svg",
+    "uploadedAt": "2026-03-26T10:52:06.897Z"
+  },
+  "career/icon-employee.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-20fdf0f211a25115aef430c090866373278ec663-80x80-svg"
+    },
+    "originalPath": "/images/career/icon-employee.svg",
+    "uploadedAt": "2026-03-26T10:52:09.248Z"
+  },
+  "career/icon-partner.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3beb6eee1c8c4c1009fc8ebe5e525417eb391309-80x80-svg"
+    },
+    "originalPath": "/images/career/icon-partner.svg",
+    "uploadedAt": "2026-03-26T10:52:11.210Z"
+  },
+  "career/job-opportunities.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-4c410fcf81e9a5361f2b2d647248f57522986f28-596x250-svg"
+    },
+    "originalPath": "/images/career/job-opportunities.svg",
+    "uploadedAt": "2026-03-26T10:52:13.383Z"
+  },
+  "career/people-skills.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-101d24e562d6e95fa2461d905a00f96901ee3a6c-75x75-svg"
+    },
+    "originalPath": "/images/career/people-skills.svg",
+    "uploadedAt": "2026-03-26T10:52:15.678Z"
+  },
+  "career/self-development.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2d13248b5055257fc5056c1b9a687d8da915bae7-76x76-svg"
+    },
+    "originalPath": "/images/career/self-development.svg",
+    "uploadedAt": "2026-03-26T10:52:22.757Z"
+  },
+  "career/vision-design.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-87074f0624be0c285434eb3841ee900dcdb0cb69-76x76-svg"
+    },
+    "originalPath": "/images/career/vision-design.svg",
+    "uploadedAt": "2026-03-26T10:52:25.050Z"
+  },
+  "draft/bg2.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5110f0bc6c8dc0e375c196edb3e30b0bcdbcc367-1920x634-png"
+    },
+    "originalPath": "/images/draft/bg2.png",
+    "uploadedAt": "2026-03-26T10:52:30.425Z"
+  },
+  "draft/carousel1.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-0d9b8c028691b10d552937440f7692f077062b6a-1090x613-jpg"
+    },
+    "originalPath": "/images/draft/carousel1.jpg",
+    "uploadedAt": "2026-03-26T10:52:32.161Z"
+  },
+  "draft/carousel2.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-ba6d7a7564fce795c21d41273d87838db25606d3-326x154-jpg"
+    },
+    "originalPath": "/images/draft/carousel2.jpg",
+    "uploadedAt": "2026-03-26T10:52:34.422Z"
+  },
+  "draft/carousel3.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-a651c0ff1306e6ff5ec89411d22a378baaf30398-1000x683-jpg"
+    },
+    "originalPath": "/images/draft/carousel3.jpg",
+    "uploadedAt": "2026-03-26T10:52:37.035Z"
+  },
+  "draft/carousel4.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-8edba1fc2c20e08316c398ba5dc42afa97132557-340x148-jpg"
+    },
+    "originalPath": "/images/draft/carousel4.jpg",
+    "uploadedAt": "2026-03-26T10:52:39.388Z"
+  },
+  "draft/carousel5.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-ab88b53d403deb7548023e62cda043585699d6aa-600x401-jpg"
+    },
+    "originalPath": "/images/draft/carousel5.jpg",
+    "uploadedAt": "2026-03-26T10:52:41.011Z"
+  },
+  "draft/cosmos.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-6b84ffce4a720ad859cb330b39452b6495a00e6b-1021x553-jpg"
+    },
+    "originalPath": "/images/draft/cosmos.jpg",
+    "uploadedAt": "2026-03-26T10:52:43.747Z"
+  },
+  "email-bg.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-4471877f8dd99b4aa35b1a68997b591ad2669757-878x702-svg"
+    },
+    "originalPath": "/images/email-bg.svg",
+    "uploadedAt": "2026-03-26T10:52:46.817Z"
+  },
+  "flags/en.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-60045d4c31abbdf5fc0ea37f1592636432eb537f-19x19-svg"
+    },
+    "originalPath": "/images/flags/en.svg",
+    "uploadedAt": "2026-03-26T10:52:48.710Z"
+  },
+  "flags/international.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5dc96108fcc855d9de086f0124a3a0879fdf2357-38x38-png"
+    },
+    "originalPath": "/images/flags/international.png",
+    "uploadedAt": "2026-03-26T10:52:50.478Z"
+  },
+  "flags/international.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1552492956ee42d5df6a4a83ada03e6c8cc34abe-19x19-svg"
+    },
+    "originalPath": "/images/flags/international.svg",
+    "uploadedAt": "2026-03-26T10:52:53.913Z"
+  },
+  "flags/ja.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9d0dd5cd48cd792d54189fcbc10106d24b4a8b58-19x19-svg"
+    },
+    "originalPath": "/images/flags/ja.svg",
+    "uploadedAt": "2026-03-26T10:52:56.056Z"
+  },
+  "flags/ko.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-12e0004316be3976e2f1f963bbba49c94d890069-19x19-svg"
+    },
+    "originalPath": "/images/flags/ko.svg",
+    "uploadedAt": "2026-03-26T10:52:58.190Z"
+  },
+  "flags/sg.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-ed859daf0ced09cbb47aade1ebcd53a31233d2ba-4320x2880-svg"
+    },
+    "originalPath": "/images/flags/sg.svg",
+    "uploadedAt": "2026-03-26T10:53:02.440Z"
+  },
+  "flags/singapore.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-ce4d2ec537d328f6f05d35175e8e2f0800e912ae-19x19-svg"
+    },
+    "originalPath": "/images/flags/singapore.svg",
+    "uploadedAt": "2026-03-26T10:53:04.656Z"
+  },
+  "flags/taiwan.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-eddb01b9a85619e5258d314603c1c7b66b1e56e4-19x19-svg"
+    },
+    "originalPath": "/images/flags/taiwan.svg",
+    "uploadedAt": "2026-03-26T10:53:06.536Z"
+  },
+  "flags/vi.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-05de176df7a738c469217c004c52c4878171cb88-19x19-svg"
+    },
+    "originalPath": "/images/flags/vi.svg",
+    "uploadedAt": "2026-03-26T10:53:08.786Z"
+  },
+  "footer/fax.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-26538fe946feb3731ef3e693f11f7cdd75fada33-35x35-svg"
+    },
+    "originalPath": "/images/footer/fax.svg",
+    "uploadedAt": "2026-03-26T10:53:10.307Z"
+  },
+  "footer/instagram.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-06ce7b1d4071df7f9e25c0951b788f5b08a5217d-68x72-svg"
+    },
+    "originalPath": "/images/footer/instagram.svg",
+    "uploadedAt": "2026-03-26T10:53:12.407Z"
+  },
+  "footer/kakao.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-676154bf127694daa8a7d2caa0237c58dbfd5b46-85x81-svg"
+    },
+    "originalPath": "/images/footer/kakao.svg",
+    "uploadedAt": "2026-03-26T10:53:14.787Z"
+  },
+  "footer/linkedIn.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-094a53cbb0b9a109d19888329dd6d5a14099e923-73x72-svg"
+    },
+    "originalPath": "/images/footer/linkedIn.svg",
+    "uploadedAt": "2026-03-26T10:53:16.550Z"
+  },
+  "footer/location.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b6a5528b6baf1165461464e8c09557c80e18a77c-35x35-svg"
+    },
+    "originalPath": "/images/footer/location.svg",
+    "uploadedAt": "2026-03-26T10:53:18.583Z"
+  },
+  "footer/logo-gray.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e181aba90dc037386319b761daf4014e289ef7c2-102x70-svg"
+    },
+    "originalPath": "/images/footer/logo-gray.svg",
+    "uploadedAt": "2026-03-26T10:53:20.329Z"
+  },
+  "footer/naver-blog.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-873059585ab5ce0e395b44fe96c8576572adb417-72x71-svg"
+    },
+    "originalPath": "/images/footer/naver-blog.svg",
+    "uploadedAt": "2026-03-26T10:53:22.173Z"
+  },
+  "footer/omt-partner.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-6f7772f1b7aa2a630e734fee2350aadf25c68f76-99x69-svg"
+    },
+    "originalPath": "/images/footer/omt-partner.svg",
+    "uploadedAt": "2026-03-26T10:53:24.352Z"
+  },
+  "footer/phone.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-cb5dadc7ef1f3489461d590257868663f29338a1-35x35-svg"
+    },
+    "originalPath": "/images/footer/phone.svg",
+    "uploadedAt": "2026-03-26T10:53:26.720Z"
+  },
+  "home/banner-1-2026.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-8ca27d7b690643de4ca1b63ff6ae27ce43d43ff5-1920x1016-jpg"
+    },
+    "originalPath": "/images/home/banner-1-2026.jpg",
+    "uploadedAt": "2026-03-26T10:53:31.253Z"
+  },
+  "home/banner-1-2026.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-fc7011f95e8505975d723413a8fb48a5fe6e0a44-1920x1016-png"
+    },
+    "originalPath": "/images/home/banner-1-2026.png",
+    "uploadedAt": "2026-03-26T10:53:36.513Z"
+  },
+  "home/banner-2-2026.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-f623c6b53fe5ffa52628466aa3c57c3a5f16759b-1920x1016-jpg"
+    },
+    "originalPath": "/images/home/banner-2-2026.jpg",
+    "uploadedAt": "2026-03-26T10:53:39.305Z"
+  },
+  "home/banner-2-2026.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2fc415ddb942f16a89b6cd9f292d8baeb07470e4-1920x1016-png"
+    },
+    "originalPath": "/images/home/banner-2-2026.png",
+    "uploadedAt": "2026-03-26T10:53:46.300Z"
+  },
+  "home/booking-engine.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9f1db6e99e48ca100b0c96a46f942c024a1a6990-76x76-svg"
+    },
+    "originalPath": "/images/home/booking-engine.svg",
+    "uploadedAt": "2026-03-26T10:53:48.307Z"
+  },
+  "home/cms.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2d8a3236fc6c1d0dd6db946e9dbdba7124d0efdc-76x76-svg"
+    },
+    "originalPath": "/images/home/cms.svg",
+    "uploadedAt": "2026-03-26T10:53:50.152Z"
+  },
+  "home/cost-reduction.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-26f315c8d9d12f2b3d397f63da4585a2a08b5d46-420x230-svg"
+    },
+    "originalPath": "/images/home/cost-reduction.svg",
+    "uploadedAt": "2026-03-26T10:53:52.009Z"
+  },
+  "home/happy.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-e628cec62978c4f544fc0b361ba10dd1c1cdc3c2-76x76-svg"
+    },
+    "originalPath": "/images/home/happy.svg",
+    "uploadedAt": "2026-03-26T10:53:53.550Z"
+  },
+  "home/home-banner-1.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-635b4f8bf08cf4262135668ceb1647ed5e1bf5de-2000x1335-jpg"
+    },
+    "originalPath": "/images/home/home-banner-1.jpg",
+    "uploadedAt": "2026-03-26T10:53:56.157Z"
+  },
+  "home/home-banner-2.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-87c54e2e96881cac81a560581d14e4cd6820a435-2880x1440-jpg"
+    },
+    "originalPath": "/images/home/home-banner-2.jpg",
+    "uploadedAt": "2026-03-26T10:53:58.642Z"
+  },
+  "home/hotel.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-c19055517325b055120a4463f44f9d8200063c0a-76x76-svg"
+    },
+    "originalPath": "/images/home/hotel.svg",
+    "uploadedAt": "2026-03-26T10:54:00.745Z"
+  },
+  "home/increase-sales.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-bdf03b4c269419ef155ced4e9aa8a33f98e1daa3-362x230-svg"
+    },
+    "originalPath": "/images/home/increase-sales.svg",
+    "uploadedAt": "2026-03-26T10:54:02.736Z"
+  },
+  "home/m-management-system.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3ce326d095328621a77c4827a489bd0182780982-852x758-jpg"
+    },
+    "originalPath": "/images/home/m-management-system.jpg",
+    "uploadedAt": "2026-03-26T10:54:05.180Z"
+  },
+  "home/m-management-system.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-673936e58099223c21e3d83c1a0a033d7b8f2f95-426x379-svg"
+    },
+    "originalPath": "/images/home/m-management-system.svg",
+    "uploadedAt": "2026-03-26T10:54:12.900Z"
+  },
+  "home/management-system.jpg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-daa79dc799e3654c18db303e10d243bd9b06c6a5-1656x1520-jpg"
+    },
+    "originalPath": "/images/home/management-system.jpg",
+    "uploadedAt": "2026-03-26T10:54:15.991Z"
+  },
+  "home/management-system.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d28d3243c440dd4c7b301c335425ea08342d2a7a-1656x1520-png"
+    },
+    "originalPath": "/images/home/management-system.png",
+    "uploadedAt": "2026-03-26T10:54:18.453Z"
+  },
+  "home/management-system.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-5d4215fd5c907007cc7404f6190e0092aa20627b-828x760-svg"
+    },
+    "originalPath": "/images/home/management-system.svg",
+    "uploadedAt": "2026-03-26T10:54:27.869Z"
+  },
+  "home/ota.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-2109a0f982e0e33b9d4a6608b250f4147f891806-76x76-svg"
+    },
+    "originalPath": "/images/home/ota.svg",
+    "uploadedAt": "2026-03-26T10:54:29.676Z"
+  },
+  "home/pms.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b86483835821fa902e463d50877d8a67f5dc079b-76x76-svg"
+    },
+    "originalPath": "/images/home/pms.svg",
+    "uploadedAt": "2026-03-26T10:54:32.026Z"
+  },
+  "home/quote.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-015e0550af9f5374f1b1977dd434a0593da3ee65-17x15-svg"
+    },
+    "originalPath": "/images/home/quote.svg",
+    "uploadedAt": "2026-03-26T10:54:34.307Z"
+  },
+  "home/seamless-solution-bg.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-860782c5599d5645cdd26609b76824953bb24841-652x1888-svg"
+    },
+    "originalPath": "/images/home/seamless-solution-bg.svg",
+    "uploadedAt": "2026-03-26T10:54:37.031Z"
+  },
+  "home/section-line.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-d708f55f39bb59a0b95d66f5bf8996d86caeaf3b-3005x215-svg"
+    },
+    "originalPath": "/images/home/section-line.svg",
+    "uploadedAt": "2026-03-26T10:54:39.698Z"
+  },
+  "home/society.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3d005ca1de3b004f30b7a988fc997e94ca7f2a56-76x76-svg"
+    },
+    "originalPath": "/images/home/society.svg",
+    "uploadedAt": "2026-03-26T10:54:41.821Z"
+  },
+  "home/technology.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-83abfc2e3e9b7222a884b6033e99f29fd40a654a-76x76-svg"
+    },
+    "originalPath": "/images/home/technology.svg",
+    "uploadedAt": "2026-03-26T10:54:44.211Z"
+  },
+  "home/website.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-aed1ca78ada71cfced5e6d67f76b9e0bead868e2-76x76-svg"
+    },
+    "originalPath": "/images/home/website.svg",
+    "uploadedAt": "2026-03-26T10:54:46.010Z"
+  },
+  "icons/chevron-white.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-7e978b6573c74c11a7581398eefcc1a789131040-7x12-svg"
+    },
+    "originalPath": "/images/icons/chevron-white.svg",
+    "uploadedAt": "2026-03-26T10:54:48.083Z"
+  },
+  "icons/chevron.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-50fb459057379a83efdaf08435e5c63e84c941a5-7x12-svg"
+    },
+    "originalPath": "/images/icons/chevron.svg",
+    "uploadedAt": "2026-03-26T10:54:50.057Z"
+  },
+  "icons/close.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-56db179e0edeb1279e5572768d431a8213af0c16-20x20-svg"
+    },
+    "originalPath": "/images/icons/close.svg",
+    "uploadedAt": "2026-03-26T10:54:51.757Z"
+  },
+  "icons/facebook.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-3f1e4e6a2de12b630ae12e55de7983be8c087431-32x32-svg"
+    },
+    "originalPath": "/images/icons/facebook.svg",
+    "uploadedAt": "2026-03-26T10:54:53.500Z"
+  },
+  "icons/new-email-outline.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-f4f4fa4f3294f478f1e7c380b972ab23a669f335-30x20-svg"
+    },
+    "originalPath": "/images/icons/new-email-outline.svg",
+    "uploadedAt": "2026-03-26T10:54:55.740Z"
+  },
+  "logo/logo.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-a009fe0919a2ec553861c5f6e4a33fe0fc1bff71-190x34-svg"
+    },
+    "originalPath": "/images/logo/logo.svg",
+    "uploadedAt": "2026-03-26T10:54:57.450Z"
+  },
+  "logo/name-black-exclamation.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-612f41114a397613d6fc58c6f21772051ddadb2f-174x18-svg"
+    },
+    "originalPath": "/images/logo/name-black-exclamation.svg",
+    "uploadedAt": "2026-03-26T10:54:59.087Z"
+  },
+  "logo/name-black.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-1698a17b1b8183c9523caeb08839f03a098f2197-230x18-svg"
+    },
+    "originalPath": "/images/logo/name-black.svg",
+    "uploadedAt": "2026-03-26T10:55:00.837Z"
+  },
+  "logo/name-white.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-93a2bf8a7df258304a64bcedd3e8db9472f3ddc0-355x31-svg"
+    },
+    "originalPath": "/images/logo/name-white.svg",
+    "uploadedAt": "2026-03-26T10:55:03.017Z"
+  },
+  "logo/orange.svg": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-943e320f64aa3eed7a2d56f7b44bf280daefe6f8-374x498-svg"
+    },
+    "originalPath": "/images/logo/orange.svg",
+    "uploadedAt": "2026-03-26T10:55:05.179Z"
+  },
+  "logo.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-b3bac925c241945536322330131b5d4957fb35f4-236x229-png"
+    },
+    "originalPath": "/images/logo.png",
+    "uploadedAt": "2026-03-26T10:55:06.900Z"
+  },
+  "logo_gray.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-9a3a18648dc183370d7c5290b1af12a21c5183ba-118x75-png"
+    },
+    "originalPath": "/images/logo_gray.png",
+    "uploadedAt": "2026-03-26T10:55:08.976Z"
+  },
+  "logo_text.png": {
+    "_type": "image",
+    "asset": {
+      "_type": "reference",
+      "_ref": "image-dfa52292ec6cd2d671228b1189c08b3ac353d446-210x40-png"
+    },
+    "originalPath": "/images/logo_text.png",
+    "uploadedAt": "2026-03-26T10:55:10.509Z"
+  }
+}

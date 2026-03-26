@@ -1,0 +1,127 @@
+---
+import { fetchAboutUsPage } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const aboutPage = await fetchAboutUsPage();
+const banner = aboutPage?.banner;
+
+// Get localized values with fallbacks
+const title = getLocalizedValue(banner?.title, lang);
+
+// Get image from Sanity or fallback
+const bannerImageUrl = banner?.image
+  ? urlFor(banner.image).width(1920).quality(85).auto('format').url()
+  : '/images/home/banner-1-2026.jpg';
+
+// Fallback translations
+const fallbackTranslations: Record<string, any> = {
+  en: {
+    title: "Realize value"
+  },
+  ja: {
+    title: "価値を実現する"
+  },
+  ko: {
+    title: "가치를 실현하다"
+  },
+  vi: {
+    title: "Hiện thực hóa giá trị"
+  }
+};
+
+const t = fallbackTranslations[lang] || fallbackTranslations.en;
+
+// Use Sanity data or fallback
+const displayTitle = title || t.title;
+---
+
+<section class="about-us-banner" id="aboutBanner" style={`--banner-image: url('${bannerImageUrl}')`}>
+  <div class="banner-content">
+    <h2>{displayTitle}</h2>
+    <img src="/images/logo/name-white.svg" height="27" alt="OHMYHOTEL & CO" />
+  </div>
+</section>
+
+<style>
+  .about-us-banner {
+    padding: 0 2rem;
+    height: 21rem;
+    background:
+      url("/images/logo/orange.svg") 10% -5% no-repeat,
+      url("/images/logo/orange.svg") 90% 115% no-repeat,
+      var(--banner-image, url("/images/home/banner-1-2026.jpg")) center;
+    background-size: 374px auto, 523px auto, 110%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    transition: background-position 0.5s ease-out;
+  }
+
+  .banner-content {
+    text-align: center;
+    color: white;
+  }
+
+  .banner-content h2 {
+    color: white;
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+  }
+
+  .banner-content img {
+    height: 27px;
+    width: auto;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .about-us-banner {
+      background-position: -10rem -34%, calc(100% + 18rem) 165%, center 0% !important;
+      background-size: 281px auto, 310px auto, 100% auto;
+    }
+
+    .banner-content h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media only screen and (max-width: 991.98px) and (min-width: 768px) {
+    .about-us-banner {
+      background-position: -28% -5%, 185% 115%, center !important;
+    }
+  }
+</style>
+
+<script>
+  // Mouse move parallax effect (same as original)
+  if (typeof window !== 'undefined') {
+    const banner = document.getElementById('aboutBanner');
+    if (banner) {
+      const movementStrength = 50;
+      const height = movementStrength / banner.clientWidth;
+      const width = movementStrength / banner.clientWidth;
+
+      function updateBannerPosition(e: MouseEvent) {
+        const pageX = e.pageX - banner!.clientWidth / 2;
+        const pageY = e.pageY - banner!.clientHeight / 2;
+        const newvalueX = width * pageX * -1;
+        const newvalueY = height * pageY * -1;
+
+        banner!.style.backgroundPosition =
+          `10% -5%, 90% 115%, calc(50% + ${newvalueX}px) calc(50% + ${newvalueY}px)`;
+      }
+
+      banner.onmousemove = updateBannerPosition;
+    }
+  }
+</script>

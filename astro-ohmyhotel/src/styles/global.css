@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* CSS Variables matching original SCSS */
+:root {
+  /* Colors */
+  --primary-text-color: #444444;
+  --primary-header-color: #2c2c2c;
+  --primary-box-shadow: 0 0.4rem 1rem 0 rgba(0, 0, 0, 0.1);
+  --primary-box-shadow-inset: inset 0 0.4rem 1.5rem 0 rgba(0, 0, 0, 0.1);
+  --primary-border: 1px solid #eee;
+  --border-linear: linear-gradient(270deg, #FFFFFF 0%, #E3E3E3 51.39%, #FFFFFF 100%);
+  --brand-color-gradient: linear-gradient(311.56deg, #EE8768 0%, #EE8768 27.3%, #EAB65A 100%);
+  --background-color-lightblue: #F7FAFD;
+}
+
+/* Base Styles */
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  font-weight: 500;
+  color: var(--primary-text-color);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.disable-scroll {
+  overflow: hidden;
+}
+
+/* Typography - matching source App.scss */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-header-color);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 2rem;
+}
+
+h1 { font-size: 4.7rem; }
+h2 { font-size: 3.7rem; }
+h3 { font-size: 3rem; }
+h4 { font-size: 2.7rem; }
+h5 { font-size: 2.2rem; }
+h6 { font-size: 2rem; }
+
+/* Mobile typography */
+@media only screen and (max-width: 767px) {
+  h1 { font-size: 2.9rem; }
+  h2 { font-size: 2.8rem; }
+  h3 { font-size: 2.4rem; }
+  h4 { font-size: 2.2rem; }
+  h5 { font-size: 2.2rem; }
+  h6 { font-size: 1.8rem; }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+}
+
+a:hover, a:focus {
+  color: var(--primary-header-color);
+}
+
+/* Links with underline effect */
+a:not(.no-underline)::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+a:not(.no-underline):hover::before {
+  width: 100%;
+}
+
+/* Utility classes */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.content-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: var(--brand-color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Header line - matching source App.scss */
+.header-line {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-line::before {
+  content: "";
+  height: 0.2rem;
+  width: 2rem;
+  border-radius: 1px;
+  background: var(--brand-color-gradient);
+  box-shadow: var(--primary-box-shadow);
+  margin-right: 0.1rem;
+}
+
+.header-line::after {
+  content: "";
+  height: 0.2rem;
+  max-width: 13rem;
+  border-radius: 1px;
+  background: var(--brand-color-gradient);
+  box-shadow: var(--primary-box-shadow);
+  flex-grow: 1;
+}
+
+.header-line.sort-line::before {
+  width: 1rem;
+}
+
+/* Section base styles - matching source App.scss */
+section {
+  padding-top: 5rem;
+  padding-bottom: 9rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Section skew borders */
+section::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 7.3rem;
+  background-color: white;
+  border: none;
+  border-top: var(--primary-border);
+  left: 0;
+  bottom: -4rem;
+  transform: skewY(184deg);
+  z-index: 1;
+}
+
+section::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 7.3rem;
+  background-color: white;
+  border: none;
+  border-top: var(--primary-border);
+  right: 0;
+  bottom: -4rem;
+  transform: skewY(176deg);
+}
+
+section:last-of-type::before,
+section:last-of-type::after {
+  display: none;
+}
+
+/* Section header */
+.section-header {
+  padding-bottom: 2rem;
+  line-height: 3.7rem;
+}
+
+/* Section content */
+.section-content .p-title {
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+@media only screen and (max-width: 767px) {
+  section::before {
+    height: 5rem;
+  }
+
+  section::after {
+    height: 5rem;
+  }
+
+  .section-header {
+    padding: 0 2rem 2rem;
+  }
+}
+
+/* Strong text */
+strong {
+  font-weight: 700;
+  color: var(--primary-header-color);
+}
+
+/* Paragraph */
+p {
+  margin-bottom: 1.2rem;
+}
+
+/* Button styles - matching source */
+.btn {
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 1.1rem 1.8rem;
+  border-radius: 1.5rem 0 1.5rem 1.5rem;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn-primary {
+  background: var(--brand-color-gradient);
+  color: white;
+}

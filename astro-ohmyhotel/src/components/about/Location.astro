@@ -1,0 +1,256 @@
+---
+import { fetchAboutUsPage } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+import type { Language } from '../../utils/i18n';
+
+export interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+// Fetch data from Sanity
+const aboutPage = await fetchAboutUsPage();
+
+// Get locations from Sanity or use fallback
+const sanityLocations = aboutPage?.locations || [];
+
+// Map Sanity locations to display format
+const locationsFromSanity = sanityLocations.map((loc: any) => ({
+  flag: loc.flag || 'international',
+  name: getLocalizedValue(loc.name, lang) || loc.name,
+  address: getLocalizedValue(loc.address, lang) || loc.address,
+  phone: loc.phone,
+  fax: loc.fax || null,
+  email: loc.email
+}));
+
+// Fallback locations
+const fallbackLocations = [
+  {
+    flag: "ko",
+    name: "Seoul, Korea (HQ)",
+    address: "6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea",
+    phone: "+82-2-762-0552",
+    fax: "+82-2-733-0551"
+  },
+  {
+    flag: "ja",
+    name: "Osaka, Japan",
+    address: "3F, Showa Bldg, 2-5-24, Nishi-Honmachi, Nishi-ku, Osaka-shi, Osaka 550-0005 Japan",
+    phone: "+81-6-6940-7949",
+    fax: "+81-6-6940-7948 / +81-3-4531-8229"
+  },
+  {
+    flag: "vi",
+    name: "Ho Chi Minh, Vietnam",
+    address: "Unit F7-BCD, 7th Floor, Mach Building, 127 Ung Van Khiem, Ward 25, Binh Thanh District, Ho Chi Minh City, Vietnam",
+    phone: "+84-28-3519-4629",
+    fax: null
+  }
+];
+
+// Use Sanity data if available, otherwise fallback
+const locations = locationsFromSanity.length > 0 ? locationsFromSanity : fallbackLocations;
+---
+
+<div class="location-section">
+  <section>
+    <div class="section-header">
+      <h3>Location</h3>
+      <span class="header-line"></span>
+    </div>
+    <div class="section-content">
+      <div class="container">
+        {locations.map((loc: any, index: number) => (
+          <>
+            <div class="line" data-branch={loc.flag}></div>
+            <span class="lang-flag">
+              <img src={`/images/flags/${loc.flag}.svg`} alt={loc.name} />
+            </span>
+            <h6>{loc.name}</h6>
+            <div class="location-details">
+              <p>{loc.address}</p>
+              <div class="contact-info">
+                <div>
+                  <img src="/images/footer/phone.svg" alt="Phone" />
+                  {loc.phone}
+                </div>
+                {loc.fax && (
+                  <div>
+                    <img src="/images/footer/fax.svg" alt="Fax" />
+                    {loc.fax}
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .location-section {
+    background-color: #fff;
+  }
+
+  .section-header {
+    text-align: center;
+    padding: 5rem 0 3rem;
+  }
+
+  .section-header h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-header-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .header-line {
+    display: block;
+    width: 4rem;
+    height: 0.3rem;
+    background: var(--brand-color-gradient);
+    margin: 0 auto;
+  }
+
+  .container {
+    padding: 5rem 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    text-align: left;
+    position: relative;
+    max-width: 100rem;
+    margin: 0 auto;
+  }
+
+  .lang-flag {
+    margin: 0.5rem 1rem 0 0;
+  }
+
+  .lang-flag img {
+    width: 24px;
+    height: auto;
+  }
+
+  h6 {
+    margin: 0.7rem 5rem 0 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--primary-header-color);
+  }
+
+  p {
+    margin-bottom: 0;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--primary-text-color);
+    line-height: 2.3rem;
+  }
+
+  .location-details {
+    display: flex;
+  }
+
+  .location-details > div {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    margin: 0.3rem 5rem 0 0;
+    min-width: 14.5rem;
+  }
+
+  .contact-info {
+    display: flex;
+    gap: 2rem;
+    font-size: 1.4rem;
+    color: var(--primary-text-color);
+  }
+
+  .contact-info > div {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .contact-info img {
+    width: 18px;
+    height: 18px;
+    margin-right: 0.5rem;
+    opacity: 0.7;
+  }
+
+  .line {
+    height: 1px;
+    background: linear-gradient(270deg, #FFFFFF 0%, #E3E3E3 51.39%, #FFFFFF 100%);
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin: 5rem 0;
+  }
+
+  .line:first-child {
+    display: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .container {
+      padding-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .lang-flag {
+      margin: 0;
+      height: 3.5rem;
+      width: 3.5rem;
+    }
+
+    .lang-flag img {
+      height: 2.9rem;
+      width: 2.9rem;
+    }
+
+    h6 {
+      margin: 0.8rem 0 0.6rem;
+      display: flex;
+      align-items: center;
+    }
+
+    p {
+      text-align: center;
+      margin: 0;
+      line-height: 2rem;
+    }
+
+    .location-details {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .location-details > div {
+      width: 100%;
+      margin: 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-info {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .line {
+      width: 100%;
+      margin: 3rem 0;
+    }
+  }
+</style>

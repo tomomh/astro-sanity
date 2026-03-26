@@ -1,0 +1,98 @@
+---
+export interface Props {
+  title: string;
+  content: string;
+  image: string;
+  imagePosition?: 'left' | 'right';
+}
+
+const { title, content, image, imagePosition = 'right' } = Astro.props;
+---
+
+<div class:list={['product-feature', { 'image-left': imagePosition === 'left' }]}>
+  <div class="feature-content">
+    <h3>{title}</h3>
+    <div class="content-text" set:html={content}></div>
+  </div>
+  <div class="feature-image">
+    <img src={image} alt={title} />
+  </div>
+</div>
+
+<style>
+  .product-feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin: 4rem 0;
+  }
+
+  .image-left {
+    direction: rtl;
+  }
+
+  .image-left > * {
+    direction: ltr;
+  }
+
+  .feature-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+  }
+
+  .content-text {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+  }
+
+  .content-text p {
+    margin-bottom: 1rem;
+  }
+
+  .content-text ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .content-text li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .content-text li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #007bff;
+    font-weight: bold;
+  }
+
+  .feature-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .product-feature,
+    .image-left {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      direction: ltr;
+    }
+
+    .feature-content h3 {
+      font-size: 1.5rem;
+    }
+
+    .content-text {
+      font-size: 1rem;
+    }
+  }
+</style>

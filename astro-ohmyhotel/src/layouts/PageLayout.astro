@@ -1,0 +1,33 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+}
+
+const {
+  title = 'Ohmyhotel & Co',
+  description = 'Hotel Technology Solutions',
+  lang = 'ja'
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header currentLang={lang} currentPath={currentPath} />
+  <main class="app-content" style="margin-top: 6.9rem;">
+    <slot />
+  </main>
+  <Footer currentLang={lang} />
+</BaseLayout>
+
+<style>
+  .app-content {
+    min-height: calc(100vh - 6.9rem - 400px); /* Subtract header and approximate footer height */
+  }
+</style>

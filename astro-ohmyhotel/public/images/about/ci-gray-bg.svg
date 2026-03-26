@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="71px" height="48px" viewBox="0 0 71 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>grey</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="loop-copy-3" fill-rule="nonzero">
+            <g id="Group-10">
+                <path d="M0,48 L0,0 L70,0 L70,48 L0,48 Z M70,1 L1,1 L1,48 L70,48 L70,1 Z" id="Combined-Shape" fill="#E3E3E3"></path>
+                <path d="M1.5,15.5 L70,15.5" id="Path-11" stroke="#E7E7E7" opacity="0.378534226" stroke-dasharray="1"></path>
+                <path d="M1.5,33.5 L70,33.5" id="Path-11-Copy" stroke="#E7E7E7" opacity="0.378534226" stroke-dasharray="1"></path>
+                <path d="M-5.5,25 L42,25" id="Path-11-Copy-3" stroke="#E7E7E7" opacity="0.378534226" stroke-dasharray="1" transform="translate(18.500000, 25.000000) rotate(90.000000) translate(-18.500000, -25.000000) "></path>
+                <path d="M11.5,25 L58.7376798,25" id="Path-11-Copy-2" stroke="#E7E7E7" opacity="0.378534226" stroke-dasharray="1" transform="translate(35.500000, 25.000000) rotate(90.000000) translate(-35.500000, -25.000000) "></path>
+                <path d="M28.5,25 L75.7376798,25" id="Path-11-Copy-4" stroke="#E7E7E7" opacity="0.378534226" stroke-dasharray="1" transform="translate(52.500000, 25.000000) rotate(90.000000) translate(-52.500000, -25.000000) "></path>
+            </g>
+            <rect id="Rectangle" fill="#F4F4F4" style="mix-blend-mode: multiply;" x="0" y="0" width="71" height="48"></rect>
+        </g>
+    </g>
+</svg>
