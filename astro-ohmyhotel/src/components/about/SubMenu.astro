@@ -1,4 +1,6 @@
 ---
+import { buildUrlWithLang, type Language } from '../../utils/i18n';
+
 export interface Props {
   lang: string;
   activeItem: string;
@@ -20,7 +22,7 @@ const items = [
     <ul>
       {items.map((item) => (
         <li class={activeItem === item.path ? 'active' : ''}>
-          <a href={`/${lang}/about-us/${item.path}`}>{item.name}</a>
+          <a href={buildUrlWithLang(`/about-us/${item.path}`, lang as Language)}>{item.name}</a>
           <span class="header-line sort-line"></span>
         </li>
       ))}

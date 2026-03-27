@@ -1,6 +1,26 @@
 ---
-// Root redirect to default language
+import MainLayout from '../layouts/main.astro';
+import HeroBanner from '../components/home/HeroBanner.astro';
+import TwoThings from '../components/home/TwoThings.astro';
+import AllInOne from '../components/home/AllInOne.astro';
+import SimpleIntuitive from '../components/home/SimpleIntuitive.astro';
+import FriendConfidant from '../components/home/FriendConfidant.astro';
+import { getLangFromUrl, type Language } from '../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+
+const titles: Record<Language, string> = {
+  en: 'OHMYHOTEL & CO - Hotel Technology Solutions',
+  ja: 'OHMYHOTEL & CO - ホテルテクノロジーソリューション',
+  ko: 'OHMYHOTEL & CO - 호텔 기술 솔루션',
+  vi: 'OHMYHOTEL & CO - Giải pháp Công nghệ Khách sạn'
+};
 ---
-<script>
-  window.location.href = '/en/';
-</script>
+
+<MainLayout content={{ title: titles[lang] }}>
+  <HeroBanner lang={lang} />
+  <TwoThings lang={lang} />
+  <AllInOne lang={lang} />
+  <SimpleIntuitive lang={lang} />
+  <FriendConfidant lang={lang} />
+</MainLayout>

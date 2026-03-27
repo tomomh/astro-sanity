@@ -1,0 +1,119 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DesiredTraits from '../../components/careers/DesiredTraits.astro';
+import { getLangFromUrl, type Language } from '../../utils/i18n';
+import { fetchCareersPage } from '../../utils/queries';
+import { getLocalizedValue } from '../../utils/sanity';
+
+const lang = getLangFromUrl(Astro.url);
+
+// Fetch careers page data from Sanity
+const careersPage = await fetchCareersPage();
+
+// Get localized values from Sanity
+const sanityBannerTitle = getLocalizedValue(careersPage?.banner?.title, lang);
+
+// Page title translations
+const pageTitles: Record<Language, string> = {
+  en: 'Desired Traits',
+  ja: '求める人材',
+  ko: '인재상',
+  vi: 'Phẩm chất mong muốn'
+};
+
+const bannerTitles: Record<Language, string> = {
+  en: 'Who We Look For',
+  ja: '私たちが求める人材',
+  ko: '우리가 찾는 인재',
+  vi: 'Chúng tôi tìm kiếm ai'
+};
+
+const bannerSubtitles: Record<Language, string> = {
+  en: 'Our core values and the people who embody them',
+  ja: '私たちのコアバリューとそれを体現する人々',
+  ko: '우리의 핵심 가치와 이를 구현하는 사람들',
+  vi: 'Các giá trị cốt lõi và những người thể hiện chúng'
+};
+
+const pageTitle = pageTitles[lang];
+const bannerTitle = sanityBannerTitle || bannerTitles[lang];
+const bannerSubtitle = bannerSubtitles[lang];
+---
+
+<PageLayout title={pageTitle} lang={lang}>
+  <div class="careers-page">
+    <section class="career-banner">
+      <div class="banner-content">
+        <h1>{bannerTitle}</h1>
+        <p>{bannerSubtitle}</p>
+      </div>
+    </section>
+
+    <DesiredTraits lang={lang} />
+  </div>
+</PageLayout>
+
+<style>
+  .careers-page {
+    min-height: 100vh;
+    background-color: #F7FAFD;
+  }
+
+  .career-banner {
+    padding: 0 2rem;
+    min-height: 21rem;
+    background:
+      url("/images/logo/orange.svg") 10% -3% no-repeat,
+      url("/images/logo/orange.svg") 90% 115% no-repeat,
+      url("/images/career/banner.jpg") center 39%;
+    background-size: 374px auto, 523px auto, cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .career-banner h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .career-banner p {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    color: white;
+  }
+
+  @media (max-width: 991px) {
+    .career-banner {
+      background-position: -28% -5%, 185% 115%, center 39%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .career-banner {
+      min-height: 16rem;
+      padding: 2rem 1.5rem;
+      background-position: -10rem -34%, calc(100% + 18rem) 165%, center 20%;
+      background-size: 281px auto, 310px auto, cover;
+    }
+
+    .career-banner h1 {
+      font-size: 1.75rem;
+    }
+
+    .career-banner p {
+      font-size: 1rem;
+    }
+  }
+</style>

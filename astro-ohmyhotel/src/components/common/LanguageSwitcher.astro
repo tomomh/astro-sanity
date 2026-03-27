@@ -1,4 +1,6 @@
 ---
+import { buildUrlWithLang, type Language } from '../../utils/i18n';
+
 export interface Props {
   currentLang: string;
   currentPath: string;
@@ -44,31 +46,29 @@ const translations: Record<string, Record<string, string>> = {
 
 const t = translations[currentLang] || translations.en;
 
-// Function to get language link
+// Function to get language link using query param
 const getLanguageLink = (langCode: string) => {
-  // Remove current language from path if it exists
-  const pathWithoutLang = currentPath.replace(/^\/(ja|en|vi|ko)/, '');
-  // Add new language prefix
-  return langCode === 'ja' ? (pathWithoutLang || '/') : `/${langCode}${pathWithoutLang || ''}`;
+  return buildUrlWithLang(currentPath, langCode as Language);
 };
 
-const currentLangName = `lang${currentLang.charAt(0).toUpperCase()}${currentLang.slice(1)}`;
+const getLangKey = (code: string) => 'lang' + code.charAt(0).toUpperCase() + code.slice(1);
+const currentLangKey = getLangKey(currentLang);
 ---
 
 <div class="language-switcher dropdown" data-dropdown="lang">
   <button class="nav-link dropdown-toggle no-underline" aria-expanded="false" type="button">
     <span class="lang-flag">
-      <img src={`/images/flags/${currentLang}.svg`} alt={currentLang} />
+      <img src={'/images/flags/' + currentLang + '.svg'} alt={currentLang} />
     </span>
-    <span>{t[currentLangName]}</span>
+    <span>{t[currentLangKey]}</span>
   </button>
   <div class="dropdown-menu">
     {languages.map((lang) => (
       <a href={getLanguageLink(lang.code)} class="lang-option no-underline">
         <span class="lang-flag">
-          <img src={`/images/flags/${lang.code}.svg`} alt={lang.name} />
+          <img src={'/images/flags/' + lang.code + '.svg'} alt={lang.name} />
         </span>
-        <span>{t[`lang${lang.code.charAt(0).toUpperCase()}${lang.code.slice(1)}`]}</span>
+        <span>{t[getLangKey(lang.code)]}</span>
       </a>
     ))}
   </div>
@@ -171,11 +171,8 @@ const currentLangName = `lang${currentLang.charAt(0).toUpperCase()}${currentLang
 </style>
 
 <script>
-  // Dropdown toggle for language switcher
   const langSwitcher = document.querySelector('.language-switcher');
   const langToggle = langSwitcher?.querySelector('.dropdown-toggle');
-  const langMenu = langSwitcher?.querySelector('.dropdown-menu');
-
   let isMouseOver = false;
 
   function openDropdown() {

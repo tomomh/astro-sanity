@@ -1,0 +1,369 @@
+---
+import MainLayout from '../../layouts/main.astro';
+import ProductFeature from '../../components/business/ProductFeature.astro';
+import ProductScreenshots from '../../components/business/ProductScreenshots.astro';
+import PartnerLogos from '../../components/business/PartnerLogos.astro';
+import ContactForm from '../../components/business/ContactForm.astro';
+import DownloadSection from '../../components/business/DownloadSection.astro';
+import { getLangFromUrl, type Language } from '../../utils/i18n';
+import { fetchProduct, fetchProductsList } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
+
+export async function getStaticPaths() {
+  // Fetch product slugs from Sanity
+  const sanityProducts = await fetchProductsList();
+  const sanitySlugList = sanityProducts?.map((p: any) => p.slug?.current || p.slug).filter(Boolean) || [];
+
+  // Fallback slugs
+  const fallbackSlugs = ['ota', 'pms', 'cms', 'booking-engine', 'online-booking-engine', 'hotel-web', 'company-profile'];
+
+  // Use Sanity slugs if available, otherwise fallback
+  const slugList = sanitySlugList.length > 0 ? sanitySlugList : fallbackSlugs;
+
+  return slugList.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params as { slug: string };
+const lang = getLangFromUrl(Astro.url);
+
+// Fetch product from Sanity
+const sanityProduct = await fetchProduct(slug);
+
+// Map Sanity product to display format
+const productFromSanity = sanityProduct ? {
+  title: getLocalizedValue(sanityProduct.title, lang) || sanityProduct.name || sanityProduct.title,
+  description: getLocalizedValue(sanityProduct.shortDescription, lang) || sanityProduct.shortDescription,
+  features: sanityProduct.features?.map((f: any) => ({
+    title: getLocalizedValue(f.title, lang) || f.title,
+    content: getLocalizedValue(f.description, lang) || f.description,
+    image: f.image ? urlFor(f.image).width(600).auto('format').url() : (f.icon ? urlFor(f.icon).width(600).auto('format').url() : null),
+    imagePosition: f.imagePosition || 'right'
+  })) || [],
+  screenshots: sanityProduct.screenshots?.map((s: any) => urlFor(s).width(800).auto('format').url()) || [],
+  partners: sanityProduct.partners?.map((p: any) => ({
+    name: p.name,
+    logo: p.logo ? urlFor(p.logo).width(200).auto('format').url() : null,
+    url: p.url
+  })) || [],
+  downloads: sanityProduct.downloads || [],
+  showContactForm: sanityProduct.showContactForm !== false,
+  contactFormTitle: getLocalizedValue(sanityProduct.contactFormTitle, lang) || 'Interested in this solution?',
+  contactFormDescription: getLocalizedValue(sanityProduct.contactFormDescription, lang) || 'Contact us for more information and pricing'
+} : null;
+
+// Fallback product data
+const fallbackProductData: Record<string, any> = {
+  'ota': {
+    title: 'OTA (Online Travel Agency)',
+    description: 'Comprehensive B2C platform with Ohmyhotel.com and Ohmytrip.com',
+    features: [
+      {
+        title: 'Multi-language Support',
+        content: '<p>Available in 5 languages: Korean, English, Japanese, Vietnamese, and Chinese</p><ul><li>Ohmyhotel.com for accommodation</li><li>Ohmytrip.com for comprehensive travel services</li></ul>',
+        image: '/images/business/OTA/ota-multilang.jpg'
+      },
+      {
+        title: 'Lower Costs, Higher Revenue',
+        content: '<p>Reduce commission fees and increase direct bookings</p><ul><li>Competitive commission rates</li><li>Real-time inventory management</li><li>Automated booking confirmation</li></ul>',
+        image: '/images/business/OTA/ota-revenue.jpg',
+        imagePosition: 'left'
+      }
+    ],
+    partners: [
+      { name: 'Trip.com', logo: '/images/business/PARTNER/tripcom.png' },
+      { name: 'Agoda', logo: '/images/business/PARTNER/agoda.png' },
+      { name: 'Booking.com', logo: '/images/business/PARTNER/booking.png' },
+      { name: 'Expedia', logo: '/images/business/PARTNER/expedia.png' }
+    ]
+  },
+  'pms': {
+    title: 'Property Management System',
+    description: 'Intuitive Asset Management System, Just one.',
+    features: [
+      {
+        title: 'Efficiency',
+        content: '<p>The OhmyhotelHotel & Co. PMS provides a complete operating environment for all room and lodging, such as hotels and residences, and for all management that takes place in the ancillary facilities.</p><ul><li>Accessible with various devices without place/time restrictions</li><li>Secures transparent and efficient hotel management</li><li>Regular updates</li><li>Supports integrated management service (customer, booking, sales information) for each hotel chains.</li></ul>',
+        image: '/images/business/PMS/property-management-system.jpg'
+      },
+      {
+        title: 'Cost Reduction',
+        content: '<ul><li>Less initial introduction cost and operational cost via cloud service</li><li>Less operation/management/marketing cost via various report and performance management</li></ul>',
+        image: '/images/business/PMS/cost-reduction.svg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Compatibility',
+        content: '<ul><li>Easy customizing via connection to other systems and various options</li></ul>',
+        image: '/images/business/PMS/compatibility.svg'
+      },
+      {
+        title: 'Quick bookings, faster check-in',
+        content: '<p>Don\'t keep customers waiting. Book quickly on one platform and check in customers faster.</p><ul><li>Individuals and groups can be booked</li><li>Copy and paste functions, guest history management</li><li>Room type, allocation and change immediately after inventory check</li></ul>',
+        image: '/images/business/PMS/faster-check-in.svg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Intuitive and complete accommodation management',
+        content: '<p>View and manage the accommodation status by date and room at a glance. It can be viewed on a weekly or monthly basis.</p><ul><li>Room type and room level can be checked.</li><li>Check and shortcut detailed accommodation status (change of room, settlement, memo, etc.)</li><li>Download Accommodation Status Excel by Date</li></ul>',
+        image: '/images/business/PMS/accommodation-management.svg'
+      },
+      {
+        title: 'Advanced Analysis Report',
+        content: '<p>View key performance indicators in a comprehensive and flexible report.</p><ul><li>Daily, historical summary of reports, and detailed options</li><li>Download Excel and print online</li></ul>',
+        image: '/images/business/PMS/analysis-report.svg',
+        imagePosition: 'left'
+      }
+    ],
+    screenshots: [
+      '/images/business/PMS/full-package-hotelier.jpg',
+      '/images/business/PMS/accommodation.jpg'
+    ]
+  },
+  'cms': {
+    title: 'CMS (Channel Management System)',
+    description: 'Efficient rate and inventory management',
+    features: [
+      {
+        title: 'The Simplest Solution',
+        content: '<p>Manage all your channels from one dashboard</p><ul><li>Single interface for all OTAs</li><li>Bulk update capabilities</li><li>Real-time synchronization</li></ul>',
+        image: '/images/business/CMS/cms-dashboard.jpg'
+      },
+      {
+        title: 'Smart Rate Management',
+        content: '<p>Optimize pricing across all channels</p><ul><li>Dynamic pricing tools</li><li>Rate parity control</li><li>Seasonal rate planning</li></ul>',
+        image: '/images/business/CMS/cms-rates.jpg',
+        imagePosition: 'left'
+      }
+    ]
+  },
+  'booking-engine': {
+    title: 'Booking Engine',
+    description: 'Booking modules for the Ohmyhotel & Co Booking Engine (EZ-BOOK) are fully responsive and can be customized for your website.',
+    features: [
+      {
+        title: 'Efficient inventory, rate management',
+        content: '<p>Manage your hotel inventory and rates efficiently with our comprehensive booking engine.</p>',
+        image: '/images/business/BE/efficient.svg'
+      },
+      {
+        title: 'Quick reservation, convenient reservation check',
+        content: '<p>Fast and easy reservation process for both guests and staff.</p>',
+        image: '/images/business/BE/reservation.svg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Easy Hotel Registration',
+        content: '<p>Simple setup process to get your hotel online quickly.</p>',
+        image: '/images/business/BE/hotel-registration.svg'
+      },
+      {
+        title: 'Online Payment',
+        content: '<p>Secure payment processing integrated directly into the booking flow.</p>',
+        image: '/images/business/BE/online-payment.svg',
+        imagePosition: 'left'
+      }
+    ],
+    screenshots: [
+      '/images/business/BE/hotel-booking-engine-1.jpg'
+    ]
+  },
+  'online-booking-engine': {
+    title: 'Hotel Website & Booking Engine',
+    description: 'More valuable experience than staying. Sell your room with a business-friendly website.',
+    features: [
+      {
+        title: 'Design',
+        content: '<p>From search to payment, real-time hotel booking allows you to increase your reservation directly and to offer a professional website that is easy to use. Our hotel web designer team listens carefully to our customers\' requests and puts top priority on web design for your type of accommodation.</p><p>It shows our hotel better, Increase user confidence in the brand.</p>',
+        image: '/images/business/BE/design.jpg'
+      },
+      {
+        title: 'Template',
+        content: '<p>Optimized templates for the latest browsers and mobile.</p><p>We can promote our hotel to travelers around the world through various language programs.</p>',
+        image: '/images/business/BE/template.jpg',
+        imagePosition: 'left'
+      },
+      {
+        title: 'Booking',
+        content: '<p>Try paying online. It\'s a two-step scheduling process that\'s easy and convenient.</p>',
+        image: '/images/business/BE/booking.jpg'
+      },
+      {
+        title: 'Booking Engine',
+        content: '<p>Booking modules for the Ohmyhotel & Co Booking Engine (EZ-BOOK) are fully responsive and can be customized for your website.</p><p>The hotel booking engine works perfectly with the Ohmyhotel PMS to improve the efficiency of reservation.</p>',
+        image: '/images/business/BE/hotel-booking-engine-1.jpg',
+        imagePosition: 'left'
+      }
+    ]
+  },
+  'hotel-web': {
+    title: 'Hotel Management',
+    description: 'Ohmyhotel & Co offers unique hotel operation know-how and details.',
+    features: [
+      {
+        title: 'Hotel Management Services',
+        content: '<p>Based on own hotel booking system, we signed general service administration contracts with distinguished hotels in Korea and Japan. Entering the contracts, we managed and sold the booking system for the hotels. We promise to support our customers with care based on our approaching services.</p>',
+        image: '/images/business/HM/hotel-management.svg'
+      },
+      {
+        title: 'Upcoming Hotel',
+        content: '<ul><li>A 10-story business city hotel located in an urban region</li><li>Grand open in late 2019</li></ul>',
+        image: '/images/business/HM/hotel-management.svg',
+        imagePosition: 'left'
+      }
+    ]
+  },
+  'company-profile': {
+    title: 'Hotel Management',
+    description: 'Ohmyhotel & Co offers unique hotel operation know-how and details.',
+    features: [
+      {
+        title: 'About Us',
+        content: '<p>Based on own hotel booking system, we signed general service administration contracts with distinguished hotels in Korea and Japan. Entering the contracts, we managed and sold the booking system for the hotels. We promise to support our customers with care based on our approaching services.</p>',
+        image: null
+      }
+    ],
+    downloads: [
+      {
+        title: { en: 'For the Hotel - Download', ko: '호텔용 - 다운로드', ja: 'ホテル用 - ダウンロード', vi: 'Dành cho khách sạn - Tải về' },
+        description: { en: 'OHMYHOTEL Company Profile', ko: 'OHMYHOTEL 회사 소개서', ja: 'OHMYHOTEL 会社概要', vi: 'Hồ sơ công ty OHMYHOTEL' },
+        file: { asset: { _ref: 'file-hotel-profile' } }
+      },
+      {
+        title: { en: 'For the Channel - Download', ko: '채널용 - 다운로드', ja: 'チャンネル用 - ダウンロード', vi: 'Dành cho kênh - Tải về' },
+        description: { en: 'Ohmyhotel Channel Sales Proposal', ko: 'Ohmyhotel 채널 판매 제안서', ja: 'Ohmyhotel チャンネル販売提案書', vi: 'Đề xuất bán hàng kênh Ohmyhotel' },
+        file: { asset: { _ref: 'file-channel-proposal' } }
+      }
+    ],
+    showContactForm: false
+  }
+};
+
+// Use Sanity data or fallback
+const fallbackProduct = fallbackProductData[slug] || fallbackProductData['ota'];
+const product = productFromSanity && productFromSanity.features.length > 0
+  ? productFromSanity
+  : fallbackProduct;
+---
+
+<MainLayout content={{ title: `${product.title} - OHMYHOTEL & CO` }}>
+  <div class="product-page">
+    <section class="hero">
+      <h1>{product.title}</h1>
+      <p>{product.description}</p>
+    </section>
+
+    <div class="container">
+      {product.features.map((feature: any) => (
+        <ProductFeature
+          title={feature.title}
+          content={feature.content}
+          image={feature.image}
+          imagePosition={feature.imagePosition}
+        />
+      ))}
+
+      {product.screenshots && (
+        <ProductScreenshots
+          images={product.screenshots}
+          title="Product Screenshots"
+        />
+      )}
+
+      {product.partners && product.partners.length > 0 && (
+        <PartnerLogos
+          title="Our Partners"
+          partners={product.partners}
+        />
+      )}
+
+      {product.downloads && product.downloads.length > 0 && (
+        <DownloadSection
+          title="Downloads"
+          downloads={product.downloads}
+          lang={lang}
+        />
+      )}
+
+      {product.showContactForm !== false && (
+        <ContactForm
+          title={product.contactFormTitle || "Interested in this solution?"}
+          description={product.contactFormDescription || "Contact us for more information and pricing"}
+          lang={lang}
+        />
+      )}
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .product-page {
+    min-height: 100vh;
+    background-color: #F7FAFD;
+  }
+
+  .hero {
+    padding: 0 2rem;
+    min-height: 21rem;
+    background:
+      url("/images/logo/orange.svg") 10% -5% no-repeat,
+      url("/images/logo/orange.svg") 90% 115% no-repeat,
+      url("/images/business/business-banner.jpg") center center;
+    background-size: 374px auto, 523px auto, cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    color: white;
+    max-width: 800px;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  @media (max-width: 991px) {
+    .hero {
+      background-position: -28% -5%, 185% 115%, center center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 16rem;
+      padding: 2rem 1.5rem;
+      background-position: -10rem -34%, calc(100% + 18rem) 165%, center center;
+      background-size: 281px auto, 310px auto, cover;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+
+    .container {
+      padding: 2rem 1rem;
+    }
+  }
+</style>

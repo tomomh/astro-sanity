@@ -34,6 +34,15 @@ export const siteSettings = defineType({
       },
     }),
     defineField({
+      name: 'logoGray',
+      title: 'Logo Gray (Footer)',
+      type: 'image',
+      description: 'Gray logo for footer section',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'favicon',
       title: 'Favicon',
       type: 'image',
@@ -44,6 +53,32 @@ export const siteSettings = defineType({
       title: 'Social Media Links',
       type: 'array',
       of: [{type: 'socialLink'}],
+    }),
+    defineField({
+      name: 'footerIcons',
+      title: 'Footer Icons',
+      type: 'object',
+      description: 'Icons used in the footer section',
+      fields: [
+        defineField({
+          name: 'location',
+          title: 'Location Icon',
+          type: 'image',
+          description: 'Icon for address/location',
+        }),
+        defineField({
+          name: 'phone',
+          title: 'Phone Icon',
+          type: 'image',
+          description: 'Icon for phone number',
+        }),
+        defineField({
+          name: 'fax',
+          title: 'Fax Icon',
+          type: 'image',
+          description: 'Icon for fax number',
+        }),
+      ],
     }),
     defineField({
       name: 'contactEmail',

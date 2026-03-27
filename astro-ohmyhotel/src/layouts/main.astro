@@ -2,22 +2,19 @@
 import '../styles/global.css';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import { getLangFromUrl } from '../utils/i18n';
 
 export interface Props {
   content: {
     title: string;
   };
-  lang?: string;
 }
 
-const { content, lang = 'en' } = Astro.props;
+const { content } = Astro.props;
 
-// Get current path from URL
+// Get language from ?hl= query param
+const currentLang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
-
-// Extract language from path if not provided
-const pathLang = currentPath.split('/')[1];
-const currentLang = ['en', 'ja', 'ko', 'vi'].includes(pathLang) ? pathLang : lang;
 ---
 
 <html lang={currentLang}>
@@ -30,16 +27,10 @@ const currentLang = ['en', 'ja', 'ko', 'vi'].includes(pathLang) ? pathLang : lan
 	</head>
 	<body>
 		<Header currentLang={currentLang} currentPath={currentPath} />
-		<main class="main-content">
+		<main class="app-content">
 			<slot />
 		</main>
 		<Footer currentLang={currentLang} />
 	</body>
 </html>
 
-<style>
-  .main-content {
-    padding-top: 7.5rem; /* Account for fixed header height */
-    min-height: calc(100vh - 7.5rem);
-  }
-</style>

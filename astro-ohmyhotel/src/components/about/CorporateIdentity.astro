@@ -14,21 +14,70 @@ const aboutPage = await fetchAboutUsPage();
 const corporateIdentity = aboutPage?.corporateIdentity;
 
 // Get localized values from Sanity
+const introTitle = getLocalizedValue(corporateIdentity?.introTitle, lang);
 const introText = getLocalizedValue(corporateIdentity?.intro, lang);
 const colorSystemDesc = getLocalizedValue(corporateIdentity?.colorSystem?.description, lang);
 const signatureDesc = getLocalizedValue(corporateIdentity?.signatureDescription, lang);
 
-// Get colors and signatures from Sanity
+// Get intro images from Sanity
+const introImages = corporateIdentity?.introImages;
+const mainLogoUrl = introImages?.mainLogo ? urlFor(introImages.mainLogo).url() : '/images/about/ci-intro-logo-new.svg';
+const secondaryLogoUrl = introImages?.secondaryLogo ? urlFor(introImages.secondaryLogo).url() : '/images/about/ci-intro-logo-new-1.svg';
+const aiDownloadUrl = introImages?.aiDownloadUrl || '/images/about/ci_ohmyhotelco_ai_new.zip';
+const jpgDownloadUrl = introImages?.jpgDownloadUrl || '/images/about/ci_ohmyhotelco_new.zip';
+
+// Get colors from Sanity with fallback
 const sanityColors = corporateIdentity?.colorSystem?.colors || [];
+
+// Map Sanity colors to display format
+const colorsFromSanity = sanityColors.map((color: any) => ({
+  name: color.name || '',
+  type: color.type || 'solid',
+  hex: color.hex || '',
+  rgb: color.rgb || '',
+  cmyk: color.cmyk || '',
+  pantone: color.pantone || '',
+  gradientColors: color.gradientColors || ''
+}));
+
+// Fallback colors
+const fallbackColors = [
+  { name: 'Orange Gradient', type: 'gradient', gradientColors: 'linear-gradient(90deg, #BD1819 0%, #F1C400 100%)' },
+  { name: 'Green Gradient', type: 'gradient', gradientColors: 'linear-gradient(90deg, #07834C 0%, #1DA136 100%)' },
+  { name: 'Orange', type: 'solid', hex: '#ff6000', rgb: '255/96/0', cmyk: '00/77/100/00' },
+  { name: 'Black', type: 'solid', hex: '#383838', rgb: '56/56/56', cmyk: '69/62/61/54' },
+  { name: 'White', type: 'solid', hex: '#fffcf8', rgb: '252/252/248', cmyk: '0/1/2/0' },
+  { name: 'Green', type: 'solid', hex: '#00953a', rgb: '00/149/58', cmyk: '98/12/100/02' }
+];
+
+const colors = colorsFromSanity.length > 0 ? colorsFromSanity : fallbackColors;
+
+// Get signatures from Sanity with fallback
 const sanitySignatures = corporateIdentity?.signatures || [];
 
+// Map Sanity signatures to display format
+const signaturesFromSanity = sanitySignatures.map((sig: any) => ({
+  backgroundColor: sig.backgroundColor || 'cream',
+  image1: sig.image1 ? urlFor(sig.image1).url() : null,
+  image2: sig.image2 ? urlFor(sig.image2).url() : null
+}));
+
+// Fallback signatures
+const fallbackSignatures = [
+  { backgroundColor: 'white', image1: '/images/about/ci-1-01.png', image2: '/images/about/ci-1-02.png' },
+  { backgroundColor: 'cream', image1: '/images/about/ci-1-01.png', image2: '/images/about/ci-1-02.png' },
+  { backgroundColor: 'orange', image1: '/images/about/ci-2-01.png', image2: '/images/about/ci-2-02.png' },
+  { backgroundColor: 'cream', image1: '/images/about/ci-3-01.png', image2: '/images/about/ci-3-02.png' }
+];
+
+const signatures = signaturesFromSanity.length > 0 ? signaturesFromSanity : fallbackSignatures;
+
 // Fallback content
-const fallbackIntro = {
-  title: 'Loved and Reliable Company,<br />Ohmyhotel & Co',
-  description: `CI of Ohmyhotel & Co is the design which expresses creative ideas and active thinking method in a visual language.<br />
+const fallbackIntroTitle = 'Loved and Reliable Company <br/><img src="/images/logo/name-black.svg" alt="Ohmyhotel & Co">';
+
+const fallbackIntro = `CI of Ohmyhotel & Co is the design which expresses creative ideas and active thinking method in a visual language.<br />
     CI also symbolizes the symbol mark of orange with a pleasant scent.<br />
-    CI is the symbol of customer-centered management communicating with partners anytime and anywhere.`
-};
+    CI is the symbol of customer-centered management communicating with partners anytime and anywhere.`;
 
 const fallbackColorDesc = `Ohmyhotel & Co colors are a key factor in establishing corporate identity.<br />
   For effective use, the designated colors should be used in accordance to the characteristics of the medium.<br />
@@ -39,9 +88,24 @@ const fallbackSignatureDesc = `Signature is the most reasonable and organized co
   Therefore, it should only be used in its specified perimeters.`;
 
 // Use Sanity data or fallback
-const displayIntro = introText || fallbackIntro.description;
+const displayIntroTitle = introTitle || fallbackIntroTitle;
+const displayIntro = introText || fallbackIntro;
 const displayColorDesc = colorSystemDesc || fallbackColorDesc;
 const displaySignatureDesc = signatureDesc || fallbackSignatureDesc;
+
+// Helper function to get CSS class for color type
+const getColorClass = (color: any) => {
+  if (color.type === 'gradient') {
+    if (color.name?.toLowerCase().includes('orange')) return 'orange-gradient';
+    if (color.name?.toLowerCase().includes('green')) return 'green-gradient';
+    return 'gradient';
+  }
+  if (color.hex === '#ff6000') return 'orange';
+  if (color.hex === '#383838') return 'black';
+  if (color.hex === '#fffcf8') return 'white';
+  if (color.hex?.toLowerCase().includes('00953a') || color.hex?.toLowerCase().includes('009538')) return 'green';
+  return '';
+};
 ---
 
 <div class="CI-page">
@@ -53,19 +117,19 @@ const displaySignatureDesc = signatureDesc || fallbackSignatureDesc;
     </div>
     <div class="section-content">
       <div class="container">
-        <h6 class="p-title">Loved and Reliable Company,<br />Ohmyhotel & Co</h6>
+        <h6 class="p-title" set:html={displayIntroTitle} />
         <p set:html={displayIntro} />
       </div>
       <div class="full-width-image">
-        <img class="left" src="/images/about/ci-intro-logo-new.svg" alt="CI Logo" />
-        <img class="right" src="/images/about/ci-intro-logo-new-1.svg" alt="CI Logo" />
+        <img class="left" src={mainLogoUrl} alt="CI Logo" />
+        <img class="right" src={secondaryLogoUrl} alt="CI Logo" />
       </div>
       <div class="content-center">
-        <a href="/images/about/ci_ohmyhotelco_ai_new.zip" download="ci_ohmyhotelco_ai" class="btn btn-primary">
+        <a href={aiDownloadUrl} download="ci_ohmyhotelco_ai" class="btn btn-primary">
           <img src="/images/about/download.svg" alt="" width="18" />
           <span>AI Download</span>
         </a>
-        <a href="/images/about/ci_ohmyhotelco_new.zip" download="ci_ohmyhotelco" class="btn btn-primary">
+        <a href={jpgDownloadUrl} download="ci_ohmyhotelco" class="btn btn-primary">
           <img src="/images/about/download.svg" alt="" width="18" />
           <span>JPG Download</span>
         </a>
@@ -87,51 +151,28 @@ const displaySignatureDesc = signatureDesc || fallbackSignatureDesc;
           <div>Corporate Identity Basic System</div>
         </div>
         <div class="content-center row">
-          <div class="color-item">
-            <div class="color-cycle orange-gradient"></div>
-            <div class="orange-gradient">
-              <p>Reference</p>
-              <p>Gradient View</p>
+          {colors.map((color: any) => (
+            <div class="color-item">
+              <div
+                class:list={["color-cycle", getColorClass(color)]}
+                style={color.type === 'gradient' && color.gradientColors ? `background: ${color.gradientColors}` : (color.hex && !getColorClass(color) ? `background-color: ${color.hex}` : '')}
+              ></div>
+              <div class:list={[{ 'orange-gradient': color.name?.toLowerCase().includes('orange') && color.type === 'gradient', 'green-gradient': color.name?.toLowerCase().includes('green') && color.type === 'gradient' }]}>
+                {color.type === 'gradient' ? (
+                  <>
+                    <p>Reference</p>
+                    <p>Gradient View</p>
+                  </>
+                ) : (
+                  <>
+                    {color.cmyk && <p>CMYK: {color.cmyk}</p>}
+                    {color.rgb && <p>RGB: {color.rgb}</p>}
+                    {color.hex && <p>{color.hex}</p>}
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-          <div class="color-item">
-            <div class="color-cycle green-gradient"></div>
-            <div class="green-gradient">
-              <p>Reference</p>
-              <p>Gradient View</p>
-            </div>
-          </div>
-          <div class="color-item">
-            <div class="color-cycle orange"></div>
-            <div>
-              <p>CMYK: 00/77/100/00</p>
-              <p>RGB: 255/96/0</p>
-              <p>#ff6000</p>
-            </div>
-          </div>
-          <div class="color-item">
-            <div class="color-cycle black"></div>
-            <div>
-              <p>CMYK: 69/62/61/54</p>
-              <p>RGB: 56/56/56</p>
-              <p>#383838</p>
-            </div>
-          </div>
-          <div class="color-item">
-            <div class="color-cycle white"></div>
-            <div>
-              <p>CMYK: 0/1/2/0</p>
-              <p>RGB: 252/252/248</p>
-              <p>#fffcf8</p>
-            </div>
-          </div>
-          <div class="color-item">
-            <div class="color-cycle green"></div>
-            <div>
-              <p>CMYK: 98/12/100/02</p>
-              <p>RGB: 00/149/58</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
@@ -149,22 +190,16 @@ const displaySignatureDesc = signatureDesc || fallbackSignatureDesc;
       </div>
       <div class="container signature-grid">
         <div class="signature-row">
-          <div class="color-item-signature">
-            <div class="white"><img src="/images/about/ci-1-01.png" alt="Logo" /></div>
-            <div class="white"><img src="/images/about/ci-1-02.png" alt="Logo" /></div>
-          </div>
-          <div class="color-item-signature">
-            <div><img src="/images/about/ci-1-01.png" alt="Logo" /></div>
-            <div><img src="/images/about/ci-1-02.png" alt="Logo" /></div>
-          </div>
-          <div class="color-item-signature">
-            <div class="orange"><img src="/images/about/ci-2-01.png" alt="Logo" /></div>
-            <div class="orange"><img src="/images/about/ci-2-02.png" alt="Logo" /></div>
-          </div>
-          <div class="color-item-signature">
-            <div><img src="/images/about/ci-3-01.png" alt="Logo" /></div>
-            <div><img src="/images/about/ci-3-02.png" alt="Logo" /></div>
-          </div>
+          {signatures.map((sig: any) => (
+            <div class="color-item-signature">
+              <div class:list={[sig.backgroundColor]}>
+                {sig.image1 && <img src={sig.image1} alt="Logo" />}
+              </div>
+              <div class:list={[sig.backgroundColor]}>
+                {sig.image2 && <img src={sig.image2} alt="Logo" />}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -409,6 +444,10 @@ const displaySignatureDesc = signatureDesc || fallbackSignatureDesc;
 
   .color-item-signature > div.white {
     background-color: #FFFFFF;
+  }
+
+  .color-item-signature > div.cream {
+    background-color: #fffcf8;
   }
 
   .color-item-signature > div.orange {

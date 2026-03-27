@@ -1,0 +1,15 @@
+---
+import MainLayout from '../../layouts/main.astro';
+import AboutUsBanner from '../../components/about/AboutUsBanner.astro';
+import SubMenu from '../../components/about/SubMenu.astro';
+import History from '../../components/about/History.astro';
+import { getLangFromUrl } from '../../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<MainLayout content={{ title: 'History - OHMYHOTEL & CO' }}>
+  <AboutUsBanner lang={lang} />
+  <SubMenu lang={lang} activeItem="history" />
+  <History lang={lang} />
+</MainLayout>

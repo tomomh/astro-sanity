@@ -21,31 +21,9 @@ const imageUrl = homePage?.simpleImage
   ? urlFor(homePage.simpleImage).width(828).quality(90).auto('format').url()
   : '/images/home/management-system.png';
 
-// Fallback translations
-const fallbackTranslations: Record<string, any> = {
-  en: {
-    header: "Simple and intuitive asset management system",
-    content: "The most ideal system for selling as many rooms as possible. <br/>Enjoy all of these benefits with a strategic partnership."
-  },
-  ja: {
-    header: "シンプルで直感的な資産管理システム",
-    content: "できるだけ多くの部屋を販売するための最も理想的なシステム。<br/>戦略的パートナーシップでこれらのメリットをすべてお楽しみください。"
-  },
-  ko: {
-    header: "간편하고 직관적인 자산 관리 시스템",
-    content: "가능한 한 많은 객실을 판매하기 위한 가장 이상적인 시스템.<br/>전략적 파트너십으로 이 모든 혜택을 누리세요."
-  },
-  vi: {
-    header: "Hệ thống quản lý tài sản đơn giản và trực quan",
-    content: "Hệ thống lý tưởng nhất để bán càng nhiều phòng càng tốt. <br/>Tận hưởng tất cả những lợi ích này với quan hệ đối tác chiến lược."
-  }
-};
-
-const t = fallbackTranslations[lang] || fallbackTranslations.en;
-
-// Use Sanity data or fallback
-const displayHeader = header || t.header;
-const displayContent = description || t.content;
+// Use Sanity data (content now fully managed in Sanity)
+const displayHeader = header || '';
+const displayContent = description || '';
 ---
 
 <section class="simple-intuitive-section">

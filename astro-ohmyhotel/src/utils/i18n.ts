@@ -3,9 +3,20 @@ export type Language = typeof languages[number];
 export const defaultLang: Language = 'en';
 
 export function getLangFromUrl(url: URL): Language {
-  const [, lang] = url.pathname.split('/');
-  if (languages.includes(lang as Language)) return lang as Language;
+  // Get language from ?hl= query param
+  const hlParam = url.searchParams.get('hl');
+  if (hlParam && languages.includes(hlParam as Language)) {
+    return hlParam as Language;
+  }
   return defaultLang;
+}
+
+export function buildUrlWithLang(pathname: string, lang: Language): string {
+  // Build URL with ?hl= query param (omit for default language)
+  if (lang === defaultLang) {
+    return pathname;
+  }
+  return `${pathname}?hl=${lang}`;
 }
 
 export function useTranslations(lang: Language) {

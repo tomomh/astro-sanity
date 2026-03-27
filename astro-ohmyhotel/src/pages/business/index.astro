@@ -1,17 +1,11 @@
 ---
-import MainLayout from '../../../layouts/main.astro';
-import ProductCard from '../../../components/business/ProductCard.astro';
-import { languages, type Language } from '../../../utils/i18n';
-import { fetchProductsList } from '../../../utils/queries';
-import { getLocalizedValue, urlFor } from '../../../utils/sanity';
+import MainLayout from '../../layouts/main.astro';
+import ProductCard from '../../components/business/ProductCard.astro';
+import { getLangFromUrl, buildUrlWithLang, type Language } from '../../utils/i18n';
+import { fetchProductsList } from '../../utils/queries';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
 
-export async function getStaticPaths() {
-  return languages.map((lang) => ({
-    params: { lang },
-  }));
-}
-
-const { lang } = Astro.params as { lang: Language };
+const lang = getLangFromUrl(Astro.url);
 
 // Fetch products from Sanity
 const sanityProducts = await fetchProductsList();
@@ -87,7 +81,7 @@ const products = productsFromSanity.length > 0 ? productsFromSanity : fallbackPr
             title={product.title}
             description={product.description}
             image={product.image}
-            link={`/${lang}/business/${product.slug}`}
+            link={buildUrlWithLang(`/business/${product.slug}`, lang)}
           />
         ))}
       </div>
@@ -98,47 +92,60 @@ const products = productsFromSanity.length > 0 ? productsFromSanity : fallbackPr
 <style>
   .business-page {
     min-height: 100vh;
+    background-color: #F7FAFD;
   }
 
   .hero {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    color: white;
-    padding: 6rem 2rem;
+    padding: 0 2rem;
+    min-height: 21rem;
+    background:
+      url("/images/logo/orange.svg") 10% -5% no-repeat,
+      url("/images/logo/orange.svg") 90% 115% no-repeat,
+      url("/images/business/business-banner.jpg") center center;
+    background-size: 374px auto, 523px auto, cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: white;
   }
 
   .hero h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: white;
   }
 
   .hero p {
-    font-size: 1.5rem;
-    opacity: 0.9;
+    font-size: 1.25rem;
+    opacity: 0.95;
+    color: white;
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 1140px;
     margin: 0 auto;
     padding: 4rem 2rem;
   }
 
   .intro-section {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
   }
 
   .intro-section h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1a1a1a;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c2c2c;
     margin-bottom: 1rem;
   }
 
   .intro-section p {
-    font-size: 1.2rem;
-    color: #666;
+    font-size: 1.1rem;
+    color: #444444;
     max-width: 800px;
     margin: 0 auto;
   }
@@ -149,22 +156,38 @@ const products = productsFromSanity.length > 0 ? productsFromSanity : fallbackPr
     gap: 2rem;
   }
 
+  @media (max-width: 991px) {
+    .hero {
+      background-position: -28% -5%, 185% 115%, center center;
+    }
+  }
+
   @media (max-width: 768px) {
+    .hero {
+      min-height: 16rem;
+      padding: 2rem 1.5rem;
+      background-position: -10rem -34%, calc(100% + 18rem) 165%, center center;
+      background-size: 281px auto, 310px auto, cover;
+    }
+
     .hero h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     .intro-section h2 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
 
     .products-grid {
       grid-template-columns: 1fr;
     }
+
+    .container {
+      padding: 2rem 1rem;
+    }
   }
 </style>
-</MainLayout>

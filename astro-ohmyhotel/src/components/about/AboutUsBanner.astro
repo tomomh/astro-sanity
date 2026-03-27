@@ -21,26 +21,8 @@ const bannerImageUrl = banner?.image
   ? urlFor(banner.image).width(1920).quality(85).auto('format').url()
   : '/images/home/banner-1-2026.jpg';
 
-// Fallback translations
-const fallbackTranslations: Record<string, any> = {
-  en: {
-    title: "Realize value"
-  },
-  ja: {
-    title: "価値を実現する"
-  },
-  ko: {
-    title: "가치를 실현하다"
-  },
-  vi: {
-    title: "Hiện thực hóa giá trị"
-  }
-};
-
-const t = fallbackTranslations[lang] || fallbackTranslations.en;
-
-// Use Sanity data or fallback
-const displayTitle = title || t.title;
+// Use Sanity data (content now fully managed in Sanity)
+const displayTitle = title || '';
 ---
 
 <section class="about-us-banner" id="aboutBanner" style={`--banner-image: url('${bannerImageUrl}')`}>

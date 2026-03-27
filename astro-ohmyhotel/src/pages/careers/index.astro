@@ -1,19 +1,12 @@
 ---
-import PageLayout from '../../../layouts/PageLayout.astro';
-import DesiredTraits from '../../../components/careers/DesiredTraits.astro';
-import JobList from '../../../components/careers/JobList.astro';
-import type { Language } from '../../../utils/i18n';
-import { languages } from '../../../utils/i18n';
-import { fetchCareersPage } from '../../../utils/queries';
-import { getLocalizedValue } from '../../../utils/sanity';
+import PageLayout from '../../layouts/PageLayout.astro';
+import DesiredTraits from '../../components/careers/DesiredTraits.astro';
+import JobList from '../../components/careers/JobList.astro';
+import { getLangFromUrl, type Language } from '../../utils/i18n';
+import { fetchCareersPage } from '../../utils/queries';
+import { getLocalizedValue } from '../../utils/sanity';
 
-export async function getStaticPaths() {
-  return languages.map((lang) => ({
-    params: { lang }
-  }));
-}
-
-const { lang } = Astro.params as { lang: Language };
+const lang = getLangFromUrl(Astro.url);
 
 // Fetch careers page data from Sanity
 const careersPage = await fetchCareersPage();
@@ -72,13 +65,24 @@ const bannerSubtitle = sanityBannerSubtitle || fallbackBannerContent[lang].subti
 <style>
   .careers-page {
     min-height: 100vh;
+    background-color: #F7FAFD;
   }
 
   .career-banner {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    color: white;
-    padding: 6rem 2rem;
+    padding: 0 2rem;
+    min-height: 21rem;
+    background:
+      url("/images/logo/orange.svg") 10% -3% no-repeat,
+      url("/images/logo/orange.svg") 90% 115% no-repeat,
+      url("/images/career/banner.jpg") center 39%;
+    background-size: 374px auto, 523px auto, cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: white;
   }
 
   .banner-content {
@@ -87,23 +91,34 @@ const bannerSubtitle = sanityBannerSubtitle || fallbackBannerContent[lang].subti
   }
 
   .career-banner h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: white;
   }
 
   .career-banner p {
     font-size: 1.25rem;
-    opacity: 0.9;
+    opacity: 0.95;
+    color: white;
+  }
+
+  @media (max-width: 991px) {
+    .career-banner {
+      background-position: -28% -5%, 185% 115%, center 39%;
+    }
   }
 
   @media (max-width: 768px) {
     .career-banner {
-      padding: 4rem 1.5rem;
+      min-height: 16rem;
+      padding: 2rem 1.5rem;
+      background-position: -10rem -34%, calc(100% + 18rem) 165%, center 20%;
+      background-size: 281px auto, 310px auto, cover;
     }
 
     .career-banner h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
 
     .career-banner p {

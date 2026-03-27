@@ -47,6 +47,21 @@ export const jobListing = defineType({
       type: 'internationalizedArrayString',
     }),
     defineField({
+      name: 'flag',
+      title: 'Country Flag',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Korea', value: 'ko'},
+          {title: 'Japan', value: 'ja'},
+          {title: 'Vietnam', value: 'vi'},
+          {title: 'Singapore', value: 'singapore'},
+          {title: 'International', value: 'international'},
+        ],
+      },
+      description: 'Country flag to display with the job listing',
+    }),
+    defineField({
       name: 'employmentType',
       title: 'Employment Type',
       type: 'string',
@@ -101,10 +116,23 @@ export const jobListing = defineType({
       isActive: 'isActive',
     },
     prepare({title, department, isActive}) {
-      const displayTitle = title?.[0]?.value || 'Untitled Job'
+      // Handle internationalized array title
+      const displayTitle = Array.isArray(title)
+        ? title.find((item: {_key: string; value: string}) => item._key === 'en')?.value ||
+          title[0]?.value ||
+          'Untitled Job'
+        : title || 'Untitled Job'
+
+      // Handle both string and internationalized array department
+      const displayDepartment = Array.isArray(department)
+        ? department.find((item: {_key: string; value: string}) => item._key === 'en')?.value ||
+          department[0]?.value ||
+          'No department'
+        : department || 'No department'
+
       return {
         title: displayTitle,
-        subtitle: `${department || 'No department'} ${isActive ? '✓' : '(Inactive)'}`,
+        subtitle: `${displayDepartment} ${isActive ? '✓' : '(Inactive)'}`,
       }
     },
   },

@@ -40,6 +40,7 @@ export const homePageQuery = `*[_type == "homePage"][0]{
 export const aboutUsPageQuery = `*[_type == "aboutUsPage"][0]{
   banner,
   ceoMessage{
+    greeting,
     title,
     content,
     ceoName,
@@ -49,34 +50,59 @@ export const aboutUsPageQuery = `*[_type == "aboutUsPage"][0]{
   },
   vision{
     title,
-    content,
-    image
+    slogan,
+    image,
+    items[]{
+      _key,
+      title,
+      description
+    }
   },
   history[]{
     _key,
     year,
-    title,
-    description
+    month,
+    flag,
+    event,
+    lastOfYear
   },
   corporateIdentity{
     intro,
+    introTitle,
+    introImages{
+      mainLogo,
+      secondaryLogo,
+      aiDownloadUrl,
+      jpgDownloadUrl
+    },
     colorSystem{
       description,
       colors[]{
         _key,
         name,
+        type,
         hex,
         rgb,
-        pantone
+        cmyk,
+        pantone,
+        gradientColors
       }
     },
-    signatures[]
+    signatureDescription,
+    signatures[]{
+      _key,
+      backgroundColor,
+      image1,
+      image2
+    }
   },
   locations[]{
     _key,
+    flag,
     name,
     address,
     phone,
+    fax,
     email,
     image
   }
@@ -105,43 +131,73 @@ export const jobListingsQuery = `*[_type == "jobListing"] | order(publishedAt de
   title,
   department,
   location,
+  flag,
   employmentType,
   description,
   requirements,
+  applicationUrl,
+  isActive,
   slug
 }`;
 
 // Product Query
 export const productQuery = (slug: string) => `*[_type == "product" && slug.current == "${slug}"][0]{
+  name,
   title,
   subtitle,
   slug,
+  icon,
   banner,
-  logo,
   shortDescription,
-  description,
+  fullDescription,
+  productImage,
   features[]{
     _key,
     title,
     description,
+    icon,
+    image
+  },
+  screenshots[]{
+    _key,
+    asset,
+    caption
+  },
+  partners[]{
+    _key,
+    name,
+    logo,
+    url
+  },
+  downloads[]{
+    _key,
+    title,
+    description,
+    file,
     icon
   },
-  screenshots[],
+  showContactForm,
+  contactFormTitle,
+  contactFormDescription,
   cta
 }`;
 
 // Products List Query
-export const productsListQuery = `*[_type == "product"] | order(order asc){
+export const productsListQuery = `*[_type == "product"] | order(_createdAt asc){
   _id,
+  name,
   title,
   slug,
   shortDescription,
-  logo
+  icon
 }`;
 
 // Site Settings Query
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   siteName,
+  logo,
+  logoWhite,
+  logoGray,
   footerLinks{
     aboutUs,
     business,
@@ -149,6 +205,11 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
     location,
     contactUs,
     privacy
+  },
+  footerIcons{
+    location,
+    phone,
+    fax
   },
   address,
   contactEmail,

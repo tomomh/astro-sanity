@@ -1,0 +1,15 @@
+---
+import MainLayout from '../../layouts/main.astro';
+import AboutUsBanner from '../../components/about/AboutUsBanner.astro';
+import SubMenu from '../../components/about/SubMenu.astro';
+import Vision from '../../components/about/Vision.astro';
+import { getLangFromUrl } from '../../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<MainLayout content={{ title: 'Vision - OHMYHOTEL & CO' }}>
+  <AboutUsBanner lang={lang} />
+  <SubMenu lang={lang} activeItem="vision" />
+  <Vision lang={lang} />
+</MainLayout>

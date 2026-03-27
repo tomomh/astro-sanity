@@ -1,5 +1,34 @@
 @import "tailwindcss";
 
+/* Font Face - Gothic font for English version */
+@font-face {
+  font-family: 'Gothic';
+  src: url('/fonts/GOTHIC.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gothic';
+  src: url('/fonts/GOTHICI.TTF') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Gothic';
+  src: url('/fonts/GOTHICB.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gothic';
+  src: url('/fonts/GOTHICBI.TTF') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
 /* CSS Variables matching original SCSS */
 :root {
   /* Colors */
@@ -34,6 +63,53 @@ body.disable-scroll {
   overflow: hidden;
 }
 
+/* Language-specific styles */
+html[lang='en'] body {
+  font-family: Gothic, "Noto Sans", sans-serif;
+}
+
+html[lang='ja'] body h1,
+html[lang='ja'] body h2,
+html[lang='ja'] body h3,
+html[lang='ja'] body h4,
+html[lang='ja'] body h5,
+html[lang='ja'] body h6,
+html[lang='ko'] body h1,
+html[lang='ko'] body h2,
+html[lang='ko'] body h3,
+html[lang='ko'] body h4,
+html[lang='ko'] body h5,
+html[lang='ko'] body h6 {
+  font-weight: 500;
+}
+
+/* Hide fax for Vietnamese */
+html[lang='vi'] .footer-fax {
+  display: none !important;
+}
+
+/* App Layout */
+.App {
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.app-content {
+  margin-top: 7.9rem;
+  min-height: calc(100vh - 35rem);
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Hide utility */
+.hide {
+  display: none;
+}
+
 /* Typography - matching source App.scss */
 h1, h2, h3, h4, h5, h6 {
   color: var(--primary-header-color);
@@ -59,30 +135,11 @@ h6 { font-size: 2rem; }
   h6 { font-size: 1.8rem; }
 }
 
+/* Base link styles - will be overridden by more specific link rules below */
 a {
   color: inherit;
   text-decoration: none;
   position: relative;
-}
-
-a:hover, a:focus {
-  color: var(--primary-header-color);
-}
-
-/* Links with underline effect */
-a:not(.no-underline)::before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: -2px;
-  left: 0;
-  background-color: currentColor;
-  transition: width 0.3s ease;
-}
-
-a:not(.no-underline):hover::before {
-  width: 100%;
 }
 
 /* Utility classes */
@@ -106,6 +163,35 @@ a:not(.no-underline):hover::before {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+.content-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-bottom {
+  margin-top: auto;
+}
+
+/* Mobile line break */
+br.mobile {
+  display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+  br.mobile {
+    display: block !important;
+  }
 }
 
 /* Gradient text */
@@ -195,6 +281,16 @@ section:last-of-type::after {
 }
 
 /* Section content */
+.section-content {
+  text-align: center;
+}
+
+.section-content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .section-content .p-title {
   font-weight: 500;
   margin-bottom: 1.2rem;
@@ -244,4 +340,394 @@ p {
 .btn-primary {
   background: var(--brand-color-gradient);
   color: white;
+}
+
+.btn span {
+  padding-right: 1rem;
+}
+
+.btn img:first-child {
+  margin-right: 1.5rem;
+}
+
+.btn img:last-child {
+  margin-left: 1.5rem;
+}
+
+/* Quote styles - matching source App.scss */
+.quote {
+  position: relative;
+  padding: 0 0.7rem;
+  display: inline-flex;
+}
+
+.quote::before {
+  content: url("/images/home/quote.svg");
+  display: inline-block;
+  margin-left: -2.7rem;
+  position: absolute;
+  top: -1rem;
+  transform: rotateX(180deg);
+}
+
+.quote::after {
+  content: url("/images/home/quote.svg");
+  display: inline-block;
+  margin-left: 1rem;
+  transform: rotateY(180deg);
+  position: absolute;
+  bottom: -0.8rem;
+}
+
+/* Lang flag - language switcher flag */
+.lang-flag {
+  border: var(--primary-border);
+  background-color: white;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: inline-flex;
+  margin-right: 1.2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.lang-flag img {
+  height: 1.9rem;
+  width: 1.9rem;
+  border-radius: 50%;
+}
+
+/* Link hover effect - matching source App.scss */
+a:not(.btn):not(.no-underline) {
+  color: #555;
+  position: relative;
+}
+
+a:not(.btn):not(.no-underline)::before {
+  background-color: #000;
+  content: "";
+  height: 1px;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  transform: translateY(1px);
+  transition: all 0.15s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition-property: opacity, transform;
+  width: 100%;
+}
+
+a:not(.btn):not(.no-underline):hover,
+a:not(.btn):not(.no-underline):focus {
+  text-decoration: none;
+  color: black;
+}
+
+a:not(.btn):not(.no-underline):hover::before,
+a:not(.btn):not(.no-underline):focus::before {
+  opacity: 1;
+  transform: translateY(-3px) translateZ(0);
+}
+
+/* Card body - matching source App.scss */
+.card-body {
+  padding: 1rem;
+  height: 100%;
+  background: transparent;
+}
+
+.card-body p {
+  width: 100%;
+}
+
+.blur-text {
+  opacity: 0.5;
+}
+
+/* Item icon mixin implementation */
+.item-icon {
+  height: 7.5rem;
+  width: 7.5rem;
+  box-shadow: var(--primary-box-shadow-inset);
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* ================================================
+   HomePage Section Styles - matching HomePage.scss
+   ================================================ */
+
+/* Simple Intuitive Section */
+.simple-intuitive-section img {
+  margin-top: 3rem;
+}
+
+.simple-intuitive-section img.for-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .simple-intuitive-section img.for-mobile {
+    display: block;
+  }
+
+  .simple-intuitive-section img.for-desktop {
+    display: none;
+  }
+}
+
+/* Two Things Section */
+.two-things-section {
+  z-index: 3;
+}
+
+.two-things-section::before,
+.two-things-section::after {
+  display: none;
+}
+
+.two-things-section .section-content img {
+  padding: 3.5rem 0 5rem;
+}
+
+.two-things-section .section-content .cost-reduction-img {
+  transform: translateX(12%);
+}
+
+@media only screen and (max-width: 767px) {
+  .two-things-section {
+    overflow: hidden;
+  }
+
+  .two-things-section .section-header {
+    padding-bottom: 0;
+  }
+
+  .two-things-section .section-content img {
+    padding: 3.5rem 2rem 3.5rem;
+    margin: 0;
+  }
+
+  .two-things-section .section-content .cost-reduction-img {
+    transform: translateX(10%);
+  }
+}
+
+@media only screen and (max-width: 991.98px) and (min-width: 768px) {
+  .two-things-section .section-content img {
+    height: 25rem;
+  }
+
+  .two-things-section .section-content br {
+    display: none;
+  }
+}
+
+/* All In One Section */
+.all-in-one-section {
+  padding-top: 27rem;
+  margin-top: -22.5rem;
+  background: url("/images/home/section-line.svg") center -1px no-repeat,
+    url("/images/home/seamless-solution-bg.svg") calc(100% + 250px) 35% no-repeat,
+    url("/images/home/seamless-solution-bg.svg") -315px 35% no-repeat,
+    linear-gradient(180deg, var(--background-color-lightblue) 0px, #fff 44rem);
+}
+
+.all-in-one-section .row {
+  justify-content: center;
+}
+
+.all-in-one-section .section-content .col-md-4,
+.all-in-one-section .section-content .col-md-6,
+.your-friend-confidant-section .section-content .col-md-4,
+.your-friend-confidant-section .section-content .col-md-6 {
+  padding: 0 3.5rem;
+}
+
+.all-in-one-section .section-content .col-md-4:nth-child(n + 4) .card-body,
+.all-in-one-section .section-content .col-md-6:nth-child(n + 4) .card-body,
+.your-friend-confidant-section .section-content .col-md-4:nth-child(n + 4) .card-body,
+.your-friend-confidant-section .section-content .col-md-6:nth-child(n + 4) .card-body {
+  border-top: var(--primary-border);
+  padding-top: 4rem;
+}
+
+.all-in-one-section .section-content .card-body,
+.your-friend-confidant-section .section-content .card-body {
+  border: 0;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.all-in-one-section .section-content .card-body .p-content ul,
+.your-friend-confidant-section .section-content .card-body .p-content ul {
+  list-style: disc;
+  margin: 0;
+  text-align: left;
+}
+
+.all-in-one-section .section-content .card-body .p-content ul li,
+.your-friend-confidant-section .section-content .card-body .p-content ul li {
+  line-height: 1.2;
+  padding-bottom: 1rem;
+}
+
+.all-in-one-section .section-content .card-body .p-content a,
+.your-friend-confidant-section .section-content .card-body .p-content a {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  padding-bottom: 0.3rem;
+}
+
+.all-in-one-section .section-content .card-body .p-content a img,
+.your-friend-confidant-section .section-content .card-body .p-content a img {
+  margin-left: 0.8rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .all-in-one-section {
+    padding-top: 27rem;
+    margin-top: -22.5rem;
+    background: url("/images/home/section-line.svg") center -1px no-repeat,
+      url("/images/home/seamless-solution-bg.svg") calc(100% + 370px) 0% repeat-y,
+      url("/images/home/seamless-solution-bg.svg") -515px 0% repeat-y,
+      linear-gradient(180deg, var(--background-color-lightblue) 0px, #fff 44rem);
+    background-size: auto, auto 100%, auto 100%, auto;
+  }
+
+  .all-in-one-section .section-content .col-md-4:nth-child(n + 2) .card-body,
+  .all-in-one-section .section-content .col-md-6:nth-child(n + 2) .card-body,
+  .your-friend-confidant-section .section-content .col-md-4:nth-child(n + 2) .card-body,
+  .your-friend-confidant-section .section-content .col-md-6:nth-child(n + 2) .card-body {
+    position: relative;
+    padding-top: 4rem;
+    border-top: none;
+  }
+
+  .all-in-one-section .section-content .col-md-4:nth-child(n + 2) .card-body::after,
+  .all-in-one-section .section-content .col-md-6:nth-child(n + 2) .card-body::after,
+  .your-friend-confidant-section .section-content .col-md-4:nth-child(n + 2) .card-body::after,
+  .your-friend-confidant-section .section-content .col-md-6:nth-child(n + 2) .card-body::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(270deg, #ffffff 0%, #e3e3e3 51.39%, #ffffff 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .your-friend-confidant-section .card-body {
+    padding-bottom: 0.3rem !important;
+  }
+
+  .management-system {
+    margin: 0 -2rem;
+  }
+
+  .management-system img {
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 991.98px) and (min-width: 768px) {
+  .all-in-one-section .section-content .col-md-4:nth-child(n + 3) .card-body,
+  .all-in-one-section .section-content .col-md-6:nth-child(n + 3) .card-body {
+    position: relative;
+    padding-top: 4rem;
+    border-top: none;
+  }
+
+  .all-in-one-section .section-content .col-md-4:nth-child(n + 3) .card-body::after,
+  .all-in-one-section .section-content .col-md-6:nth-child(n + 3) .card-body::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(270deg, #ffffff 0%, #e3e3e3 51.39%, #ffffff 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .your-friend-confidant-section .section-content .col-md-4 {
+    padding: 0 1.5rem;
+  }
+
+  .your-friend-confidant-section .section-content br {
+    display: none;
+  }
+}
+
+/* ================================================
+   About Us Banner - matching AboutUsPage.scss
+   ================================================ */
+.about-us-banner {
+  padding: 0 2rem;
+  height: 21rem;
+  background: url("/images/logo/orange.svg") 10% -5% no-repeat,
+    url("/images/logo/orange.svg") 90% 115% no-repeat,
+    url("/images/home/banner-1-2026.jpg") center;
+  background-size: 374px auto, 523px auto, 110%;
+  display: flex;
+  flex-direction: column;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  transition: background-position 0.5s ease-out;
+}
+
+.about-us-banner * {
+  color: white;
+}
+
+.about-us-banner::after,
+.about-us-banner::before {
+  background-color: var(--background-color-lightblue);
+}
+
+.about-us-banner h2 {
+  margin-bottom: 1rem;
+  margin-top: 5rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .about-us-banner {
+    background-position: -10rem -34%, calc(100% + 18rem) 165%, center 0% !important;
+    background-size: 281px auto, 310px auto, 100% auto;
+  }
+}
+
+@media only screen and (max-width: 991.98px) and (min-width: 768px) {
+  .about-us-banner {
+    background-position: -28% -5%, 185% 115%, center !important;
+  }
+}
+
+/* Mobile container padding */
+@media only screen and (max-width: 767px) {
+  body .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .section-content br,
+  .common-content br {
+    display: none;
+  }
+
+  .section-content .card-body,
+  .common-content .card-body {
+    padding-top: 0;
+  }
+
+  .App .app-content {
+    margin-top: 6.1rem;
+  }
 }

@@ -16,117 +16,18 @@ const homePage = await fetchHomePage();
 const header = getLocalizedValue(homePage?.allInOneTitle, lang);
 const subtitle = getLocalizedValue(homePage?.allInOneSubtitle, lang);
 
-// Get features from Sanity
-const features = homePage?.allInOneFeatures?.map((feature: any) => ({
-  title: getLocalizedValue(feature.title, lang),
-  icon: feature.icon ? urlFor(feature.icon).width(80).auto('format').url() : null
+
+// Use Sanity data (content now fully managed in Sanity)
+const displayHeader = header || '';
+
+// Get products from Sanity allInOneFeatures
+const products = homePage?.allInOneFeatures?.map((feature: any, index: number) => ({
+  icon: feature.icon ? urlFor(feature.icon).width(80).auto('format').url() : '/images/home/booking-engine.svg',
+  title: getLocalizedValue(feature.title, lang) || '',
+  content: getLocalizedValue(feature.content, lang) || '',
+  link: feature.link || `/${lang}/business`,
+  learnMore: getLocalizedValue(feature.learnMore, lang) || 'Learn more'
 })) || [];
-
-// Fallback translations - matching original website content
-const fallbackTranslations: Record<string, any> = {
-  en: {
-    header: "OHMY System for HOTEL",
-    title1: "Online Booking Engine",
-    content1: `<p>Simple booking</p><p>Low prices</p>`,
-    title2: "Website",
-    content2: `<p>Greater prominence for your hotel</p><p>User-oriented design</p>`,
-    title3: "Company Profile",
-    content3: `<p>For the Channel</p><p>For the Hotel</p>`,
-    title4: "PMS",
-    content4: `<p>Convenient booking inquiries</p><p>Intuitive accommodation management</p>`,
-    title5: "CMS",
-    content5: `<p>Efficient rate/availability management</p><p>Concise interface</p>`,
-    learnMore: "Learn more"
-  },
-  ja: {
-    header: "OHMY System for HOTEL",
-    title1: "オンライン予約エンジン",
-    content1: `<p>シンプルな予約</p><p>低価格</p>`,
-    title2: "ウェブサイト",
-    content2: `<p>ホテルの存在感を高める</p><p>ユーザー志向のデザイン</p>`,
-    title3: "会社概要",
-    content3: `<p>チャネル向け</p><p>ホテル向け</p>`,
-    title4: "PMS",
-    content4: `<p>便利な予約照会</p><p>直感的な宿泊管理</p>`,
-    title5: "CMS",
-    content5: `<p>効率的な料金/在庫管理</p><p>簡潔なインターフェース</p>`,
-    learnMore: "詳細"
-  },
-  ko: {
-    header: "OHMY System for HOTEL",
-    title1: "온라인 예약 엔진",
-    content1: `<p>간편한 예약</p><p>저렴한 가격</p>`,
-    title2: "웹사이트",
-    content2: `<p>호텔의 존재감 향상</p><p>사용자 중심의 디자인</p>`,
-    title3: "회사소개",
-    content3: `<p>채널 전용</p><p>호텔 전용</p>`,
-    title4: "PMS",
-    content4: `<p>편리한 예약 조회</p><p>직관적인 숙박 관리</p>`,
-    title5: "CMS",
-    content5: `<p>효율적인 요금/재고 관리</p><p>간결한 인터페이스</p>`,
-    learnMore: "자세히 보기"
-  },
-  vi: {
-    header: "OHMY System for HOTEL",
-    title1: "Công cụ Đặt phòng Trực tuyến",
-    content1: `<p>Đặt phòng đơn giản</p><p>Giá thấp</p>`,
-    title2: "Website",
-    content2: `<p>Tăng sự nổi bật cho khách sạn</p><p>Thiết kế hướng người dùng</p>`,
-    title3: "Hồ sơ Công ty",
-    content3: `<p>Cho Kênh</p><p>Cho Khách sạn</p>`,
-    title4: "PMS",
-    content4: `<p>Tra cứu đặt phòng tiện lợi</p><p>Quản lý lưu trú trực quan</p>`,
-    title5: "CMS",
-    content5: `<p>Quản lý giá/phòng trống hiệu quả</p><p>Giao diện đơn giản</p>`,
-    learnMore: "Tìm hiểu thêm"
-  }
-};
-
-const t = fallbackTranslations[lang] || fallbackTranslations.en;
-
-// Use Sanity data or fallback
-const displayHeader = header || t.header;
-
-const defaultProducts = [
-  {
-    icon: "/images/home/booking-engine.svg",
-    title: t.title1,
-    content: t.content1,
-    link: `/${lang}/business/online-booking-engine`
-  },
-  {
-    icon: "/images/home/website.svg",
-    title: t.title2,
-    content: t.content2,
-    link: `/${lang}/business/hotel-web`
-  },
-  {
-    icon: "/images/home/ota.svg",
-    title: t.title3,
-    content: t.content3,
-    link: `/${lang}/business/company-profile`
-  },
-  {
-    icon: "/images/home/pms.svg",
-    title: t.title4,
-    content: t.content4,
-    link: `/${lang}/business/pms`
-  },
-  {
-    icon: "/images/home/cms.svg",
-    title: t.title5,
-    content: t.content5,
-    link: `/${lang}/business/cms`
-  }
-];
-
-// Use features from Sanity or fallback to default products
-const products = features.length > 0 ? features.map((feature: any, index: number) => ({
-  icon: feature.icon || defaultProducts[index]?.icon || '/images/home/booking-engine.svg',
-  title: feature.title || defaultProducts[index]?.title || '',
-  content: defaultProducts[index]?.content || '',
-  link: defaultProducts[index]?.link || `/${lang}/business`
-})) : defaultProducts;
 ---
 
 <section class="all-in-one-section">
@@ -145,7 +46,7 @@ const products = features.length > 0 ? features.map((feature: any, index: number
             <h6 class="p-title">{product.title}</h6>
             <div class="p-content" set:html={product.content}></div>
             <a href={product.link} class="learn-more">
-              {t.learnMore}
+              {product.learnMore}
               <img src="/images/icons/chevron.svg" alt=">" />
             </a>
           </div>

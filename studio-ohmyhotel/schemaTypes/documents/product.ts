@@ -12,15 +12,16 @@ export const product = defineType({
     {name: 'features', title: 'Features'},
     {name: 'gallery', title: 'Gallery'},
     {name: 'partners', title: 'Partners'},
+    {name: 'downloads', title: 'Downloads'},
+    {name: 'contact', title: 'Contact Form'},
     {name: 'seo', title: 'SEO'},
   ],
   fields: [
     defineField({
       name: 'name',
       title: 'Product Name',
-      type: 'string',
+      type: 'internationalizedArrayString',
       group: 'basic',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -164,6 +165,63 @@ export const product = defineType({
       group: 'details',
     }),
     defineField({
+      name: 'downloads',
+      title: 'Downloadable Files',
+      type: 'array',
+      group: 'downloads',
+      description: 'PDF documents or other files for download (e.g., Company Profile)',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Download Title',
+              type: 'internationalizedArrayString',
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'internationalizedArrayText',
+            }),
+            defineField({
+              name: 'file',
+              title: 'File',
+              type: 'file',
+              options: {
+                accept: '.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip',
+              },
+            }),
+            defineField({
+              name: 'icon',
+              title: 'Icon',
+              type: 'image',
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'showContactForm',
+      title: 'Show Contact Form',
+      type: 'boolean',
+      group: 'contact',
+      initialValue: true,
+      description: 'Display contact form at the bottom of the page',
+    }),
+    defineField({
+      name: 'contactFormTitle',
+      title: 'Contact Form Title',
+      type: 'internationalizedArrayString',
+      group: 'contact',
+    }),
+    defineField({
+      name: 'contactFormDescription',
+      title: 'Contact Form Description',
+      type: 'internationalizedArrayText',
+      group: 'contact',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO Settings',
       type: 'seo',
@@ -172,8 +230,20 @@ export const product = defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      name: 'name',
       media: 'icon',
+    },
+    prepare({name, media}) {
+      // Extract the English value from internationalized array, or first available
+      const title = Array.isArray(name)
+        ? name.find((item: {_key: string; value: string}) => item._key === 'en')?.value ||
+          name[0]?.value ||
+          'Untitled'
+        : name || 'Untitled'
+      return {
+        title,
+        media,
+      }
     },
   },
 })

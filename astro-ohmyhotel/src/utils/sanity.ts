@@ -1,8 +1,8 @@
 import { sanityClient } from 'sanity:client';
-import imageUrlBuilder, { type SanityImageSource } from '@sanity/image-url';
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
 
 // Image URL builder instance
-const builder = imageUrlBuilder(sanityClient);
+const builder = createImageUrlBuilder(sanityClient);
 
 /**
  * Generate optimized image URL from Sanity image asset

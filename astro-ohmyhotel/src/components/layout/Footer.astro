@@ -1,6 +1,6 @@
 ---
 import { fetchSiteSettings } from '../../utils/queries';
-import { getLocalizedValue } from '../../utils/sanity';
+import { getLocalizedValue, urlFor } from '../../utils/sanity';
 import type { Language } from '../../utils/i18n';
 
 export interface Props {
@@ -13,77 +13,27 @@ const lang = currentLang as Language;
 // Fetch site settings from Sanity
 const siteSettings = await fetchSiteSettings();
 
-// Fallback translations (used if Sanity data is empty)
-const fallbackTranslations: Record<string, Record<string, string>> = {
-  ja: {
-    aboutUs: '会社紹介',
-    business: '事業内容',
-    careers: '採用情報',
-    location: '所在地',
-    contactUs: 'お問い合わせ',
-    privacy: 'プライバシーポリシー',
-    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
-    tel: '+82-2-762-0552',
-    fax: '+82-2-733-0551'
-  },
-  en: {
-    aboutUs: 'About Us',
-    business: 'Business',
-    careers: 'Careers',
-    location: 'Location',
-    contactUs: 'Contact Us',
-    privacy: 'Privacy Policy',
-    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
-    tel: '+82-2-762-0552',
-    fax: '+82-2-733-0551'
-  },
-  vi: {
-    aboutUs: 'Về chúng tôi',
-    business: 'Kinh doanh',
-    careers: 'Nghề nghiệp',
-    location: 'Vị trí',
-    contactUs: 'Liên hệ',
-    privacy: 'Chính sách bảo mật',
-    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
-    tel: '+82-2-762-0552',
-    fax: '+82-2-733-0551'
-  },
-  ko: {
-    aboutUs: '회사소개',
-    business: '사업소개',
-    careers: '채용정보',
-    location: '오시는 길',
-    contactUs: '문의하기',
-    privacy: '개인정보처리방침',
-    address: '6F, GT Dongdaemun B/D, 328, Jong-ro, Jongno-gu, Seoul, Republic of Korea',
-    tel: '+82-2-762-0552',
-    fax: '+82-2-733-0551'
-  }
-};
-
-const fallback = fallbackTranslations[currentLang] || fallbackTranslations.en;
-
-// Use Sanity data with fallbacks
+// Get localized values from Sanity (content now fully managed in Sanity)
 const t = {
-  aboutUs: getLocalizedValue(siteSettings?.footerLinks?.aboutUs, lang) || fallback.aboutUs,
-  business: getLocalizedValue(siteSettings?.footerLinks?.business, lang) || fallback.business,
-  careers: getLocalizedValue(siteSettings?.footerLinks?.careers, lang) || fallback.careers,
-  location: getLocalizedValue(siteSettings?.footerLinks?.location, lang) || fallback.location,
-  contactUs: getLocalizedValue(siteSettings?.footerLinks?.contactUs, lang) || fallback.contactUs,
-  privacy: getLocalizedValue(siteSettings?.footerLinks?.privacy, lang) || fallback.privacy,
-  address: getLocalizedValue(siteSettings?.address, lang) || fallback.address,
-  tel: siteSettings?.contactPhone || fallback.tel,
-  fax: siteSettings?.contactFax || fallback.fax
+  aboutUs: getLocalizedValue(siteSettings?.footerLinks?.aboutUs, lang) || '',
+  business: getLocalizedValue(siteSettings?.footerLinks?.business, lang) || '',
+  careers: getLocalizedValue(siteSettings?.footerLinks?.careers, lang) || '',
+  location: getLocalizedValue(siteSettings?.footerLinks?.location, lang) || '',
+  contactUs: getLocalizedValue(siteSettings?.footerLinks?.contactUs, lang) || '',
+  privacy: getLocalizedValue(siteSettings?.footerLinks?.privacy, lang) || '',
+  address: getLocalizedValue(siteSettings?.address, lang) || '',
+  tel: siteSettings?.contactPhone || '',
+  fax: siteSettings?.contactFax || ''
 };
 
-// Social links from Sanity or fallback
-const socialLinks = siteSettings?.socialLinks || [
-  { platform: 'instagram', url: 'https://www.instagram.com/ohmytrip_by_ohmyhotel/', icon: '/images/footer/instagram.svg' },
-  { platform: 'naver', url: 'https://blog.naver.com/ohmyhotelnco', icon: '/images/footer/naver-blog.svg' },
-  { platform: 'linkedin', url: 'https://kr.linkedin.com/company/ohmyhotel-co', icon: '/images/footer/linkedIn.svg' },
-  { platform: 'partner', url: 'https://ohmypartners.notion.site/4f3bbe4586b1443897aa925e82f89190', icon: '/images/footer/omt-partner.svg' },
-  { platform: 'kakao', url: 'http://pf.kakao.com/_Pxduwxj', icon: '/images/footer/kakao.svg' }
-];
+// Social links from Sanity
+const socialLinks = siteSettings?.socialLinks || [];
+
+// Get images from Sanity with fallbacks
+const logoGray = siteSettings?.logoGray ? urlFor(siteSettings.logoGray).url() : '/images/footer/logo-gray.svg';
+const locationIcon = siteSettings?.footerIcons?.location ? urlFor(siteSettings.footerIcons.location).url() : '/images/footer/location.svg';
+const phoneIcon = siteSettings?.footerIcons?.phone ? urlFor(siteSettings.footerIcons.phone).url() : '/images/footer/phone.svg';
+const faxIcon = siteSettings?.footerIcons?.fax ? urlFor(siteSettings.footerIcons.fax).url() : '/images/footer/fax.svg';
 
 const showFax = currentLang !== 'vi'; // Hide fax for Vietnamese version
 ---
@@ -91,7 +41,7 @@ const showFax = currentLang !== 'vi'; // Hide fax for Vietnamese version
 <footer class="footer">
   <div class="container">
     <div class="logo">
-      <img src="/images/footer/logo-gray.svg" alt="Ohmyhotel & CO" />
+      <img src={logoGray} alt="Ohmyhotel & CO" />
     </div>
     <div class="info align-left">
       <div class="footer-links">
@@ -120,21 +70,21 @@ const showFax = currentLang !== 'vi'; // Hide fax for Vietnamese version
       </div>
       <div>
         <span class="icon-container">
-          <img src="/images/footer/location.svg" alt="Location" />
+          <img src={locationIcon} alt="Location" />
         </span>
         {t.address}
       </div>
       <div class="content-left">
         <div>
           <span class="icon-container">
-            <img src="/images/footer/phone.svg" alt="Phone" />
+            <img src={phoneIcon} alt="Phone" />
           </span>
           <span>{t.tel}</span>
         </div>
         {showFax && (
           <div class="footer-fax">
             <span class="icon-container">
-              <img src="/images/footer/fax.svg" alt="Fax" />
+              <img src={faxIcon} alt="Fax" />
             </span>
             <span>{t.fax}</span>
           </div>
@@ -155,15 +105,18 @@ const showFax = currentLang !== 'vi'; // Hide fax for Vietnamese version
       </div>
       <p>Copyright &copy; Ohmyhotel & Co. Ltd. All Rights Reserved.</p>
       <div class="content-left social">
-        {socialLinks.map((social: any) => (
-          <div>
-            <a href={social.url} target="_blank" rel="noopener noreferrer" class="no-underline">
-              <span>
-                <img src={social.icon || `/images/footer/${social.platform}.svg`} alt={social.platform} height="35" />
-              </span>
-            </a>
-          </div>
-        ))}
+        {socialLinks.map((social: any) => {
+          const iconUrl = social.icon?.asset ? urlFor(social.icon).url() : `/images/footer/${social.platform}.svg`;
+          return (
+            <div>
+              <a href={social.url} target="_blank" rel="noopener noreferrer" class="no-underline">
+                <span>
+                  <img src={iconUrl} alt={social.platform} height="35" />
+                </span>
+              </a>
+            </div>
+          );
+        })}
       </div>
     </div>
   </div>

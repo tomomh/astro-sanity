@@ -1,7 +1,6 @@
 ---
 import { fetchAboutUsPage } from '../../utils/queries';
 import { getLocalizedValue, urlFor } from '../../utils/sanity';
-import { PortableText } from 'astro-portabletext';
 import type { Language } from '../../utils/i18n';
 
 export interface Props {
@@ -16,12 +15,18 @@ const vision = aboutPage?.vision;
 
 // Get localized values with fallbacks
 const title = getLocalizedValue(vision?.title, lang) || 'Vision';
-const content = getLocalizedValue(vision?.content, lang);
+const slogan = getLocalizedValue(vision?.slogan, lang) || 'Your Friend and Confidant';
 
 // Get image from Sanity or fallback
 const imageUrl = vision?.image
   ? urlFor(vision.image).width(400).auto('format').url()
   : '/images/about/vision.svg';
+
+// Map Sanity vision items
+const sanityVisionItems = vision?.items?.map((item: any) => ({
+  title: getLocalizedValue(item.title, lang) || '',
+  description: getLocalizedValue(item.description, lang) || ''
+})) || [];
 
 // Fallback vision items
 const fallbackItems = [
@@ -47,7 +52,8 @@ const fallbackItems = [
   }
 ];
 
-const visionItems = fallbackItems;
+// Use Sanity items if available, otherwise fallback
+const visionItems = sanityVisionItems.length > 0 ? sanityVisionItems : fallbackItems;
 ---
 
 <section class="vision-section">
@@ -59,7 +65,7 @@ const visionItems = fallbackItems;
     <div class="section-content">
       <div class="vision-image">
         <img src={imageUrl} alt="Vision" />
-        <h3>Your Friend and Confidant</h3>
+        <h3>{slogan}</h3>
       </div>
       <div class="vision-items">
         {visionItems.map((item) => (

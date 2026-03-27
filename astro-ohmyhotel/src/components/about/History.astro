@@ -18,10 +18,10 @@ const sanityHistory = aboutPage?.history || [];
 // Map Sanity history to display format
 const historyFromSanity = sanityHistory.map((item: any) => ({
   year: item.year || '',
-  month: '',
-  flag: 'international',
-  event: getLocalizedValue(item.title, lang) || getLocalizedValue(item.description, lang) || '',
-  lastOfYear: false
+  month: item.month || '',
+  flag: item.flag || 'international',
+  event: getLocalizedValue(item.event, lang) || '',
+  lastOfYear: item.lastOfYear || false
 }));
 
 // Fallback history data structure
@@ -34,35 +34,37 @@ const fallbackHistoryData = [
 
   { year: "2024", month: "09", flag: "ko", event: "Awarded the 2024 'Tourism Day' Prime Minister's Award" },
   { year: "", month: "05", flag: "international", event: "Awarded Trip.com 2024 Performance Excellence Partner" },
-  { year: "", month: "01", flag: "ko", event: "Launched Ohmytrip.com", lastOfYear: true },
+  { year: "", month: "01", flag: "ko", event: "Launched Ohmytrip.com" },
 
   { year: "2023", month: "09", flag: "international", event: "Awarded Trip.com 2023 Performance Excellence Partner" },
   { year: "", month: "06", flag: "international", event: "Launched Ohmyhotel.com", lastOfYear: true },
 
-  { year: "2021", month: "12", flag: "ko", event: "Relocated OhMyHotel&Co. headquarters from Vietnam to Seoul", lastOfYear: true },
+  { year: "2021", month: "12", flag: "ko", event: "Relocated OhMyHotel&Co. headquarters from Vietnam to Seoul" },
 
   { year: "2018", month: "07", flag: "international", event: "Established Ohmyhotel & Co (Japan, Vietnam)" },
   { year: "", month: "06", flag: "ko", event: "Formed strategic business partnership with ROONETS PMS", lastOfYear: true },
 
-  { year: "2017", month: "11", flag: "vi", event: "Established NDC Hospitality in HCMC, Vietnam" },
+  { year: "2017", month: "11", flag: "vi", event: "Established NDC Hospitality in HCMC, Vietnam, in line with foray into Vietnam hotel development business" },
   { year: "", month: "06", flag: "ja", event: "Established Orenge Partners Holdings in Osaka", lastOfYear: true },
 
-  { year: "2015", month: "11", flag: "ko", event: "Established Ohmytrip and launched brand", lastOfYear: true },
+  { year: "2015", month: "11", flag: "ko", event: "Established Ohmytrip and launched brand" },
+  { year: "", month: "", flag: "", event: "Sale of Bico Trip Hotel's B2B unit", lastOfYear: true },
 
   { year: "2013", month: "03", flag: "taiwan", event: "Awarded prestigious Taiwan Tourism Award by Taiwan Tourism Bureau", lastOfYear: true },
 
   { year: "2012", month: "05", flag: "ko", event: "Established Ezget (IT Corporate)" },
   { year: "", month: "02", flag: "ko", event: "Appointed Policy Advisor for Secretary to President of Tourism", lastOfYear: true },
 
-  { year: "2011", month: "04", flag: "ko", event: "Acquired Bico and arranged basis for global business expansion", lastOfYear: true },
+  { year: "2011", month: "04", flag: "ko", event: "Acquired Bico and arranged basis for global business expansion centering on Bico Trip's Seoul head office", lastOfYear: true },
 
-  { year: "2010", month: "", flag: "international", event: "Founded Bico Trip branches (Hong Kong, Shanghai, Singapore, Thailand, Taiwan, Philippines)", lastOfYear: true },
+  { year: "2010", month: "", flag: "international", event: "Expanded business" },
+  { year: "", month: "", flag: "", event: "Founded Bico Trip branches (Hong Kong, Shanghai, Singapore, Thailand, Taiwan, Philippines)", lastOfYear: true },
 
-  { year: "2009", month: "12", flag: "ja", event: "Awarded Japan Tourism Agency Commissioner's Commendation", lastOfYear: true },
+  { year: "2009", month: "12", flag: "ja", event: "Awarded \"Japan Tourism Agency Commissioner's Commendation\"", lastOfYear: true },
 
   { year: "2006", month: "05", flag: "ko", event: "Established Bico Trip (Korean Corporate)", lastOfYear: true },
 
-  { year: "1997", month: "03", flag: "ja", event: "Established Bico (Japanese Corporate)", lastOfYear: true }
+  { year: "1997", month: "03", flag: "ja", event: "Established Bico (Japanese Corporate)" }
 ];
 
 // Use Sanity data if available, otherwise fallback

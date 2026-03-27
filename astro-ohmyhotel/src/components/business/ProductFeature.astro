@@ -2,30 +2,46 @@
 export interface Props {
   title: string;
   content: string;
-  image: string;
+  image?: string | null;
   imagePosition?: 'left' | 'right';
 }
 
 const { title, content, image, imagePosition = 'right' } = Astro.props;
+const hasImage = image && image.length > 0;
 ---
 
-<div class:list={['product-feature', { 'image-left': imagePosition === 'left' }]}>
+<div class:list={['product-feature', { 'image-left': imagePosition === 'left', 'no-image': !hasImage }]}>
   <div class="feature-content">
     <h3>{title}</h3>
     <div class="content-text" set:html={content}></div>
   </div>
-  <div class="feature-image">
-    <img src={image} alt={title} />
-  </div>
+  {hasImage && (
+    <div class="feature-image">
+      <img src={image} alt={title} />
+    </div>
+  )}
 </div>
 
 <style>
   .product-feature {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 3rem;
     align-items: center;
-    margin: 4rem 0;
+    padding: 3rem 0;
+    border-bottom: 1px solid transparent;
+    background-image: linear-gradient(#F7FAFD, #F7FAFD), linear-gradient(270deg, #FFFFFF 0%, #E3E3E3 51.39%, #FFFFFF 100%);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+  }
+
+  .product-feature:last-of-type {
+    border-bottom: none;
+    background-image: none;
+  }
+
+  .product-feature.no-image {
+    grid-template-columns: 1fr;
   }
 
   .image-left {
@@ -37,16 +53,17 @@ const { title, content, image, imagePosition = 'right' } = Astro.props;
   }
 
   .feature-content h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
   }
 
   .content-text {
-    font-size: 1.1rem;
-    color: #666;
-    line-height: 1.8;
+    font-size: 1rem;
+    color: #444444;
+    line-height: 1.75;
   }
 
   .content-text p {
@@ -56,43 +73,68 @@ const { title, content, image, imagePosition = 'right' } = Astro.props;
   .content-text ul {
     list-style: none;
     padding-left: 0;
+    margin: 1rem 0;
   }
 
   .content-text li {
     position: relative;
     padding-left: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: #444444;
   }
 
   .content-text li:before {
-    content: "✓";
+    content: "•";
     position: absolute;
     left: 0;
-    color: #007bff;
+    color: #EE8768;
     font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .feature-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .feature-image img {
     width: 100%;
+    max-width: 500px;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.4rem 1rem 0 rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 991px) {
+    .product-feature {
+      gap: 2rem;
+    }
+
+    .feature-content h3 {
+      font-size: 1.5rem;
+    }
   }
 
   @media (max-width: 768px) {
     .product-feature,
     .image-left {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
       direction: ltr;
+      padding: 2rem 0;
     }
 
     .feature-content h3 {
-      font-size: 1.5rem;
+      font-size: 1.35rem;
     }
 
     .content-text {
-      font-size: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .feature-image img {
+      max-width: 100%;
     }
   }
 </style>

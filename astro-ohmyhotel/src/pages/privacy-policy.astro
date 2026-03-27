@@ -1,17 +1,10 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import type { Language } from '../../utils/i18n';
-import { languages } from '../../utils/i18n';
-import { sanityClient } from '../../sanity/client';
-import { PRIVACY_PAGE_QUERY, getLocalizedValue } from '../../sanity/queries';
+import PageLayout from '../layouts/PageLayout.astro';
+import { getLangFromUrl, type Language } from '../utils/i18n';
+import { sanityClient } from '../sanity/client';
+import { PRIVACY_PAGE_QUERY, getLocalizedValue } from '../sanity/queries';
 
-export async function getStaticPaths() {
-  return languages.map((lang) => ({
-    params: { lang }
-  }));
-}
-
-const { lang } = Astro.params as { lang: Language };
+const lang = getLangFromUrl(Astro.url);
 
 // Fetch privacy page content from Sanity
 const privacyData = await sanityClient.fetch(PRIVACY_PAGE_QUERY);

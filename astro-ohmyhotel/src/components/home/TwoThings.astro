@@ -23,54 +23,9 @@ const items = homePage?.twoThingsItems?.map((item: any) => ({
   image: item.image ? urlFor(item.image).width(400).auto('format').url() : null
 })) || [];
 
-// Fallback translations
-const fallbackTranslations: Record<string, any> = {
-  en: {
-    header: "Two things you need right now.<br />We know.",
-    title1: "Cost reduction",
-    content1: "Free yourself from manual reservation, overbooking. <br />Your company has enough people.",
-    title2: "Increase in sales",
-    content2: "Increase efficiency and maximize sales of reservations <br />and accommodation with a purpose-built hotel integration system."
-  },
-  ja: {
-    header: "今必要な2つのこと。<br />私たちは知っています。",
-    title1: "コスト削減",
-    content1: "手動予約、オーバーブッキングから解放されます。<br />あなたの会社には十分な人員がいます。",
-    title2: "売上増加",
-    content2: "目的に合わせて構築されたホテル統合システムで、予約と宿泊の効率を高め、売上を最大化します。"
-  },
-  ko: {
-    header: "지금 필요한 두 가지.<br />우리는 알고 있습니다.",
-    title1: "비용 절감",
-    content1: "수동 예약, 초과 예약에서 벗어나세요. <br />귀사에는 충분한 인원이 있습니다.",
-    title2: "매출 증대",
-    content2: "맞춤형 호텔 통합 시스템으로 예약 및 숙박의 효율성을 높이고 매출을 극대화하세요."
-  },
-  vi: {
-    header: "Hai điều bạn cần ngay bây giờ.<br />Chúng tôi biết.",
-    title1: "Giảm chi phí",
-    content1: "Giải phóng khỏi đặt phòng thủ công, đặt phòng quá mức. <br />Công ty của bạn đã có đủ nhân viên.",
-    title2: "Tăng doanh số",
-    content2: "Tăng hiệu quả và tối đa hóa doanh số đặt phòng <br />và lưu trú với hệ thống tích hợp khách sạn được xây dựng chuyên biệt."
-  }
-};
-
-const t = fallbackTranslations[lang] || fallbackTranslations.en;
-
-// Use Sanity data or fallback
-const displayHeader = header || t.header;
-const displayItems = items.length > 0 ? items : [
-  {
-    title: t.title1,
-    description: t.content1,
-    image: '/images/home/cost-reduction.svg'
-  },
-  {
-    title: t.title2,
-    description: t.content2,
-    image: '/images/home/increase-sales.svg'
-  }
-];
+// Use Sanity data (content now fully managed in Sanity)
+const displayHeader = header || '';
+const displayItems = items;
 ---
 
 <section class="two-things-section">

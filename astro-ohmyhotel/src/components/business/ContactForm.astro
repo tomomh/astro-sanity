@@ -48,10 +48,11 @@ const { title = "Contact Us", description = "Get in touch with us for more infor
 
 <style>
   .contact-form-section {
-    background: #f8f9fa;
+    background: white;
     padding: 3rem;
     border-radius: 8px;
     margin: 4rem 0;
+    box-shadow: 0 0.4rem 1rem 0 rgba(0, 0, 0, 0.1);
   }
 
   .form-header {
@@ -60,15 +61,15 @@ const { title = "Contact Us", description = "Get in touch with us for more infor
   }
 
   .form-header h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1a1a1a;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2c2c2c;
     margin-bottom: 0.5rem;
   }
 
   .form-header p {
-    font-size: 1.1rem;
-    color: #666;
+    font-size: 1rem;
+    color: #444444;
   }
 
   .contact-form {
@@ -90,7 +91,7 @@ const { title = "Contact Us", description = "Get in touch with us for more infor
     display: block;
     font-size: 1rem;
     font-weight: 500;
-    color: #1a1a1a;
+    color: #2c2c2c;
     margin-bottom: 0.5rem;
   }
 
@@ -99,16 +100,16 @@ const { title = "Contact Us", description = "Get in touch with us for more infor
     width: 100%;
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid #eee;
     border-radius: 4px;
-    background: white;
+    background: #F7FAFD;
     transition: border-color 0.3s ease;
   }
 
   .form-group input:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #EE8768;
   }
 
   .form-group textarea {
@@ -122,15 +123,15 @@ const { title = "Contact Us", description = "Get in touch with us for more infor
     font-size: 1.1rem;
     font-weight: 600;
     color: white;
-    background-color: #007bff;
+    background: linear-gradient(311.56deg, #EE8768 0%, #EE8768 27.3%, #EAB65A 100%);
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: filter 0.3s ease;
   }
 
   .submit-button:hover {
-    background-color: #0056b3;
+    filter: brightness(1.1);
   }
 
   @media (max-width: 768px) {

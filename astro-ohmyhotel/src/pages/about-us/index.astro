@@ -1,0 +1,7 @@
+---
+import { getLangFromUrl, buildUrlWithLang } from '../../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+
+return Astro.redirect(buildUrlWithLang('/about-us/ceo-message', lang));
+---

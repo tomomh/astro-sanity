@@ -29,30 +29,8 @@ const signatureUrl = ceoMessage?.ceoSignature
   ? urlFor(ceoMessage.ceoSignature).width(200).auto('format').url()
   : '/images/about/sign.svg';
 
-// Fallback translations for content if not in Sanity
-const fallbackTranslations: Record<string, { thankYou: string, content: string }> = {
-  en: {
-    thankYou: "Thank you for visiting Ohmyhotel & Co",
-    content: `<p>After the start of tourism business in 1997 through Bico, we have been trying our best to provide a long-cherished pleasant travel. We accomplished continuous growth by focusing on flight and hotel booking and we developed the online booking system to provide an integrated domestic and overseas travel service.</p>
-      <p>Now, Ohmyhotel & Co is steping forward from system development and we are focusing on accomplishing a significant result in hotel solution field such as "System, marketing, and optional service" necessary for customer satisfaction.</p>
-      <p>Based on our global networks and sales know-how, we will take a leap toward "Software publishing company" for overseas marketing, finding new partner companies, and providing technology infrastructure.</p>
-      <p>Our Ohmyhotel & Co promises to become a loved and reliable company based on our approaching services.</p>`
-  },
-  ja: {
-    thankYou: "Ohmyhotel & Coへのご訪問ありがとうございます",
-    content: `<p>1997年にBicoを通じて観光事業を開始して以来、私たちは長年の夢である快適な旅行を提供するために最善を尽くしてきました。</p>`
-  },
-  ko: {
-    thankYou: "Ohmyhotel & Co를 방문해 주셔서 감사합니다",
-    content: `<p>1997년 Bico를 통해 관광 사업을 시작한 이후, 저희는 오랫동안 꿈꿔온 즐거운 여행을 제공하기 위해 최선을 다해왔습니다.</p>`
-  },
-  vi: {
-    thankYou: "Cảm ơn bạn đã ghé thăm Ohmyhotel & Co",
-    content: `<p>Sau khi bắt đầu kinh doanh du lịch vào năm 1997 thông qua Bico, chúng tôi đã cố gắng hết sức để mang đến những chuyến du lịch thú vị.</p>`
-  }
-};
-
-const t = fallbackTranslations[lang] || fallbackTranslations.en;
+// Use Sanity data (content now fully managed in Sanity)
+const greeting = getLocalizedValue(ceoMessage?.greeting, lang) || '';
 ---
 
 <section class="ceo-section">
@@ -63,13 +41,11 @@ const t = fallbackTranslations[lang] || fallbackTranslations.en;
     </div>
     <div class="section-content align-left">
       <div class="ceo-message-content">
-        <h4 class="quote">{t.thankYou}</h4>
-        {content ? (
+        <h4 class="quote">{greeting}</h4>
+        {content && (
           <div class="message-text">
             <PortableText value={content} />
           </div>
-        ) : (
-          <div class="message-text" set:html={t.content}></div>
         )}
         <div class="ceo-signature">
           <span>{ceoTitle} {ceoName}</span>
